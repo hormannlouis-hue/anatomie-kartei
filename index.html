@@ -1,0 +1,2790 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Anatomie"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="theme-color" content="#e7eaee" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#13161a" media="(prefers-color-scheme: dark)"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Anatomie-Kartei</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: one narrow column. Module switcher, Leitner box strip, actions; the index card is the only raised object. */
+:root{
+  --desk:#e7eaee; --card:#ffffff; --ink:#1a1f26; --muted:#5d6672; --line:#d3d9e0;
+  --rule:#cf5f50; --blue:#9fb5d4; --accent:#24487b; --accent-ink:#ffffff;
+  --bad:#b23a2b; --mid:#996d0e; --good:#2c7548;
+  --bad-bg:#f8e7e4; --mid-bg:#f6eedb; --good-bg:#e3f1e8;
+  --serif:"Libre Caslon Text", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --sans:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --shadow:0 1px 2px rgba(26,31,38,.06), 0 8px 24px rgba(26,31,38,.08);
+  /* Kalender: Lernmenge pro Tag als Tinte auf Karteikarton */
+  --h0:color-mix(in srgb, var(--line) 40%, var(--card));
+  --h1:color-mix(in srgb, var(--accent) 20%, var(--card));
+  --h2:color-mix(in srgb, var(--accent) 42%, var(--card));
+  --h3:color-mix(in srgb, var(--accent) 68%, var(--card));
+  --h4:var(--accent);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --desk:#13161a; --card:#1d2127; --ink:#e3e6ea; --muted:#97a0ab; --line:#2f353d;
+  --rule:#d77a6c; --blue:#3d5578; --accent:#8fb1e3; --accent-ink:#10151c;
+  --bad:#e58374; --mid:#ddb35a; --good:#74c393;
+  --bad-bg:#3a2320; --mid-bg:#352c19; --good-bg:#1d3326;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+  --h1:color-mix(in srgb, var(--accent) 28%, var(--card)); --h2:color-mix(in srgb, var(--accent) 50%, var(--card)); --h3:color-mix(in srgb, var(--accent) 74%, var(--card));
+  color-scheme:dark } }
+:root[data-theme="dark"]{
+  --desk:#13161a; --card:#1d2127; --ink:#e3e6ea; --muted:#97a0ab; --line:#2f353d;
+  --rule:#d77a6c; --blue:#3d5578; --accent:#8fb1e3; --accent-ink:#10151c;
+  --bad:#e58374; --mid:#ddb35a; --good:#74c393;
+  --bad-bg:#3a2320; --mid-bg:#352c19; --good-bg:#1d3326;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+  --h1:color-mix(in srgb, var(--accent) 28%, var(--card)); --h2:color-mix(in srgb, var(--accent) 50%, var(--card)); --h3:color-mix(in srgb, var(--accent) 74%, var(--card));
+  color-scheme:dark }
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--desk);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5}
+.wrap{max-width:640px;margin:0 auto;padding-inline:16px;padding-block:20px 48px;display:flex;flex-direction:column;gap:20px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+header{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}
+h1{font-family:var(--serif);font-weight:700;font-size:1.9rem;line-height:1.1;margin:0;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:.85rem;margin-top:4px}
+.exam{font-size:.8rem;font-weight:500;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--card);white-space:nowrap;font-variant-numeric:tabular-nums}
+.exam b{font-weight:600}
+
+.status{font-size:.85rem;color:var(--muted);border-left:3px solid var(--blue);padding:4px 0 4px 10px}
+
+/* Module switcher */
+.mods{display:flex;flex-wrap:wrap;gap:6px}
+.mod{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:6px 12px 7px;display:flex;flex-direction:column;align-items:flex-start;text-align:left;min-width:0;position:relative}
+.mod b{font-size:.9rem;font-weight:600;line-height:1.3}
+.mod span{font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums;line-height:1.3}
+.mod[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--card)}
+.mod[aria-pressed="true"] span{color:var(--card);opacity:.75}
+.mod i{position:absolute;top:-6px;right:-6px;font-style:normal;font-size:.68rem;font-weight:600;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--accent);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
+
+/* Leitner strip */
+.box{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;align-items:end}
+.slot{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}
+.slot .bar{width:100%;height:64px;display:flex;align-items:flex-end;border-bottom:2px solid var(--line)}
+.slot .fill{width:100%;background:var(--blue);border-radius:3px 3px 0 0;min-height:2px;transition:height .3s}
+.slot.new .fill{background:var(--line)}
+.slot .n{font-weight:600;font-variant-numeric:tabular-nums;font-size:.95rem}
+.slot .lbl{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;text-align:center;line-height:1.2}
+.boxcap{font-size:.75rem;color:var(--muted);margin-top:6px}
+
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--card)}
+.seg button{border:0;background:none;padding:7px 12px;font-size:.85rem;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--card)}
+select{font:inherit;font-size:.85rem;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);max-width:100%;min-width:0}
+
+.actions{display:flex;flex-direction:column;gap:8px}
+.primary{background:var(--accent);color:var(--accent-ink);border:0;border-radius:10px;padding:14px 16px;font-weight:600;font-size:1rem;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.primary:disabled{background:var(--line);color:var(--muted);cursor:default}
+.secondary{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 16px;font-size:.9rem;text-align:left;display:flex;justify-content:space-between;gap:12px}
+.secondary:disabled{color:var(--muted);cursor:default}
+.next{font-size:.8rem;color:var(--muted)}
+
+h2{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;margin:0 0 8px}
+.weak{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.weak li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.weak .q{font-family:var(--serif);font-size:.92rem;line-height:1.35;min-width:0}
+.weak .src{display:block;font-family:var(--sans);font-size:.72rem;color:var(--muted);margin-top:2px}
+.pill{font-size:.72rem;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pill.bad{background:var(--bad-bg);color:var(--bad)}
+.pill.mid{background:var(--mid-bg);color:var(--mid)}
+.pill.good{background:var(--good-bg);color:var(--good)}
+.empty{font-size:.88rem;color:var(--muted);padding:10px 0}
+
+/* Study */
+.studybar{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.ghost{background:none;border:0;color:var(--muted);font-size:.85rem;padding:6px 0}
+.count{font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.track{height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.track span{display:block;height:100%;background:var(--accent);transition:width .25s}
+
+.card{background:var(--card);border-radius:6px;box-shadow:var(--shadow);padding:18px 20px 22px;display:flex;flex-direction:column;gap:14px;min-height:260px}
+.card .meta{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.card .meta .state{text-transform:none;letter-spacing:0}
+.card .q{font-family:var(--serif);font-size:1.22rem;line-height:1.4;margin:0;padding-bottom:12px;border-bottom:1.5px solid var(--rule);text-wrap:pretty}
+.answer{display:flex;flex-direction:column;gap:8px;font-family:var(--serif);font-size:1rem;line-height:1.55}
+.answer p{margin:0}
+.answer.show{animation:rise .25s ease-out}
+@keyframes rise{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.tip{font-family:var(--sans);font-size:.82rem;line-height:1.45;background:var(--mid-bg);color:var(--ink);border-radius:6px;padding:8px 10px}
+.tip b{color:var(--mid);font-weight:600}
+.reveal{align-self:stretch;background:none;border:1.5px dashed var(--line);border-radius:8px;padding:14px;color:var(--muted);font-size:.92rem;margin-top:auto}
+.rate{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.rate button{border:0;border-radius:10px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:2px;font-weight:600;font-size:.9rem}
+.rate small{font-weight:400;font-size:.72rem;opacity:.85}
+.rate .r-bad{background:var(--bad-bg);color:var(--bad)}
+.rate .r-mid{background:var(--mid-bg);color:var(--mid)}
+.rate .r-good{background:var(--good-bg);color:var(--good)}
+.keys{font-size:.72rem;color:var(--muted);text-align:center}
+.studybar .sbr{display:flex;align-items:center;gap:14px}
+.ghost.undo{color:var(--accent)}
+.mynote{font-family:var(--sans);font-size:.82rem;line-height:1.45;border:1px dashed var(--line);border-radius:6px;padding:8px 10px;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.mynote.empty{border:0;padding:0}
+.mynote .nk{color:var(--muted);font-size:.72rem;letter-spacing:.04em;text-transform:uppercase}
+.mynote .nt{white-space:pre-wrap;color:var(--ink)}
+.mynote textarea{width:100%}
+.mynote .nrow{display:flex;gap:14px;align-items:center}
+
+.done{background:var(--card);border-radius:6px;box-shadow:var(--shadow);padding:22px 20px;display:flex;flex-direction:column;gap:14px}
+.done h3{font-family:var(--serif);font-size:1.4rem;margin:0}
+.tally{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;text-align:center}
+.tally div{border-radius:8px;padding:10px 4px}
+.tally b{display:block;font-size:1.3rem;font-variant-numeric:tabular-nums}
+.tally span{font-size:.75rem}
+
+/* Spielstand (Startseite) */
+.game{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;text-align:left;width:100%}
+.ringwrap{position:relative;width:44px;height:44px;flex:none}
+.ring{width:44px;height:44px;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:4}
+.ring .bg{stroke:var(--line)}
+.ring .fg{stroke:var(--good);stroke-linecap:round;transition:stroke-dashoffset .4s}
+.ringwrap b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:600;font-variant-numeric:tabular-nums}
+.game-txt{display:flex;flex-direction:column;min-width:0;flex:1}
+.game-txt b{font-weight:600;font-size:.92rem}
+.game-txt span{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.game-go{font-size:.8rem;color:var(--accent);white-space:nowrap}
+.plan{display:flex;flex-direction:column;gap:7px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;text-align:left;width:100%;margin-top:-12px}
+.plan-top{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.plan-top b{font-weight:600;font-size:.92rem}
+.plan-top > span:not(.pill){font-size:.85rem;font-variant-numeric:tabular-nums}
+.plan-top .pill{margin-left:auto}
+.planbar{display:block;height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.planbar span{display:block;height:100%;width:0;background:var(--accent);border-radius:3px;transition:width .4s}
+.plan-sub{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums;line-height:1.35}
+.plansum{background:var(--card);border-radius:6px;box-shadow:var(--shadow);padding:14px 16px;display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.plansum .big{display:flex;align-items:baseline;gap:6px 14px;flex-wrap:wrap}
+.plansum .big b{font-family:var(--serif);font-size:1.6rem;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
+.plansum .big span{font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.plansum p{margin:0;font-size:.85rem;line-height:1.45}
+.pfoot{display:flex;flex-direction:column;gap:3px;font-size:.8rem;line-height:1.4;font-variant-numeric:tabular-nums}
+.pfoot .k{color:var(--muted)}
+.pace{display:flex;height:8px;border-radius:4px;overflow:hidden;background:var(--line)}
+.pace i{display:block;height:100%;background:var(--accent)}
+.pace.ok i{background:var(--good)} .pace.low i{background:var(--mid)}
+.plansum p.k{font-size:.78rem;color:var(--muted)}
+.planhow{font-size:.75rem;color:var(--muted);line-height:1.45;margin:12px 0 0}
+
+/* Fortschritt */
+#stats{flex-direction:column;gap:24px}
+.panel{background:var(--card);border-radius:6px;box-shadow:var(--shadow);padding:18px 20px 20px}
+.lvl-top{display:flex;align-items:center;gap:16px}
+.lvl-num{width:64px;height:64px;flex:none;border-radius:50%;border:2px solid var(--accent);color:var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.lvl-num small{font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.lvl-num b{font-family:var(--serif);font-weight:700;font-size:1.9rem}
+.lvl-rank{font-family:var(--serif);font-size:1.4rem;font-weight:700;line-height:1.2;text-wrap:balance}
+.lvl-xp{font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.xpbar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin-top:14px}
+.xpbar span{display:block;height:100%;width:0;background:var(--accent);border-radius:4px;transition:width .4s}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}
+.kpi b{display:block;font-size:1.35rem;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.2}
+.kpi span{display:block;font-size:.72rem;color:var(--muted);line-height:1.25}
+.calnav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.calnav b{font-family:var(--serif);font-size:1.08rem}
+.calnav button{border:1px solid var(--line);background:var(--card);border-radius:8px;width:36px;height:34px;font-size:1rem}
+.calnav button:disabled{opacity:.35;cursor:default}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cal .wd{font-size:.66rem;color:var(--muted);text-align:center;text-transform:uppercase;letter-spacing:.06em}
+.day{aspect-ratio:5/4;min-width:0;border-radius:6px;border:1.5px solid transparent;background:var(--h0);color:var(--ink);display:flex;flex-direction:column;justify-content:space-between;align-items:stretch;padding:3px 5px;font-size:.7rem;position:relative;text-align:left}
+.day .dn{font-variant-numeric:tabular-nums;opacity:.7}
+.day .dc{align-self:flex-end;font-weight:600;font-size:.76rem;font-variant-numeric:tabular-nums}
+.day.h1{background:var(--h1)} .day.h2{background:var(--h2)}
+.day.h3{background:var(--h3);color:var(--accent-ink)} .day.h4{background:var(--h4);color:var(--accent-ink)}
+.day.est{border-style:dashed;border-color:var(--accent)}
+.day.future{background:transparent;border:1px dashed var(--line);color:var(--muted)}
+.day.today{border-color:var(--ink);border-style:solid}
+.day.sel{outline:2px solid var(--accent);outline-offset:1px}
+.day .ex{position:absolute;left:3px;bottom:3px;font-size:.6rem;font-weight:600;background:var(--rule);color:var(--card);border-radius:3px;padding:0 3px;max-width:calc(100% - 6px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.daydetail{font-size:.85rem;margin-top:10px;min-height:1.5em;font-variant-numeric:tabular-nums}
+.monthsum{font-size:.78rem;color:var(--muted);margin-top:4px;font-variant-numeric:tabular-nums}
+.heatkey{display:flex;align-items:center;gap:4px;font-size:.7rem;color:var(--muted);margin-top:8px;flex-wrap:wrap}
+.heatkey i{width:14px;height:14px;border-radius:3px;display:inline-block}
+.mstats{display:flex;flex-direction:column;gap:18px}
+.mrow{display:flex;flex-direction:column;gap:6px}
+.mhead{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.mhead b{font-weight:600}
+.mhead span{font-size:.78rem;color:var(--muted)}
+.mhead strong{margin-left:auto;font-family:var(--serif);font-size:1.2rem;font-variant-numeric:tabular-nums}
+.mhead strong small{font-family:var(--sans);font-size:.72rem;color:var(--muted);font-weight:400;margin-left:3px}
+.stack{display:flex;height:12px;border-radius:6px;overflow:hidden;background:var(--h0)}
+.stack i{display:block;height:100%}
+.c-sitzt{background:var(--good)} .c-auf{background:var(--blue)} .c-wack{background:var(--mid)} .c-neu{background:var(--h0);outline:1px solid var(--line);outline-offset:-1px}
+.mfoot{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.74rem;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px 12px}
+.badge{display:flex;gap:10px;align-items:center;padding:6px 0;min-width:0}
+.seal{width:40px;height:40px;flex:none;border-radius:50%;border:1.5px dashed var(--line);color:var(--muted);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:700;font-size:.9rem}
+.badge.on .seal{background:var(--accent);border:1.5px solid var(--accent);color:var(--accent-ink)}
+.badge div{min-width:0}
+.badge b{display:block;font-size:.85rem;font-weight:600;line-height:1.3}
+.badge span{display:block;font-size:.72rem;color:var(--muted);line-height:1.3}
+.badge:not(.on) b{color:var(--muted)}
+.fine{font-size:.76rem;color:var(--muted);line-height:1.5;margin:0}
+.xpgain{font-family:var(--serif);font-size:1.15rem;color:var(--accent)}
+@media (max-width:420px){ .kpis{grid-template-columns:repeat(2,minmax(0,1fr))} .panel{padding:16px} .day{padding:2px 3px} .day .dc{font-size:.68rem} }
+
+/* Lernmodus */
+.modes{display:flex;flex-direction:column;gap:6px}
+.modes .seg{align-self:flex-start}
+.modehint{font-size:.78rem;color:var(--muted)}
+/* Schriftlich */
+.write{display:flex;flex-direction:column;gap:10px}
+.skel{font-size:.82rem;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+.skel summary{cursor:pointer;color:var(--ink);font-weight:500}
+.skel ol{margin:6px 0 2px;padding-left:20px}
+textarea{font-family:var(--serif);font-size:1rem;line-height:1.5;width:100%;min-height:9em;resize:vertical;border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--desk);color:var(--ink)}
+textarea:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.wrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.photo{display:block;min-width:0;max-width:100%}
+.photo input{font:inherit;font-size:.8rem;color:var(--muted);max-width:100%}
+.photo input::file-selector-button{font:inherit;font-size:.85rem;color:var(--accent);background:var(--card);border:1px dashed var(--line);border-radius:8px;padding:9px 12px;margin-right:8px;cursor:pointer}
+.photo input::-webkit-file-upload-button{font:inherit;font-size:.85rem;color:var(--accent);background:var(--card);border:1px dashed var(--line);border-radius:8px;padding:9px 12px;margin-right:8px;cursor:pointer}
+.photo input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.pickhelp{background:var(--mid-bg);border-radius:6px;padding:8px 10px;color:var(--ink)}
+.photoname{font-size:.78rem;color:var(--muted);min-width:0;overflow-wrap:anywhere}
+.thumbrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.pastezone{flex:1 1 10em;min-width:0;min-height:2.6em;border:1px dashed var(--line);border-radius:8px;padding:9px 12px;font-size:.85rem;color:var(--ink);background:var(--card);-webkit-user-select:text;user-select:text;overflow:hidden;max-height:5em;white-space:nowrap}
+.pastezone:empty::before{content:attr(data-ph);color:var(--muted)}
+.pastezone:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.pickhelp a{color:var(--accent)}
+.thumbrow img{max-width:min(100%,220px);max-height:160px;border-radius:6px;border:1px solid var(--line);background:#fff}
+.write.drop{outline:2px dashed var(--accent);outline-offset:6px;border-radius:8px}
+.ownimg{display:block;max-width:100%;max-height:60vh;object-fit:contain;object-position:left top;border-radius:6px;border:1px solid var(--line);background:#fff;margin-top:6px}
+.wrow .primary{margin-left:auto;padding:11px 16px;font-size:.95rem}
+.whint{font-size:.78rem;color:var(--bad);min-height:0}
+.whint.info{color:var(--muted)}
+.fb{display:flex;flex-direction:column;gap:14px;font-size:.92rem}
+.fb h4{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 4px;font-weight:600;font-family:var(--sans)}
+.own{font-family:var(--serif);white-space:pre-wrap;line-height:1.5;overflow-wrap:anywhere}
+.own mark{background:var(--mid-bg);color:var(--mid);border-radius:3px;padding:0 2px;font-weight:600}
+.qscan{font-size:.78rem;color:var(--muted);margin-top:4px}
+.fbbox{border-left:3px solid var(--accent);padding:2px 0 2px 12px;display:flex;flex-direction:column;gap:6px;line-height:1.5}
+.fbbox p{margin:0}
+.fbbox .k{font-weight:600}
+.fbbox .ask{background:var(--mid-bg);border-radius:6px;padding:6px 10px}
+.chip{display:inline-block;font-size:.72rem;font-weight:600;padding:1px 7px;border-radius:999px;background:var(--bad-bg);color:var(--bad);margin-right:6px}
+.thinking{color:var(--muted);font-style:italic}
+.linkbtn{background:none;border:0;padding:0;color:var(--accent);font-size:.82rem;text-decoration:underline;text-underline-offset:2px}
+.prec{display:flex;flex-direction:column;gap:6px;margin-top:2px}
+textarea.precin{min-height:3.4em;font-size:.95rem}
+.precbtn{align-self:flex-start;padding:8px 14px;font-size:.85rem}
+.goalhit{font-size:.82rem;font-weight:600;color:var(--good);text-align:center}
+.radar{display:grid;grid-template-columns:minmax(0,1.7fr) repeat(4,minmax(0,1fr));gap:4px;font-size:.76rem;align-items:stretch}
+.radar .rh{color:var(--muted);text-align:center;font-variant-numeric:tabular-nums;padding-bottom:2px}
+.radar .rn{display:flex;flex-direction:column;justify-content:center;line-height:1.25;min-width:0}
+.radar .rn b{font-weight:600}
+.radar .rn span{color:var(--muted);font-size:.7rem}
+.radar .rc{border-radius:4px;padding:5px 2px;text-align:center;font-variant-numeric:tabular-nums;color:var(--ink);display:flex;align-items:center;justify-content:center}
+.answer b.anchor{font-weight:700;color:var(--ink);background:var(--mid-bg);border-radius:3px;padding:0 .12em}
+.answer .prem{padding-left:1.9em;text-indent:-1.9em}
+.answer .prem .pre{display:inline-block;width:1.9em;text-indent:0;font-family:var(--sans);font-size:.85em;font-weight:600;color:var(--accent)}
+.answer ul.alist{margin:0;padding-left:1.2em}
+.answer ul.alist li{margin:2px 0}
+.anchorhint{font-family:var(--sans);font-size:.75rem;color:var(--muted)}
+button.rn{background:none;border:0;padding:0;text-align:left;color:inherit;font:inherit;cursor:pointer}
+button.rn[aria-expanded="true"] b{color:var(--accent)}
+button.rn b::after{content:' ›';color:var(--muted);font-weight:400}
+.quotes{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.quotes li{border-left:3px solid var(--bad);padding:2px 0 2px 10px;font-size:.86rem;line-height:1.45}
+.quotes .qt{font-family:var(--serif)}
+.quotes small{display:block;color:var(--muted);font-size:.72rem}
+.radarnote{font-size:.8rem;margin-top:8px;font-variant-numeric:tabular-nums}
+.rate button.suggest{box-shadow:0 0 0 2px var(--card),0 0 0 4px currentColor}
+
+/* Disputation: Streitgespräch in Zügen, Claude rot (Einwand), die Person blau (Erwiderung), Urteil in Akzentfarbe */
+.disp{display:flex;flex-direction:column;gap:12px;font-size:.92rem}
+.disp .ctx{font-size:.82rem;color:var(--muted);margin:0;line-height:1.45}
+.disp h4,.verdict h4,.turn h4{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0;font-weight:600;font-family:var(--sans)}
+.turn{display:flex;flex-direction:column;gap:4px;line-height:1.5;padding:2px 0 2px 12px}
+.turn.c{border-left:3px solid var(--rule)}
+.turn.c .zug{font-family:var(--serif);font-size:1rem}
+.turn.l{border-left:3px solid var(--blue)}
+.turn .note{font-size:.78rem;color:var(--muted)}
+.turn .tfb{font-size:.84rem;line-height:1.45;display:flex;flex-direction:column;gap:3px;margin-top:2px}
+.turn .tfb p{margin:0}
+.turn .tfb .k{font-weight:600}
+.verdict{border-left:3px solid var(--accent);padding:2px 0 2px 12px;display:flex;flex-direction:column;gap:6px;line-height:1.5}
+.verdict p{margin:0}
+.verdict .k{font-weight:600}
+
+/* Drei Lernmodi als gleich breite Spalten, damit sie auch am Handy in eine Zeile passen */
+#modeSeg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-self:stretch}
+#modeSeg button{padding:7px 4px;text-align:center;line-height:1.25}
+/* Klausur-Simulation: Restzeit, nach Ablauf in der Fehlerfarbe */
+.count.late{color:var(--bad);font-weight:600}
+
+@keyframes fromL{from{opacity:0;transform:translateX(-22px)}to{opacity:1;transform:none}}
+@keyframes fromR{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:none}}
+.card.inL{animation:fromL .2s ease-out}.card.inR{animation:fromR .2s ease-out}
+.card.hist{outline:1.5px dashed var(--line);outline-offset:-1.5px}
+.histnav{display:grid;grid-template-columns:auto 1fr auto;gap:8px;position:sticky;bottom:10px;z-index:2;padding:8px;margin:0 -8px;border-radius:14px;background:color-mix(in srgb, var(--desk) 88%, transparent);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.histnav button{justify-content:center;text-align:center;padding:11px 12px;font-size:.9rem;white-space:nowrap}
+.hown{display:flex;flex-direction:column;gap:12px;font-size:.92rem}
+.hown h4{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 4px;font-weight:600;font-family:var(--sans)}
+@media (prefers-reduced-motion: reduce){ .card.inL,.card.inR{animation:none} .answer.show{animation:none} .slot .fill,.track span,.xpbar span,.ring .fg{transition:none} }
+@media (max-width:420px){ h1{font-size:1.6rem} .card{padding:16px 16px 18px} .card .q{font-size:1.12rem} }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Anatomie-Kartei</h1>
+      <div class="sub" id="sub">Funktionelle Sportanatomie</div>
+    </div>
+    <div class="exam" id="exam"></div>
+  </header>
+
+  <div class="status" id="status">Karten und Fortschritt werden geladen …</div>
+
+  <main id="home" style="display:flex;flex-direction:column;gap:20px">
+    <div class="panel" id="resumeBox" hidden style="display:flex;flex-direction:column;gap:10px">
+      <b>Weitermachen, wo du warst</b>
+      <p class="fine">Auf diesem Gerät ist noch kein Lernstand gespeichert. Hast du eine Sicherung, etwa von einem anderen Gerät oder aus der alten Kartei, füg sie hier ein (sie beginnt mit „KARTEI1:“). Zum ersten Mal hier? Dann einfach ohne Sicherung starten.</p>
+      <textarea id="rsIn" class="precin" rows="3" aria-label="Sicherung einfügen"></textarea>
+      <div class="wrow"><button class="primary" id="rsGo" type="button" style="margin-left:0">Sicherung einspielen</button><button class="linkbtn" id="rsSkip" type="button">Ohne Sicherung starten</button></div>
+      <p class="qscan" id="rsMsg" aria-live="polite"></p>
+    </div>
+    <button class="game" id="gameBtn" type="button" hidden>
+      <span class="ringwrap" aria-hidden="true"><svg class="ring" viewBox="0 0 44 44"><circle class="bg" cx="22" cy="22" r="18"/><circle class="fg" id="ringFg" cx="22" cy="22" r="18" stroke-dasharray="113.1" stroke-dashoffset="113.1"/></svg><b id="ringN">0</b></span>
+      <span class="game-txt"><b id="gLevel">Level 1 · Erstsemester</b><span id="gLine"></span></span>
+      <span class="game-go">Fortschritt →</span>
+    </button>
+    <button class="plan" id="planBtn" type="button" hidden>
+      <span class="plan-top"><b>Klausurplan heute</b><span id="pLine"></span><span class="pill" id="pPill"></span></span>
+      <span class="planbar" aria-hidden="true"><span id="pFill"></span></span>
+      <span class="plan-sub" id="pSub"></span>
+    </button>
+    <nav class="mods" id="mods" aria-label="Modul"></nav>
+
+    <section aria-label="Karteikasten">
+      <div class="box" id="box"></div>
+      <div class="boxcap">Neue Karten links. Gewusst schiebt eine Karte ein Fach weiter, „halb“ zwei Fächer zurück und morgen wieder, „nicht gewusst“ zurück in Fach 1 und gleich noch einmal. Vorgezogenes Üben und eine zweite Runde am selben Tag bringen keinen Aufstieg. In der letzten Woche vor jeder Klausur kommt jede Karte noch einmal dran, verteilt auf die Tage statt alle am Vorabend.</div>
+    </section>
+
+    <div class="filters">
+      <div class="seg" role="group" aria-label="Veranstaltung" id="groups"></div>
+      <select id="sitzung" aria-label="Sitzung"><option value="alle">Alle Sitzungen</option></select>
+    </div>
+
+    <div class="modes">
+      <div class="seg" role="group" aria-label="Lernmodus" id="modeSeg">
+        <button type="button" data-mode="karte" aria-pressed="true">Karteikarte</button>
+        <button type="button" data-mode="schrift" aria-pressed="false">Schriftlich</button>
+        <button type="button" data-mode="klausur" aria-pressed="false">Klausur</button>
+      </div>
+      <div class="seg" role="group" aria-label="Rolle in der Disputation" id="roleSeg" hidden>
+        <button type="button" data-role="verteidigen" aria-pressed="true">Ich verteidige</button>
+        <button type="button" data-role="angreifen" aria-pressed="false">Ich greife an</button>
+      </div>
+      <div class="modehint" id="modeHint"></div>
+    </div>
+
+    <div class="actions">
+      <button class="primary" id="learn" type="button" disabled><span>Lernen</span><span id="learnN"></span></button>
+      <button class="secondary" id="weakBtn" type="button" disabled><span>Wackelige Karten üben</span><span id="weakN"></span></button>
+      <div class="next" id="next"></div>
+    </div>
+
+    <section>
+      <h2>Wackelig</h2>
+      <ul class="weak" id="weak"></ul>
+    </section>
+    <p class="fine" id="storeLine"></p>
+  </main>
+
+  <section id="study" hidden style="flex-direction:column;gap:14px">
+    <div class="studybar">
+      <button class="ghost" id="quit" type="button">← Beenden</button>
+      <span class="sbr"><button class="ghost" id="skipBtn" type="button" hidden title="Karte ohne Bewertung überspringen">Überspringen</button><button class="ghost" id="histBtn" type="button" hidden title="Vorige Karten mit Lösung ansehen (Pfeil links)">‹ Vorige</button><button class="ghost undo" id="undo" type="button" hidden title="Letzte Bewertung zurücknehmen (Taste Z)">↶ Rückgängig</button><span class="count" id="count"></span></span>
+    </div>
+    <div class="track"><span id="trackFill" style="width:0"></span></div>
+    <div class="goalhit" id="goalHit" hidden></div>
+    <article class="card" id="card">
+      <div class="meta"><span id="cMeta"></span><span class="state" id="cState" aria-live="polite"></span></div>
+      <p class="q" id="cQ"></p>
+      <div class="disp" id="dispBox" hidden></div>
+      <div class="write" id="writeBox" hidden>
+        <details class="skel" id="skel"><summary id="skelSum">Skelett</summary><ol id="skelList"></ol></details>
+        <label for="ans" class="modehint" id="ansLbl">Deine Antwort, so wie in der Klausur</label>
+        <textarea id="ans" rows="7"></textarea>
+        <div class="wrow">
+          <span class="photo" id="photoLbl" hidden><input type="file" id="photo" accept="image/*,application/pdf" aria-label="Foto oder PDF der Handschrift wählen"></span>
+          <div class="pastezone" id="pasteZone" contenteditable="true" role="textbox" aria-label="Bild der Handschrift hier einfügen" data-ph="oder Bild einfügen" hidden></div>
+          <button class="primary" id="checkBtn" type="button">Antwort prüfen</button>
+        </div>
+        <div class="modehint pickhelp" id="pickHelp" hidden>In der Claude-App öffnet sich hier keine Datei- oder Fotoauswahl. Öffne die Kartei im Browser (Chrome): oben rechts auf Teilen tippen, Link kopieren und in Chrome öffnen. Dort öffnet der Knopf deine Galerie und Dateien. In Chrome über ⋮ → „Zum Startbildschirm hinzufügen“ liegt die Kartei dann wie eine App auf dem Startbildschirm. Ohne Browser: ein Bild in die Zwischenablage kopieren (z. B. in der Notiz-App „Als Bild kopieren“), dann hier den Finger auf „oder Bild einfügen“ halten und Einfügen wählen.</div>
+        <div class="thumbrow" id="thumbRow" hidden><img id="thumb" alt="Vorschau deiner Handschrift"><span class="photoname" id="photoName"></span><button type="button" class="linkbtn" id="photoDel">Entfernen</button></div>
+        <div class="modehint" id="photoTip" hidden>Handschrift anhängen: Datei wählen, ein kopiertes Bild einfügen oder die Datei hierher ziehen.</div>
+        <div class="whint" id="whint"></div>
+      </div>
+      <div class="fb" id="fb" hidden>
+        <div><h4>Deine Antwort</h4><div class="own" id="ownTxt"></div><div class="qscan" id="qscan"></div></div>
+        <div id="fbWrap"><h4>Rückmeldung</h4><div class="fbbox" id="fbTxt"></div></div>
+        <button type="button" class="linkbtn" id="peekBtn" hidden>Lösung zeigen</button>
+        <h4 id="fbLz" style="margin-bottom:-8px" hidden>Lösung</h4>
+      </div>
+      <div class="answer" id="cA" hidden></div>
+      <button class="reveal" id="revealBtn" type="button">Erst laut antworten, dann aufdecken</button>
+    </article>
+    <article class="card hist" id="hist" hidden>
+      <div class="meta"><span id="hMeta"></span><span class="state" id="hState"></span></div>
+      <p class="q" id="hQ"></p>
+      <div class="hown" id="hOwn"></div>
+      <div class="answer" id="hA"></div>
+    </article>
+    <div class="histnav" id="histNav" hidden>
+      <button type="button" class="secondary" id="hPrev">‹ Zurück</button>
+      <button type="button" class="primary" id="hClose">Aktuelle Karte</button>
+      <button type="button" class="secondary" id="hNext">Weiter ›</button>
+    </div>
+    <div class="rate" id="rate" hidden>
+      <button type="button" class="r-bad" data-r="again">Nicht gewusst<small>gleich nochmal</small></button>
+      <button type="button" class="r-mid" data-r="half">Halb<small>morgen</small></button>
+      <button type="button" class="r-good" data-r="good">Gewusst<small id="tGood"></small></button>
+    </div>
+    <div class="keys" id="keys">Tastatur: Leertaste deckt auf · 1 / 2 / 3 bewertet · Z nimmt zurück</div>
+  </section>
+
+  <section id="stats" hidden>
+    <div class="studybar">
+      <button class="ghost" id="statsBack" type="button">← Zurück zur Kartei</button>
+      <span class="count" id="statsTotal"></span>
+    </div>
+
+    <div class="panel">
+      <div class="lvl-top">
+        <div class="lvl-num"><small>Level</small><b id="sLvl">1</b></div>
+        <div><div class="lvl-rank" id="sRank">Erstsemester</div><div class="lvl-xp" id="sXp"></div></div>
+      </div>
+      <div class="xpbar"><span id="sXpFill"></span></div>
+      <div class="kpis">
+        <div class="kpi"><b id="kStreak">0</b><span id="kStreakL">Tage Serie</span></div>
+        <div class="kpi"><b id="kBest">0</b><span>beste Serie</span></div>
+        <div class="kpi"><b id="kToday">0</b><span id="kTodayL">Karten heute (Ziel 20)</span></div>
+        <div class="kpi"><b id="kDays">0</b><span>Lerntage</span></div>
+      </div>
+    </div>
+
+    <section id="backupSec" hidden>
+      <h2>Sicherung</h2>
+      <div class="panel" style="display:flex;flex-direction:column;gap:10px">
+        <p class="fine" id="bkInfo"></p>
+        <div class="wrow"><button class="primary" id="bkCopy" type="button" style="margin-left:0">Sicherung kopieren</button><button class="secondary" id="bkFile" type="button" hidden>Als Datei speichern</button></div>
+        <textarea id="bkOut" class="precin" rows="3" readonly hidden aria-label="Sicherungscode"></textarea>
+        <p class="qscan" id="bkMsg" aria-live="polite"></p>
+        <label for="bkIn" class="modehint">Sicherung einspielen: Code hier einfügen</label>
+        <textarea id="bkIn" class="precin" rows="3"></textarea>
+        <div class="wrow"><button class="secondary precbtn" id="bkLoad" type="button">Einspielen</button><span class="photo"><input type="file" id="bkPick" accept=".txt,text/plain" aria-label="Sicherungsdatei wählen"></span></div>
+      </div>
+    </section>
+
+    <section id="planSec">
+      <h2>Klausurplan</h2>
+      <div class="plansum" id="planSum"></div>
+      <div class="mstats" id="pstats"></div>
+      <p class="planhow">So rechnet der Plan: Für jede Karte schätzt die Kartei, wie oft sie bis zur Klausur noch drankommt, wenn du ihren Regeln folgst (gewusst ein Fach weiter, halb zwei zurück, nicht gewusst in Fach 1, in der letzten Woche jede noch einmal). Grundlage ist deine Trefferquote je Fach bei planmäßigen Wiederholungen der letzten vier Wochen; Wiederholungen am selben Tag und der erste Kontakt mit einer Karte zählen dafür nicht. Am Anfang ist sie mit Erfahrungswerten gemischt und wird mit jeder Karte genauer. Karten aus Sitzungen, die noch kommen, sind mit dem Schnitt der bisherigen Vorlesungen eingerechnet, neue Karten sollen spätestens 18 Tage vor der Klausur zum ersten Mal drankommen, damit sie den Rhythmus 1–3–7 Tage noch schaffen. Das Tagesziel ist der Rest geteilt durch die Tage bis zur Klausur, mindestens alles heute Fällige plus die neuen von heute, höchstens alles, was heute überhaupt lernbar ist; es wird beim ersten Lernen am Tag festgelegt. Was heute noch nicht geht, weil Sitzungen fehlen, verteilt der Plan auf die Tage danach. Module ohne Klausurtermin zählen nicht mit.</p>
+    </section>
+
+    <section>
+      <h2>Kalender</h2>
+      <div class="calnav">
+        <button type="button" id="calPrev" aria-label="Voriger Monat">‹</button>
+        <b id="calTitle"></b>
+        <button type="button" id="calNext" aria-label="Nächster Monat">›</button>
+      </div>
+      <div class="cal" id="cal"></div>
+      <div class="daydetail" id="dayDetail"></div>
+      <div class="monthsum" id="monthSum"></div>
+      <div class="heatkey">weniger <i style="background:var(--h0)"></i><i style="background:var(--h1)"></i><i style="background:var(--h2)"></i><i style="background:var(--h3)"></i><i style="background:var(--h4)"></i> mehr</div>
+    </section>
+
+    <section>
+      <h2>Fächer</h2>
+      <div class="legend" style="margin-bottom:12px"><span><i class="c-sitzt"></i>sitzt (Fach 4–5)</span><span><i class="c-auf"></i>im Aufbau (Fach 3)</span><span><i class="c-wack"></i>wackelig (Fach 1–2)</span><span><i class="c-neu"></i>neu</span></div>
+      <div class="mstats" id="mstats"></div>
+    </section>
+
+    <section>
+      <h2>Fehlermuster in schriftlichen Antworten</h2>
+      <div id="radar"></div>
+    </section>
+
+    <section>
+      <h2>Abzeichen</h2>
+      <div class="badges" id="badges"></div>
+    </section>
+
+    <p class="fine">XP gibt es für jede bewertete Karte: 10 für „gewusst“, 6 für „halb“, 3 für „nicht gewusst“. Ehrlich „nicht gewusst“ zu drücken lohnt sich also auch, denn der Abrufversuch ist das Training. Schriftliche Antworten bringen 5 XP extra, eine eigene Korrektur 3, das geschaffte Tagesziel von 20 Karten einmal am Tag 30, das Klausurplan-Ziel des Tages (wenn es über 20 liegt) noch einmal 20. Pro sieben Lerntage am Stück gibt es einen Puffertag (höchstens zwei), der die Serie über einen freien Tag rettet. Sicherheit pro Fach: Eine Karte in Fach 1 zählt 20 %, in Fach 5 100 %, neue Karten 0 %.</p>
+  </section>
+
+  <section id="done" hidden>
+    <div class="done">
+      <h3>Durchgang fertig</h3>
+      <div class="tally">
+        <div style="background:var(--bad-bg);color:var(--bad)"><b id="dBad">0</b><span>nicht gewusst</span></div>
+        <div style="background:var(--mid-bg);color:var(--mid)"><b id="dMid">0</b><span>halb</span></div>
+        <div style="background:var(--good-bg);color:var(--good)"><b id="dGood">0</b><span>gewusst</span></div>
+      </div>
+      <div class="xpgain" id="dXp"></div>
+      <div class="next" id="dNote"></div>
+      <button class="secondary" id="histDone" type="button" hidden><span>Karten dieser Runde ansehen</span><span>›</span></button>
+      <div id="bkDoneBox" hidden style="display:flex;flex-direction:column;gap:6px">
+        <button class="secondary" id="bkDone" type="button"><span>Sicherung kopieren</span><span>für den Notfall</span></button>
+        <textarea id="bkOutDone" class="precin" rows="3" readonly hidden aria-label="Sicherungscode"></textarea>
+        <p class="qscan" id="bkDoneMsg" aria-live="polite"></p>
+      </div>
+      <button class="linkbtn" id="undoDone" type="button" hidden style="align-self:flex-start">↶ Letzte Bewertung zurücknehmen</button>
+      <button class="primary" id="back" type="button"><span>Zurück zur Kartei</span><span></span></button>
+    </div>
+  </section>
+</div>
+
+<script>
+/* Eigenständige Fassung: Karten kommen aus cards.json neben dieser Datei, der Lernstand bleibt im Speicher dieser Seite. */
+(function(){
+  const dataP = fetch('cards.json', {cache: 'no-cache'}).then(r => { if(!r.ok) throw {code: 'http_' + r.status}; return r.json(); });
+  const snapOf = obj => ({docs: Object.entries(obj || {}).map(([id, data]) => ({id, data: () => JSON.parse(JSON.stringify(data))}))});
+  const db = {collection(path){ return {
+    onSnapshot(cb, err){ dataP.then(d => cb(snapOf(path === 'modules' ? d.modules : path === 'decks' ? d.decks : {})), e => { if(err) err(e); }); return () => {}; },
+    doc(){ return {set: () => Promise.reject({code: 'standalone'}), delete: () => Promise.resolve()}; }
+  }; }};
+  window.claude = {use: async n => n === 'db' ? db : null};
+  try { if(navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {}); } catch(e){}
+})();
+</script>
+<script>
+(function(){
+  const INTERVAL = {1:1, 2:3, 3:7, 4:14, 5:30};
+  const NEW_PER_SESSION = 12, MAX_DUE = 30, WEAK_SESSION = 15, MAX_REQUEUE = 3;
+  const FACH_LABEL = ['Neu','Fach 1','Fach 2','Fach 3','Fach 4','Fach 5'];
+  const FACH_RHYTHM = ['','1 Tag','3 Tage','7 Tage','14 Tage','30 Tage'];
+  const DEFAULT_MOD = 'anatomie';
+
+  let decks = [], cards = [], prog = {}, modules = {}, deckOrder = {};
+  let db = null, uid = null, progLoaded = false, decksLoaded = false;
+  /* store: 'cloud' = Fortschritt im Claude-Konto, 'local' = im Browser dieses Geräts, null = gar nicht */
+  let store = null, lastBackup = null, lsBroken = false, dl = null, lsErr = '', lsFound = null, lsCreated = null, lsSaved = null;
+  const LKEY = 'kk-local-v1';
+  const filt = {modul:'alle', group:'alle', sitzung:'alle'};
+  try { const m = localStorage.getItem('kk-modul'); if(m) filt.modul = m; } catch(e){}
+  let queue = [], pos = 0, revealed = false, miss = new Map(), halfAgain = new Set(), tally = {again:0, half:0, good:0};
+  let days = {}, logDirty = null, logTimer = null, logChain = Promise.resolve(), cardT0 = 0, sessionXp = 0, calMonth = null, selDay = null;
+  const DAY_GOAL = 20, XP = {good:10, half:6, again:3}, XP_WRITE = 5, XP_PREC = 3, XP_GOAL = 30, WRITE_SESSION = 8, LEECH = 3, FINAL_DAYS = 7;
+  const XP_DISP = 10, DISP_ROUNDS = 3, PRIO_PER_SESSION = 8, SYN_PER_SESSION = 3, EXAM_N = 4, EXAM_MIN = 45;
+  let answers = [], earned = {}, badgeBusy = false, radarOpen = null;
+  let notes = {}, lastStep = null, reuseId = null, logPending = 0;
+  let hist = [], hi = null, histFrom = 'study', histPaused = 0;
+  const TOUCH = (() => { try { return matchMedia('(pointer: coarse)').matches; } catch(e){ return false; } })();
+  const clone = x => JSON.parse(JSON.stringify(x));
+  const isLeech = p => !!p && (p.wrong||0) >= LEECH && (p.box||0) < 4;
+  const PNAMES = {'P-01':'Verwechslung', 'P-02':'Unvollständig', 'P-03':'Alltagswort statt Fachbegriff', 'P-04':'Zahl ungenau'};
+  const MUSTER = [
+    'P-01 Verwechslung: Struktur, Muskel, Gelenk, Lage- oder Bewegungsbegriff vertauscht (z. B. Abduktion/Adduktion, Innen-/Außenrotation, medial/lateral, Sehne/Band, Muskelspindel/Golgi-Sehnenorgan, Typ-I-/Typ-II-Fasern).',
+    'P-02 Unvollständig: es fehlen Teile, die die Frage verlangt (z. B. bei „Beschreibe die Anatomie eines Gelenks“: Gelenkart, knöcherne Anteile, Bänder, umgebende Muskulatur; bei Aufzählungen fehlen Glieder).',
+    'P-03 Alltagswort statt Fachbegriff: richtig gemeint, aber ohne den Fachbegriff aus den Folien (z. B. „Oberschenkelknochen“ ohne Femur, „Strecken“ ohne Extension, wo der Fachbegriff gefragt ist).',
+    'P-04 Zahl ungenau: Gradzahl nach der Neutral-0-Methode, Anzahl (Knochen, Wirbel, Freiheitsgrade) oder Prozentangabe falsch oder vertauscht.'
+  ];
+  let mode = 'karte', sample = null, aiOff = false, imgOk = false, imgChecked = false, photoBlob = null, photoName = '', photoBusy = false, thumbUrl = null, attempt = null, aiCtl = null, suggested = null;
+  let disp = null, role = 'verteidigen', skipOpen = false, exam = null;
+  try { const md = localStorage.getItem('kk-mode'); if(md === 'schrift' || md === 'klausur') mode = md; } catch(e){}
+  try { if(localStorage.getItem('kk-role') === 'angreifen') role = 'angreifen'; } catch(e){}
+  const SKEL = [
+    [/^(erläutere|erkläre|begründe)/i, 'Erläutere', ['These: worum es geht, in einem Satz', 'Warum: die Begründung', 'Beispiel', 'Rückbezug auf die Frage']],
+    [/^(unterscheide|grenze)/i, 'Unterscheide', ['Kriterium benennen', 'A an diesem Kriterium messen', 'B daran messen: „A …, B dagegen …“']],
+    [/^vergleiche/i, 'Vergleiche', ['Vergleichskriterien nennen', 'Gemeinsamkeiten', 'Unterschiede, je Kriterium']],
+    [/^rekonstruiere/i, 'Rekonstruiere', ['Prämissen einzeln nummerieren, je deskriptiv oder normativ', 'keine Pfeile zwischen den Prämissen', 'Konklusion mit wörtlich gleichem Prädikat']],
+    [/^(beschreibe|stelle .* dar)/i, 'Beschreibe', ['Was es ist: Art bzw. Einordnung (z. B. Gelenkform)', 'Aufbau: knöcherne Anteile, Bänder, Knorpel', 'Umgebende Muskulatur', 'Funktion bzw. Bewegungsmöglichkeiten', 'Fachbegriffe aus den Folien']],
+    [/^(analysiere|welche muskeln|welche gelenke)/i, 'Analysiere', ['Bewegung bzw. Bewegungsphase benennen', 'Beteiligte Gelenke und ihre Gelenkform', 'Bewegungsrichtung (Fachbegriff) und Freiheitsgrade', 'Agonist(en), Antagonist(en)', 'Arbeitsweise: konzentrisch, exzentrisch oder isometrisch']],
+    [/^(trifft|welche aussage|welche der folgenden)/i, 'Multiple Choice', ['Jede Aussage einzeln prüfen: richtig oder falsch', 'Bei „ausschließlich“, „immer“, „nur“ besonders misstrauisch', 'Erst dann die passende Antwortkombination wählen', 'Bei falschen Aussagen kurz sagen, was richtig wäre']],
+    [/^(nimm stellung|beurteile|bewerte|diskutiere|spricht)/i, 'Nimm Stellung', ['These', 'Begründung', 'stärkster Einwand', 'Replik', 'Fazit mit Einschränkung']],
+    [/(warum|inwiefern|wieso)/i, 'Erläutere', ['These: worum es geht, in einem Satz', 'Warum: die Begründung', 'Beispiel', 'Rückbezug auf die Frage']],
+    [/^(nenne|benenne|gib|welche|was|wofür|wie viele|wann|wer|wo)/i, 'Nenne', ['vollständig', 'ohne Bewertung', 'Fachbegriffe aus den Folien']],
+  ];
+  const QUANT = /(?<![\p{L}])(kein[\p{L}]*|nie|niemals|nirgends|nichts|immer|stets|alle|alles|allen|aller|allem|jede[\p{L}]*|nur|ohne|zwangsläufig[\p{L}]*|ausschließlich|ausnahmslos|völlig|gar nicht)(?![\p{L}])/giu;
+  const RANKS = ['Erstsemester','Kommiliton:in','Hiwi','Tutor:in','Examenskandidat:in','Absolvent:in','Doktorand:in','Postdoc','Privatdozent:in','Professor:in','Emeritus'];
+  const MONTHS = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+
+  const $ = id => document.getElementById(id);
+  const pad = n => String(n).padStart(2,'0');
+  const iso = d => d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+  const noon = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d, 12); };
+  const today = () => iso(new Date());
+  const addDays = n => { const d = new Date(); d.setHours(12,0,0,0); d.setDate(d.getDate()+n); return iso(d); };
+  const daysTo = s => Math.round((noon(s) - noon(today())) / 864e5);
+  const WD = ['So','Mo','Di','Mi','Do','Fr','Sa'];
+  const dayLabel = s => { const d = noon(s); return WD[d.getDay()]+' '+d.getDate()+'.'+(d.getMonth()+1)+'.'; };
+  const human = s => { const n = daysTo(s); return n<=0 ? 'heute' : n===1 ? 'morgen' : dayLabel(s); };
+  const inDays = n => n<=0 ? 'heute' : n===1 ? 'morgen' : 'in '+n+' Tagen';
+  const validDate = s => typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s);
+
+  const plusDays = (s, n) => { const d = noon(s); d.setDate(d.getDate() + n); return iso(d); };
+  const modOf = key => modules[key] || {name:key, short:key, groups:{}};
+  const examOf = key => { const m = modules[key]; return m && validDate(m.exam) ? m.exam : null; };
+  function capExam(s, key){
+    const ex = examOf(key); if(!ex) return s;
+    const eve = plusDays(ex, -1);
+    return (today() < eve && s > eve) ? eve : s;
+  }
+  function hash01(str){ let h = 2166136261; for(let i = 0; i < str.length; i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return ((h >>> 0) % 1000) / 1000; }
+  /* Nächste Fälligkeit nach "gewusst". Würde sie hinter die Klausur fallen, bekommt die Karte
+     einen festen Tag in der letzten Woche davor (verteilt nach Karten-ID) statt alle den Vorabend.
+     Wer in dieser Woche schon wiederholt hat, ist für die Klausur durch. */
+  function dueFor(box, key, id){
+    const due = addDays(INTERVAL[box]), ex = examOf(key);
+    if(!ex) return due;
+    const t = today(), eve = plusDays(ex, -1);
+    if(t > eve || due <= eve) return due;
+    const win = plusDays(ex, -FINAL_DAYS);
+    if(t >= win) return due;
+    const slot = plusDays(win, Math.floor(hash01(String(id)) * FINAL_DAYS));
+    return slot > t ? slot : addDays(1);
+  }
+  /* Gleicher Tag: Nachholrunde oder zweite Runde. Vorgezogen: noch nicht fällig und weniger als das halbe
+     Intervall seit dem letzten Mal (z. B. über „Wackelige Karten üben“, Disputation, Klausur). Beides zählt
+     weder für die Trefferquote im Klausurplan noch als Aufstieg im Kasten. */
+  function reviewState(c){
+    const t = today(), pv = prog[c.id];
+    const pb = pv ? Math.min(5, Math.max(1, pv.box || 1)) : 0;
+    const sameDay = !!pv && (pv.last === t || miss.has(c.id) || halfAgain.has(c.id));
+    const early = !!pv && !sameDay && !!pv.due && pv.due > t && !!pv.last && -daysTo(pv.last) < INTERVAL[pb] / 2;
+    return {t, pv, pb, sameDay, early};
+  }
+  /* Was „gewusst“ mit der Karte macht; dieselbe Regel für die Bewertung und die Beschriftung des Knopfs */
+  function goodOutcome(c){
+    const st = reviewState(c), box = st.pv ? (st.pv.box || 0) : 0, due = st.pv ? st.pv.due : null;
+    if(miss.has(c.id)) return {box: 1, due: capExam(addDays(1), c.modul)};
+    if(halfAgain.has(c.id)) return {box: Math.max(1, box), due: capExam(addDays(1), c.modul)};
+    if(st.pv && (st.pv.last === st.t || st.early)) return {box: Math.max(1, box), due: (!due || due <= st.t) ? capExam(addDays(1), c.modul) : due};
+    const nb = Math.min(5, Math.max(0, box) + 1);
+    return {box: nb, due: dueFor(nb, c.modul, c.id)};
+  }
+  function setStatus(msg){ const el = $('status'); el.textContent = msg || ''; el.hidden = !msg; }
+  /* Hinweiszeile unter dem Schreibfeld: Fehler rot, Statusmeldungen („wird vorbereitet …“) gedämpft */
+  function hint(msg, info){ const h = $('whint'); h.textContent = msg || ''; h.classList.toggle('info', !!info && !!msg); }
+  /* Auf Touch-Geräten nicht automatisch fokussieren, sonst springt die Tastatur auf und schiebt die Karte weg */
+  function focusAns(){ if(!TOUCH && !$('writeBox').hidden && !$('ans').disabled) $('ans').focus(); }
+  /* Bild-URLs der laufenden Runde (Handschrift in Disputation und Klausur); beim nächsten Start freigegeben */
+  const blobUrls = [];
+  function keepUrl(b){ const u = URL.createObjectURL(b); blobUrls.push(u); return u; }
+  function dropUrls(){ while(blobUrls.length){ try { URL.revokeObjectURL(blobUrls.pop()); } catch(e){} } }
+  const kart = n => n === 1 ? '1 Karte' : n + ' Karten';
+  function el(tag, cls, text){ const e = document.createElement(tag); if(cls) e.className = cls; if(text != null) e.textContent = text; return e; }
+
+  function examShort(key){
+    const ex = examOf(key), m = modOf(key);
+    if(ex){ const n = daysTo(ex); return n > 0 ? 'in '+n+' Tagen' : n === 0 ? 'heute' : 'vorbei'; }
+    return m.examLabel || 'Termin offen';
+  }
+  function renderHeader(){
+    const box = $('exam'); box.textContent = '';
+    const sub = $('sub');
+    if(filt.modul === 'alle'){
+      const keys = modKeys().filter(k => cards.some(c => c.modul === k));
+      sub.textContent = keys.length ? keys.map(k => modOf(k).name).join(' · ') : 'Karten für alle Klausurmodule';
+      const next = keys.filter(k => examOf(k) && daysTo(examOf(k)) >= 0).sort((a,b) => examOf(a) < examOf(b) ? -1 : 1)[0];
+      if(next){ box.append('Nächste Klausur: ', el('b', null, modOf(next).short || modOf(next).name), ' ' + examShort(next)); box.hidden = false; }
+      else box.hidden = true;
+    } else {
+      const m = modOf(filt.modul), ex = examOf(filt.modul);
+      sub.textContent = [m.name, m.sub].filter(Boolean).join(' · ');
+      box.hidden = false;
+      if(ex){
+        const n = daysTo(ex);
+        if(n > 0){ box.append('Klausur in ', el('b', null, String(n)), ' Tagen · ' + dayLabel(ex)); }
+        else if(n === 0){ box.append(el('b', null, 'Klausur heute')); }
+        else box.textContent = 'Klausur war ' + dayLabel(ex);
+      } else box.textContent = 'Klausur ' + (m.examLabel || 'Termin offen');
+    }
+  }
+
+  function modKeys(){
+    const keys = new Set(Object.keys(modules));
+    decks.forEach(d => keys.add(d.modul));
+    return [...keys].sort((a,b) => ((modOf(a).order ?? 99) - (modOf(b).order ?? 99)) || a.localeCompare(b));
+  }
+
+  function flatten(){
+    decks.forEach(d => { d.modul = d.modul || DEFAULT_MOD; });
+    const keys = modKeys();
+    const gIdx = d => { const i = Object.keys(modOf(d.modul).groups || {}).indexOf(d.deck); return i < 0 ? 99 : i; };
+    decks.sort((a,b) => (keys.indexOf(a.modul) - keys.indexOf(b.modul)) || (gIdx(a) - gIdx(b)) || String(a.deck).localeCompare(String(b.deck)) || (a.nr - b.nr));
+    deckOrder = {}; decks.forEach((d,i) => deckOrder[d.id] = i);
+    cards = [];
+    decks.forEach(d => (d.cards||[]).forEach(c => cards.push({...c, deckId:d.id, modul:d.modul, group:d.deck, nr:d.nr, title:d.title, prio: d.kind === 'nacharbeit', syn: d.kind === 'synthese'})));
+    if(decksLoaded && filt.modul !== 'alle' && !keys.includes(filt.modul)) filt.modul = 'alle';
+  }
+
+  function groupLabel(key, g){ const m = modOf(key); return (m.groups && m.groups[g]) || g || m.short || m.name || ''; }
+  function label(c){
+    const m = modOf(c.modul), g = groupLabel(c.modul, c.group);
+    const short = m.short || m.name;
+    if(c.prio) return (filt.modul === 'alle' && short ? short + ' · ' : '') + 'Nacharbeit · ' + c.src;
+    if(c.syn) return (filt.modul === 'alle' && short ? short + ' · ' : '') + 'Synthese · ' + c.src;
+    let s = (g ? g + ' ' : '') + pad(c.nr) + ' · ' + c.src;
+    if(filt.modul === 'alle' && short && g !== short) s = short + ' · ' + s;
+    return s;
+  }
+  function deckLabel(d){
+    if(d.kind === 'nacharbeit') return 'Nacharbeit · ' + kart((d.cards || []).length);
+    if(d.kind === 'synthese') return 'Synthese · ' + kart((d.cards || []).length);
+    const g = groupLabel(d.modul, d.deck); return (g ? g + ' ' : '') + pad(d.nr) + ' · ' + d.title;
+  }
+
+  const inFilter = c => (filt.modul === 'alle' || c.modul === filt.modul) && (filt.group === 'alle' || c.group === filt.group) && (filt.sitzung === 'alle' || c.deckId === filt.sitzung);
+  const score = p => p ? (p.wrong||0)*2 + (p.half||0) : 0;
+  const examRank = c => { const ex = examOf(c.modul); return ex && daysTo(ex) >= 0 ? daysTo(ex) : 9999; };
+  function dueList(list){
+    const t = today();
+    return list.filter(c => prog[c.id] && prog[c.id].due && prog[c.id].due <= t)
+      .sort((a,b) => score(prog[b.id]) - score(prog[a.id]) || examRank(a) - examRank(b) || (prog[a.id].box||0) - (prog[b.id].box||0));
+  }
+  /* Neue Karten: Nacharbeit (aus Fehlern in Abfragen, Probeklausuren, Tablet-Antworten, Disputationen) vor allen anderen */
+  const newList = list => list.filter(c => !prog[c.id]).sort((a,b) => (b.prio ? 1 : 0) - (a.prio ? 1 : 0) || examRank(a) - examRank(b) || deckOrder[a.deckId] - deckOrder[b.deckId]);
+  function freshPick(list){
+    const f = newList(list);
+    /* Synthese-Karten tröpfchenweise, sonst kämen sie erst, wenn alle Sitzungskarten gesehen sind */
+    return {pr: f.filter(c => c.prio).slice(0, PRIO_PER_SESSION), sy: f.filter(c => c.syn && !c.prio).slice(0, SYN_PER_SESSION), nw: f.filter(c => !c.prio && !c.syn).slice(0, NEW_PER_SESSION), total: f.length};
+  }
+  function weakList(list){
+    return list.filter(c => score(prog[c.id]) > 0 && (prog[c.id].box||0) < 4)
+      .sort((a,b) => score(prog[b.id]) - score(prog[a.id]) || (prog[a.id].box||0) - (prog[b.id].box||0));
+  }
+  const weakPractice = list => { const t = today(); return list.filter(c => prog[c.id] && prog[c.id].last !== t); };
+  const dueCount = key => { const t = today(); return cards.filter(c => c.modul === key && prog[c.id] && prog[c.id].due && prog[c.id].due <= t).length; };
+
+  function renderMods(){
+    const nav = $('mods'); nav.textContent = '';
+    const keys = modKeys();
+    if(!keys.length) return;
+    const mk = (key, name, sub, due) => {
+      const b = el('button', 'mod'); b.type = 'button';
+      b.setAttribute('aria-pressed', String(filt.modul === key));
+      b.append(el('b', null, name), el('span', null, sub));
+      if(due > 0){ const i = el('i', null, String(due)); i.title = due + ' fällig'; b.appendChild(i); }
+      b.addEventListener('click', () => {
+        filt.modul = key; filt.group = 'alle'; filt.sitzung = 'alle';
+        try { localStorage.setItem('kk-modul', key); } catch(e){}
+        renderHome();
+      });
+      nav.appendChild(b);
+    };
+    const totalDue = keys.reduce((s,k) => s + dueCount(k), 0);
+    mk('alle', 'Alle', kart(cards.length), totalDue);
+    keys.forEach(k => {
+      const n = cards.filter(c => c.modul === k).length;
+      mk(k, modOf(k).short || modOf(k).name, n ? examShort(k) : 'noch keine Karten', dueCount(k));
+    });
+  }
+
+  function renderFilters(){
+    const seg = $('groups'); seg.textContent = '';
+    const groups = filt.modul === 'alle' ? [] : [...new Set(decks.filter(d => d.modul === filt.modul).map(d => d.deck))];
+    if(groups.length > 1){
+      seg.hidden = false;
+      const mk = (g, text) => {
+        const b = el('button', null, text); b.type = 'button';
+        b.setAttribute('aria-pressed', String(filt.group === g));
+        b.addEventListener('click', () => { filt.group = g; if(filt.sitzung !== 'alle'){ const d = decks.find(x => x.id === filt.sitzung); if(d && g !== 'alle' && d.deck !== g) filt.sitzung = 'alle'; } renderHome(); });
+        seg.appendChild(b);
+      };
+      mk('alle', 'Alle');
+      groups.forEach(g => mk(g, groupLabel(filt.modul, g)));
+    } else { seg.hidden = true; if(filt.group !== 'alle') filt.group = 'alle'; }
+
+    const sel = $('sitzung'); sel.textContent = '';
+    const all = el('option', null, 'Alle Sitzungen'); all.value = 'alle'; sel.appendChild(all);
+    const visible = decks.filter(d => (filt.modul === 'alle' || d.modul === filt.modul) && (filt.group === 'alle' || d.deck === filt.group));
+    if(filt.modul === 'alle'){
+      modKeys().forEach(k => {
+        const ds = visible.filter(d => d.modul === k); if(!ds.length) return;
+        const og = document.createElement('optgroup'); og.label = modOf(k).name;
+        ds.forEach(d => { const o = el('option', null, deckLabel(d)); o.value = d.id; og.appendChild(o); });
+        sel.appendChild(og);
+      });
+    } else visible.forEach(d => { const o = el('option', null, deckLabel(d)); o.value = d.id; sel.appendChild(o); });
+    sel.value = visible.some(d => d.id === filt.sitzung) ? filt.sitzung : 'alle';
+    filt.sitzung = sel.value;
+    sel.disabled = visible.length === 0;
+  }
+
+  function renderMode(){
+    $('modeSeg').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+    $('roleSeg').hidden = mode !== 'disput';
+    $('roleSeg').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.role === role)));
+    if(mode === 'disput'){
+      $('modeHint').textContent = !sample || aiOff
+        ? 'Die Disputation braucht Rückmeldung von Claude. Kommt hier keine an, öffne die Kartei angemeldet auf claude.ai.'
+        : 'Claude macht aus einer Karte eine strittige These. ' + (role === 'verteidigen' ? 'Du verteidigst, Claude greift an.' : 'Claude verteidigt, du greifst an.') + ' ' + DISP_ROUNDS + ' Züge, dann ein Urteil.  +' + XP_DISP + ' XP.';
+      return;
+    }
+    if(mode === 'klausur'){
+      const key = examModule(cards.filter(inFilter));
+      $('modeHint').textContent = 'Generalprobe: ' + EXAM_N + ' Aufgaben in ' + EXAM_MIN + ' Minuten, ohne Sitzungsangabe und Skelett. '
+        + (sample && !aiOff ? 'Rückmeldung erst nach der letzten Abgabe.' : 'Danach Vergleich mit der Lösung.')
+        + (key ? ' Modul: ' + (modOf(key).name || key) + (filt.modul === 'alle' ? ' (nächste Klausur).' : '.') : '');
+      return;
+    }
+    $('modeHint').textContent = mode === 'karte'
+      ? 'Laut antworten, aufdecken, selbst bewerten. Wenig Zeit? Nach fünf Karten auf „Beenden“ tippen: Die wichtigsten kommen zuerst, und für die Serie reicht schon eine Karte.'
+      : (() => { const t0 = today(), n = cards.filter(inFilter).filter(c => isLeech(prog[c.id]) && prog[c.id].due && prog[c.id].due <= t0).length; return n ? (n === 1 ? '1 fälliges Sorgenkind (dreimal nicht gewusst) kommt zuerst. ' : n + ' fällige Sorgenkinder (dreimal nicht gewusst) kommen zuerst. ') : ''; })() + 'Antwort tippen' + (sample && !aiOff ? ' oder Handschrift als Foto oder PDF anhängen' : '') + (sample && !aiOff ? ', Claude gibt Rückmeldung' : ', dann mit der Lösung vergleichen') + '. Bis zu ' + WRITE_SESSION + ' Karten pro Runde, +' + XP_WRITE + ' XP je Antwort.';
+  }
+  function renderHome(){
+    renderMods(); renderFilters(); renderHeader(); renderGame(); renderMode(); renderStoreLine(); renderResume();
+    const list = cards.filter(inFilter);
+    const counts = [0,0,0,0,0,0];
+    list.forEach(c => { const p = prog[c.id]; counts[p ? Math.min(5, Math.max(1, p.box||1)) : 0]++; });
+    const max = Math.max(1, ...counts);
+    const box = $('box'); box.textContent = '';
+    counts.forEach((n,i) => {
+      const s = el('div', 'slot' + (i===0 ? ' new' : ''));
+      const bar = el('div', 'bar'), fill = el('div', 'fill'); fill.style.height = Math.round(n/max*100)+'%'; bar.appendChild(fill);
+      const lbl = el('div', 'lbl'); lbl.append(FACH_LABEL[i], document.createElement('br'), FACH_RHYTHM[i] || ' ');
+      s.append(bar, el('div', 'n', String(n)), lbl); s.title = FACH_LABEL[i] + ': ' + n + ' Karten';
+      box.appendChild(s);
+    });
+
+    const due = dueList(list), fp = freshPick(list), weak = weakList(list);
+    const nPrio = fp.pr.length, nNew = nPrio + fp.sy.length + fp.nw.length, nDue = Math.min(due.length, MAX_DUE);
+    const learn = $('learn'), ready = decksLoaded && progLoaded, waitLbl = decksLoaded && !progLoaded ? 'Fortschritt wird geladen …' : null;
+    if(mode === 'klausur'){
+      const pk = examPick(list).length, wk = examPick(weak).length, ok = ready && pk > 0;
+      learn.disabled = !ok;
+      learn.querySelector('span').textContent = waitLbl || (!decksLoaded ? 'Klausur' : '') || (!list.length ? 'Noch keine Karten' : 'Klausur simulieren');
+      $('learnN').textContent = ok ? pk + ' Aufgaben · ' + EXAM_MIN + ' min' : '';
+      $('weakBtn').disabled = !ready || wk === 0;
+      $('weakBtn').querySelector('span').textContent = 'Klausur aus wackeligen Karten';
+      $('weakN').textContent = '';
+    } else if(mode === 'disput'){
+      const cand = dispCandidates(list), ok = decksLoaded && cand.length > 0 && !!sample && !aiOff;
+      learn.disabled = !ok;
+      learn.querySelector('span').textContent = !decksLoaded ? 'Disputation' : !list.length ? 'Noch keine Karten' : 'Disputation beginnen';
+      $('learnN').textContent = ok ? DISP_ROUNDS + ' Züge' : '';
+      $('weakBtn').disabled = !ok || weak.length === 0;
+      $('weakBtn').querySelector('span').textContent = 'Über eine wackelige Karte streiten';
+      $('weakN').textContent = '';
+    } else {
+      learn.disabled = !ready || (nDue + nNew === 0);
+      learn.querySelector('span').textContent = waitLbl || (!decksLoaded ? 'Lernen' : !list.length ? 'Noch keine Karten' : (nDue + nNew === 0 ? 'Heute nichts fällig' : 'Lernen'));
+      $('learnN').textContent = [nPrio ? nPrio + ' Nacharbeit' : '', nDue ? nDue + ' fällig' : '', nNew - nPrio ? (nNew - nPrio) + ' neu' : ''].filter(Boolean).join(' + ');
+      /* Wer heute schon dran war, kommt planmäßig morgen; zum Extra-Üben nur die übrigen */
+      const wp = weakPractice(weak);
+      $('weakBtn').disabled = !ready || wp.length === 0;
+      $('weakBtn').querySelector('span').textContent = !wp.length && weak.length ? 'Wackelige: heute alle schon dran' : 'Wackelige Karten üben';
+      $('weakN').textContent = wp.length ? kart(Math.min(wp.length, mode === 'schrift' ? WRITE_SESSION : WEAK_SESSION)) : '';
+    }
+
+    const t = today();
+    if(decksLoaded && !list.length && filt.modul !== 'alle'){
+      $('next').textContent = 'Für ' + modOf(filt.modul).name + ' gibt es noch keine Karten. Sie kommen automatisch dazu, sobald die Folien in Drive liegen.';
+    } else {
+      const upcoming = list.map(c => prog[c.id] && prog[c.id].due).filter(d => d && d > t).sort()[0];
+      const rest = fp.total - nNew;
+      $('next').textContent = [upcoming ? 'Nächste Wiederholung: ' + human(upcoming) : '', rest > 0 ? (rest === 1 ? '1 weitere neue Karte wartet' : rest + ' weitere neue Karten warten') : ''].filter(Boolean).join(' · ');
+    }
+
+    const ul = $('weak'); ul.textContent = '';
+    if(!weak.length){ const li = el('li', 'empty', decksLoaded ? 'Noch keine. Karten, die du nicht oder nur halb weißt, landen hier.' : ''); li.style.display = 'block'; ul.appendChild(li); }
+    weak.slice(0,8).forEach(c => {
+      const p = prog[c.id], li = el('li');
+      const q = el('div', 'q', c.q); q.appendChild(el('span', 'src', label(c)));
+      const pill = el('span', 'pill ' + ((p.wrong||0) > 0 ? 'bad' : 'mid'), [(isLeech(p) ? 'Sorgenkind' : ''), (p.wrong ? p.wrong+'× nicht' : ''), (p.half ? p.half+'× halb' : '')].filter(Boolean).join(' · '));
+      li.append(q, pill); ul.appendChild(li);
+    });
+  }
+
+  /* Study */
+  function show(view){
+    $('home').style.display = view==='home' ? 'flex' : 'none';
+    $('study').hidden = view!=='study'; $('study').style.display = view==='study' ? 'flex' : 'none';
+    $('done').hidden = view!=='done';
+    $('stats').hidden = view!=='stats'; $('stats').style.display = view==='stats' ? 'flex' : 'none';
+    window.scrollTo(0,0);
+  }
+  function start(list){
+    if(!list.length) return;
+    dropUrls();
+    queue = list.slice(); pos = 0; miss = new Map(); halfAgain = new Set(); tally = {again:0, half:0, good:0}; sessionXp = 0; lastStep = null; reuseId = null; hist = []; hi = null; setHistView(false);
+    show('study'); showCard();
+  }
+  function showCard(){
+    if(pos >= queue.length){ finish(); return; }
+    const c = queue[pos], p = prog[c.id];
+    revealed = false; cardT0 = Date.now();
+    $('count').textContent = (pos+1) + ' / ' + queue.length;
+    $('trackFill').style.width = Math.round(pos/queue.length*100)+'%';
+    $('cMeta').textContent = label(c);
+    $('cState').textContent = !p ? (c.prio ? 'Nacharbeit' : 'neu') : (miss.has(c.id) ? 'nochmal' : (isLeech(p) ? 'Sorgenkind · ' : '') + 'Fach ' + Math.max(1,p.box||1));
+    $('cQ').textContent = c.q;
+    const a = $('cA'); a.textContent = ''; a.hidden = true; a.classList.remove('show');
+    if(renderAnswer(a, c.a)) a.appendChild(el('p', 'anchorhint', 'Fett: Fachbegriffe, die in die Antwort gehören. Fehlte einer, ist es höchstens „Halb“.'));
+    if(c.hint){ const tip = el('div', 'tip'); tip.append(el('b', null, 'Klausurtipp '), c.hint); a.appendChild(tip); }
+    a.appendChild(noteBox(c));
+    $('undo').hidden = !lastStep; $('histBtn').hidden = !hist.length;
+    $('revealBtn').hidden = mode !== 'karte'; $('rate').hidden = true;
+    $('skipBtn').hidden = mode === 'klausur'; $('skipBtn').textContent = mode === 'disput' ? 'Andere Karte' : 'Überspringen';
+    setupWrite(c);
+    if(mode === 'disput') setupDisput(c);
+    else if(mode === 'klausur') setupExam(c);
+    const gd = goodOutcome(c);
+    $('tGood').textContent = inDays(daysTo(gd.due));
+  }
+  function richLine(parent, text){
+    String(text).split(/\*\*(.+?)\*\*/g).forEach((pt, i) => { if(!pt) return; if(i % 2) parent.appendChild(el('b', 'anchor', pt)); else parent.append(pt); });
+    return parent;
+  }
+  function renderAnswer(box, text){
+    let ul = null, anchors = false;
+    String(text || '').split('\n').forEach(line => {
+      if(/\*\*.+?\*\*/.test(line)) anchors = true;
+      const li = line.match(/^\s*[-•]\s+(.*)$/);
+      if(li){ if(!ul){ ul = el('ul', 'alist'); box.appendChild(ul); } ul.appendChild(richLine(el('li'), li[1])); return; }
+      ul = null;
+      const pp = line.match(/^\s*(P\d+|K)\s*(\([^)]*\))?\s*:\s+(.*)$/);
+      if(pp){ const p = el('p', 'prem'); p.appendChild(el('span', 'pre', pp[1])); richLine(p, (pp[2] ? pp[2] + ': ' : '') + pp[3]); box.appendChild(p); return; }
+      const pm = line.match(/^\s*(\d+[.)])\s+(.*)$/);
+      if(pm){ const p = el('p', 'prem'); p.appendChild(el('span', 'pre', pm[1])); richLine(p, pm[2]); box.appendChild(p); return; }
+      box.appendChild(richLine(el('p'), line));
+    });
+    return anchors;
+  }
+  function showSolution(){
+    if(revealed || pos >= queue.length) return;
+    revealed = true;
+    const a = $('cA'); a.hidden = false; a.classList.add('show');
+    $('fbLz').hidden = false; $('peekBtn').hidden = true;
+    $('revealBtn').hidden = true; $('rate').hidden = hi !== null; $('skipBtn').hidden = true;
+  }
+  function reveal(){
+    if(revealed || pos >= queue.length) return;
+    revealed = true;
+    const a = $('cA'); a.hidden = false; a.classList.add('show');
+    $('revealBtn').hidden = true; $('rate').hidden = hi !== null; $('skipBtn').hidden = true;
+  }
+  function rate(kind){
+    if(!revealed || hi !== null) return;
+    const c = queue[pos], t = today();
+    const snap = {pos, t, id: c.id, prev: prog[c.id] ? clone(prog[c.id]) : null, day: days[t] ? clone(days[t]) : null, queue: queue.slice(), hlen: hist.length, tally: Object.assign({}, tally), miss: new Map(miss), half: new Set(halfAgain), xp: sessionXp, elapsed: Date.now() - cardT0};
+    const p = Object.assign({box:0, wrong:0, half:0, right:0}, prog[c.id] || {});
+    const kpPre = planFixed(days[t]) ? null : klausurplan();
+    const rs = reviewState(c), gd = goodOutcome(c);
+    const cls = !rs.pv ? '0' : rs.sameDay ? 'r' : rs.early ? '' : String(rs.pb);
+    const wrote = mode !== 'karte' && attempt && attempt.cardId === c.id;
+    if(wrote){
+      const pi = document.getElementById('precIn'), pv = pi ? pi.value.trim() : '';
+      if(pv && (!attempt.praezisierung || attempt.praezisierung.text !== pv)) attempt.praezisierung = {text: pv};
+      p.written = (p.written||0) + 1; sessionXp += XP_WRITE;
+      if(mode === 'disput'){ p.disput = (p.disput||0) + 1; sessionXp += XP_DISP; }
+      if(attempt.praezisierung && attempt.praezisierung.ok === true){ p.precise = (p.precise||0) + 1; sessionXp += XP_PREC; }
+      if(aiCtl) aiCtl.abort();
+      snap.attempt = clone(attempt); snap.photo = photoBlob; snap.own = $('ownTxt').cloneNode(true); snap.scan = $('qscan').textContent;
+      if(mode === 'disput'){ snap.dispNode = $('dispBox').cloneNode(true); snap.disp = disp ? clone(disp) : null; snap.dispQ = $('cQ').textContent; }
+      snap.docId = saveAttempt(Object.assign({}, attempt, {rating: kind}), reuseId && reuseId.card === c.id ? reuseId.id : null);
+      reuseId = null;
+    }
+    if(kind === 'again'){
+      p.box = 1; p.wrong++; p.due = t; tally.again++;
+      const n = (miss.get(c.id)||0) + 1; miss.set(c.id, n);
+      if(n <= MAX_REQUEUE && mode !== 'disput' && mode !== 'klausur') queue.splice(mode === 'schrift' ? queue.length : Math.min(pos + 8, queue.length), 0, c);
+    } else if(kind === 'half'){
+      p.box = Math.max(1, (p.box||0) - 2); p.half++; p.due = capExam(addDays(1), c.modul); tally.half++;
+      /* „halb“ heißt morgen wieder, keine zweite Runde am selben Tag */
+    } else {
+      p.box = gd.box; p.due = gd.due;
+      p.right++; tally.good++;
+    }
+    p.last = t;
+    save(c.id, p);
+    lastStep = snap;
+    hist.push({c, kind, attempt: wrote ? clone(snap.attempt) : null});
+    sessionXp += XP[kind];
+    const lg = logReview(c.modul, kind, Math.min(Date.now() - cardT0, wrote ? 900000 : 120000), wrote, cls, kpPre);
+    if(lg.goal || lg.plan){
+      const g = $('goalHit');
+      if(lg.goal){ sessionXp += XP_GOAL; g.textContent = 'Tagesziel geschafft: +' + XP_GOAL + ' XP'; }
+      if(lg.plan){ sessionXp += XP_PENSUM; g.textContent = (lg.goal ? g.textContent + ' · ' : '') + 'Klausurplan für heute geschafft: +' + XP_PENSUM + ' XP'; }
+      g.hidden = false;
+      clearTimeout(g._t); g._t = setTimeout(() => { g.hidden = true; }, 3500);
+    }
+    pos++; showCard();
+  }
+  function finish(){
+    $('trackFill').style.width = '100%';
+    $('dBad').textContent = tally.again; $('dMid').textContent = tally.half; $('dGood').textContent = tally.good;
+    flushLog();
+    const xpNow = totalXp(), before = levelOf(xpNow - sessionXp).L, after = levelOf(xpNow).L;
+    $('dXp').textContent = sessionXp ? '+' + sessionXp + ' XP' + (after > before ? ' · Level ' + after + ' erreicht: ' + rankOf(after) : '') : '';
+    const still = miss.size;
+    $('dNote').textContent = (mode === 'klausur' && exam && exam.used ? 'Klausur-Simulation: ' + mmss(exam.used) + ' von ' + EXAM_MIN + ':00 Minuten gebraucht' + (exam.used > EXAM_MIN * 60000 ? ', also über der Zeit. ' : '. ') : '') + (still ? still + (still===1 ? ' Karte kam heute zurück in Fach 1 und steht' : ' Karten kamen heute zurück in Fach 1 und stehen') + ' unter „Wackelig“. ' : '') + (store === 'local' ? 'Dein Fortschritt ist auf diesem Gerät gespeichert.' + (lastBackup && -daysTo(lastBackup) < 7 ? '' : ' Zeit für eine Sicherung, falls das Handy mal verloren geht.') : store ? 'Dein Fortschritt ist gespeichert.' : 'Ohne Anmeldung gilt der Fortschritt nur, solange die Seite offen ist.');
+    if(exam && exam.timer){ clearInterval(exam.timer); exam.timer = null; }
+    $('undoDone').hidden = !lastStep; $('histDone').hidden = !hist.length;
+    $('bkDoneBox').hidden = store !== 'local' || (!!lastBackup && -daysTo(lastBackup) < 7); $('bkDoneMsg').textContent = ''; $('bkOutDone').hidden = true;
+    show('done'); renderHome();
+    if(progLoaded) persistBadges(computeBadges(activity()));
+  }
+
+
+  /* Lernstatistik: ein Tagesprotokoll pro Lerntag (d-JJJJ-MM-TT) im privaten Bereich */
+  /* cls: '0' erster Kontakt, '1'–'5' planmäßige Wiederholung aus diesem Fach, 'r' Wiederholung am selben Tag.
+     Daraus schätzt der Klausurplan die Trefferquote je Fach. */
+  function logReview(mod, kind, ms, wrote, cls, kp){
+    const t = today();
+    const d = days[t] ? JSON.parse(JSON.stringify(days[t])) : {date:t, n:0, good:0, half:0, again:0, ms:0, mods:{}};
+    if(!planFixed(d) && kp){ d.pensum = kp.target; d.plan = kp.snap; d.planV = PLAN_V; }
+    d.n = (d.n||0) + 1; d[kind] = (d[kind]||0) + 1; d.ms = (d.ms||0) + ms;
+    if(wrote) d.written = (d.written||0) + 1;
+    d.mods = d.mods || {};
+    const m = d.mods[mod] || (d.mods[mod] = {n:0, ms:0}); m.n++; m.ms += ms;
+    if(cls === 'r') m.rp = (m.rp||0) + 1;
+    else if(cls){ const cc = m.c || (m.c = {}), a = cc[cls] || (cc[cls] = [0, 0]); a[0]++; if(kind === 'good') a[1]++; }
+    days[t] = d; logDirty = t;
+    clearTimeout(logTimer);
+    if(store === 'local') flushLog(); else logTimer = setTimeout(flushLog, 1500);
+    const inPlan = !!d.plan && Object.prototype.hasOwnProperty.call(d.plan, mod);
+    return {goal: d.n === DAY_GOAL, plan: inPlan && typeof d.pensum === 'number' && d.pensum > DAY_GOAL && planDone(d) === d.pensum};
+  }
+  function flushLog(){
+    clearTimeout(logTimer); logTimer = null;
+    const t = logDirty; if(!t || !days[t]) return; logDirty = null;
+    if(store === 'local'){ localSave(); return; }
+    if(!db || !uid) return;
+    const data = JSON.parse(JSON.stringify(days[t]));
+    const ref = db.collection('data/users/' + uid).doc('d-' + t);
+    logPending++;
+    logChain = logChain.then(() => ref.set(data)).catch(e => {
+      setStatus('Die Lernstatistik von heute konnte nicht gespeichert werden (' + (e && e.code || 'Fehler') + '). Deine Karten sind davon nicht betroffen.');
+    }).finally(() => { logPending--; });
+  }
+
+  const shiftDay = (s, n) => { const d = noon(s); d.setDate(d.getDate() + n); return iso(d); };
+  const shiftMonth = (ym, n) => { const [y,m] = ym.split('-').map(Number); const d = new Date(y, m-1+n, 1, 12); return d.getFullYear() + '-' + pad(d.getMonth()+1); };
+  const fmtMin = ms => { const m = Math.round(ms/60000); return m < 60 ? m + ' min' : Math.floor(m/60) + ' h ' + pad(m%60) + ' min'; };
+  const num = n => n.toLocaleString('de-DE');
+
+  function activity(){
+    const out = {};
+    Object.keys(days).forEach(k => { const v = days[k] || {}; out[k] = {n:v.n||0, ms:v.ms||0, mods:v.mods||{}, est:false}; });
+    const firstLog = Object.keys(days).sort()[0] || today();
+    cards.forEach(c => {
+      const p = prog[c.id];
+      if(!p || !p.last || p.last >= firstLog) return;
+      const o = out[p.last] || (out[p.last] = {n:0, ms:0, mods:{}, est:true});
+      if(!o.est) return;
+      o.n++; const m = o.mods[c.modul] || (o.mods[c.modul] = {n:0, ms:0}); m.n++;
+    });
+    return out;
+  }
+  function streaks(act){
+    const on = d => act[d] && act[d].n > 0;
+    const actDays = Object.keys(act).filter(on).sort(), t = today();
+    let run = 0, best = 0, freezes = 0, sinceEarn = 0;
+    if(actDays.length){
+      for(let d = actDays[0]; d <= t; d = shiftDay(d, 1)){
+        if(on(d)){ run++; sinceEarn++; if(sinceEarn >= 7){ freezes = Math.min(2, freezes + 1); sinceEarn = 0; } }
+        else if(d !== t){ if(run > 0 && freezes > 0){ freezes--; sinceEarn = 0; } else { run = 0; sinceEarn = 0; } }
+        best = Math.max(best, run);
+      }
+    }
+    return {cur: run, best, freezes, days: actDays.length};
+  }
+  function totalXp(){
+    let xp = 0;
+    Object.values(prog).forEach(p => { xp += (p.right||0)*XP.good + (p.half||0)*XP.half + (p.wrong||0)*XP.again + (p.written||0)*XP_WRITE + (p.precise||0)*XP_PREC + (p.disput||0)*XP_DISP; });
+    Object.values(days).forEach(d => {
+      if(d && (d.n||0) >= DAY_GOAL) xp += XP_GOAL;
+      if(d && typeof d.pensum === 'number' && d.pensum > DAY_GOAL && planDone(d) >= d.pensum) xp += XP_PENSUM;
+    });
+    return xp;
+  }
+  function totalReviews(){ let n = 0; Object.values(prog).forEach(p => { n += (p.right||0) + (p.half||0) + (p.wrong||0); }); return n; }
+  const xpFor = L => 100 * (L-1) * L;
+  function levelOf(xp){ let L = 1; while(xp >= xpFor(L+1)) L++; return {L, cur: xp - xpFor(L), need: xpFor(L+1) - xpFor(L)}; }
+  const rankOf = L => RANKS[Math.min(L, RANKS.length) - 1];
+
+  function modStats(key){
+    const cs = cards.filter(c => c.modul === key);
+    const s = {total:cs.length, seen:0, sitzt:0, auf:0, wack:0, neu:0, sum:0, reviews:0, ms:0, f5:0};
+    cs.forEach(c => {
+      const p = prog[c.id];
+      if(!p){ s.neu++; return; }
+      const b = Math.min(5, Math.max(1, p.box||1));
+      s.seen++; s.sum += b; s.reviews += (p.right||0) + (p.half||0) + (p.wrong||0);
+      if(b >= 4) s.sitzt++; else if(b === 3) s.auf++; else s.wack++;
+      if(b === 5) s.f5++;
+    });
+    Object.values(days).forEach(d => { const m = d && d.mods && d.mods[key]; if(m) s.ms += m.ms||0; });
+    s.pct = s.total ? Math.round(s.sum / (5 * s.total) * 100) : 0;
+    return s;
+  }
+
+  /* Klausurplan: wie viele Wiederholungen bis zur Klausur wirklich nötig sind.
+     Für jede Karte der erwartete Rest an Wiederholungen nach genau den Regeln dieser Kartei
+     (gewusst: ein Fach weiter, halb: zwei zurück, nicht gewusst: Fach 1, verteilte Schlusswoche),
+     als Tabelle V[Fach][Tage bis zur Klausur]. Die Trefferquoten je Fach kommen aus den eigenen
+     planmäßigen Wiederholungen der letzten vier Wochen, anfangs mit Erfahrungswerten gemischt. */
+  const PRIOR_S = [.4, .55, .65, .75, .8, .85], PRIOR_W = 20, SHIFT_W = 40, MEASURE_N = 30;
+  const NEW_LEAD = 18, PLAN_WIN = 28, XP_PENSUM = 20, PLAN_RUN = 5;
+  /* Rechenstand des Plans: ändert sich die Rechnung, wird ein heute schon festgeschriebenes Ziel neu bestimmt */
+  const PLAN_V = 2;
+  const planFixed = d => !!d && typeof d.pensum === 'number' && d.planV === PLAN_V;
+  const clamp = (x, lo, hi) => Math.min(hi, Math.max(lo, x));
+  const nextSunday = s => { const d = noon(s); d.setDate(d.getDate() + ((7 - d.getDay()) % 7 || 7)); return iso(d); };
+  function planStats(){
+    const from = shiftDay(today(), -PLAN_WIN), mk = () => ({c: [0,1,2,3,4,5].map(() => [0, 0]), rp: 0});
+    const per = {}, all = mk();
+    let again = 0, half = 0;
+    Object.keys(days).forEach(ds => {
+      const x = days[ds]; if(!x || ds < from) return;
+      again += x.again || 0; half += x.half || 0;
+      Object.keys(x.mods || {}).forEach(k => {
+        const m = x.mods[k]; if(!m) return;
+        const o = per[k] || (per[k] = mk());
+        for(let b = 0; b <= 5; b++){
+          const a = m.c && m.c[b]; if(!Array.isArray(a)) continue;
+          o.c[b][0] += a[0] || 0; o.c[b][1] += a[1] || 0; all.c[b][0] += a[0] || 0; all.c[b][1] += a[1] || 0;
+        }
+        o.rp += m.rp || 0; all.rp += m.rp || 0;
+      });
+    });
+    return {per, all, again, half};
+  }
+  function models(bonus){
+    const st = planStats(), keys = modKeys();
+    const sb = PRIOR_S.map((p, b) => { const [n, g] = st.all.c[b]; return (g + PRIOR_W * p) / (n + PRIOR_W); });
+    let fails = 0; st.all.c.forEach(([n, g]) => { fails += n - g; });
+    const K = clamp((st.all.rp + PRIOR_W * .4) / (fails + PRIOR_W), 0, 2);
+    const A = clamp((st.again + PRIOR_W * .35) / (st.again + st.half + PRIOR_W), .05, .95);
+    const ev = {};
+    let eAll = 0, nAll = 0;
+    keys.forEach(k => {
+      const o = st.per[k];
+      let e = 0, n = 0;
+      if(o) for(let b = 1; b <= 5; b++){ const [w, g] = o.c[b]; e += g - w * sb[b]; n += w; }
+      /* Die alten Zähler right/half/wrong mischen Nachholrunden hinein und taugen nicht als Startwert:
+         bis eigene Messungen da sind, gelten Erfahrungswerte */
+      ev[k] = {e, n, clean: n};
+      eAll += ev[k].e; nAll += ev[k].n;
+    });
+    const dAll = eAll / (nAll + SHIFT_W), out = {};
+    keys.forEach(k => {
+      const d = (ev[k].e + SHIFT_W * dAll) / (ev[k].n + SHIFT_W) + (bonus || 0);
+      const s = sb.map((v, b) => b === 0 ? v : clamp(v + d, .2, .97));
+      out[k] = {s, K, A, shift: d, n: Math.round(ev[k].n), clean: ev[k].clean, show: Math.round((s[1] + s[2] + s[3]) / 3 * 100)};
+    });
+    return out;
+  }
+  function vTable(D, m){
+    const V = [0,1,2,3,4,5].map(() => new Float64Array(D + 1));
+    for(let r = 1; r <= D; r++){
+      for(let b = 0; b <= 5; b++){
+        const s = m.s[b], q = 1 - s, c = 1 + m.K * q;
+        if(b === 0){ V[0][r] = c + V[1][r - 1]; continue; }
+        const nb = Math.min(5, b + 1), r2 = r - INTERVAL[nb];
+        let succ = 0;
+        if(r2 >= 1) succ = V[nb][r2];
+        else if(r > FINAL_DAYS){ for(let x = 1; x <= FINAL_DAYS; x++) succ += V[nb][x]; succ /= FINAL_DAYS; }
+        const fail = m.A * V[1][r - 1] + (1 - m.A) * V[Math.max(1, b - 2)][r - 1];
+        V[b][r] = c + s * succ + q * fail;
+      }
+    }
+    return V;
+  }
+  /* Noch ausstehende Sitzungen laut Sitzungsplan (modules.plan): je Sitzung so viele Karten wie die
+     bisherigen Lernzettel der Reihe im Schnitt, plus der Anteil Nacharbeit und Synthese. Sie kommen
+     mit dem Sonntagslauf nach der Sitzung dazu. */
+  function futureFor(key){
+    const plan = modOf(key).plan;
+    if(!plan || typeof plan !== 'object') return null;
+    const own = decks.filter(d => d.modul === key && !d.kind);
+    const size = d => (d.cards || []).length;
+    const base = own.reduce((s, d) => s + size(d), 0);
+    const extra = decks.filter(d => d.modul === key && d.kind).reduce((s, d) => s + size(d), 0);
+    const xr = base ? Math.min(.3, extra / base) : .1, avgAll = own.length ? base / own.length : 15;
+    const t = today(), out = [];
+    Object.keys(plan).forEach(g => {
+      const dates = Array.isArray(plan[g]) ? plan[g] : [];
+      const gd = own.filter(d => d.deck === g), have = new Set(gd.map(d => Number(d.nr))), maxNr = Math.max(0, ...have);
+      const avg = gd.length ? gd.reduce((s, d) => s + size(d), 0) / gd.length : avgAll;
+      /* Lücken vor dem letzten vorhandenen Deck sind zusammengefasste oder ausgefallene Sitzungen */
+      dates.forEach((ds, i) => {
+        if(!validDate(ds) || have.has(i + 1) || i + 1 < maxNr) return;
+        const a = nextSunday(ds);
+        out.push({g, nr: i + 1, sess: ds, date: a < t ? t : a, n: avg * (1 + xr)});
+      });
+    });
+    return out;
+  }
+  function secFor(key){
+    const from = shiftDay(today(), -7);
+    let n = 0, ms = 0, N = 0, MS = 0;
+    Object.keys(days).forEach(d => {
+      const x = days[d]; if(!x || d < from) return;
+      N += x.n || 0; MS += x.ms || 0;
+      const m = x.mods && x.mods[key]; if(m){ n += m.n || 0; ms += m.ms || 0; }
+    });
+    return clamp((n >= 20 ? ms / n : N >= 20 ? MS / N : 45000) / 1000, 8, 240);
+  }
+  /* Tempo: Durchschnitt der letzten sieben abgeschlossenen Tage (seit Beginn der Aufzeichnung) */
+  function paceFor(keys){
+    const t = today(), first = Object.keys(days).sort()[0];
+    if(!first || first >= t) return null;
+    let n = 0, nd = 0;
+    for(let d = [first, shiftDay(t, -7)].sort()[1]; d < t; d = shiftDay(d, 1)){
+      nd++;
+      const x = days[d]; if(!x) continue;
+      n += planDone(x, [].concat(keys));
+    }
+    return nd ? {avg: n / nd, days: nd} : null;
+  }
+  function planFor(key, m){
+    const ex = examOf(key); if(!ex || !m) return null;
+    const D = daysTo(ex); if(D < 1) return null;
+    const V = vTable(D, m), t = today();
+    const v0 = (lo, hi) => { lo = Math.max(1, lo); hi = Math.min(D, hi); if(hi < lo) return 0; let s = 0; for(let r = lo; r <= hi; r++) s += V[0][r]; return s / (hi - lo + 1); };
+    /* neue Karten: gleichmäßig bis zum Stichtag; danach bis zur Schlusswoche, in ihr sofort */
+    const introLo = D > NEW_LEAD ? NEW_LEAD : D > FINAL_DAYS ? FINAL_DAYS + 1 : D;
+    const intro = v0(introLo, D);
+    let R = 0, unseen = 0, total = 0, sitzt = 0;
+    cards.forEach(c => {
+      if(c.modul !== key) return;
+      total++;
+      const p = prog[c.id];
+      if(!p){ unseen++; R += intro; return; }
+      const b = Math.min(5, Math.max(1, p.box || 1));
+      if(b >= 4) sitzt++;
+      const r = p.due && p.due > t ? D - daysTo(p.due) : D;
+      if(r >= 1) R += V[b][r];
+    });
+    const fut = futureFor(key);
+    let fN = 0, fWeek = 0, fLate = 0, fSess = 0, last = null;
+    (fut || []).forEach(f => {
+      const rA = D - daysTo(f.date); if(rA < 1) return;
+      R += f.n * v0(rA - 6, rA); fN += f.n; fSess++;
+      if(daysTo(f.date) <= 7) fWeek += f.n;
+      if(rA < NEW_LEAD) fLate += f.n;
+      if(!last || f.date > last) last = f.date;
+    });
+    /* Neue pro Tag: vorhandene plus alle, die noch vor dem Stichtag erscheinen, gleichmäßig bis dahin;
+       wer die vorhandenen jetzt zügig lernt, hat später Luft für die nachkommenden */
+    /* Quote neuer Karten pro Tag, gerechnet vom Stand zu Tagesbeginn; heute schon gelernte neue zählen ab */
+    const d0 = days[t] && days[t].mods && days[t].mods[key];
+    const doneToday = (d0 && d0.n) || 0, newToday = (d0 && d0.c && Array.isArray(d0.c[0]) && d0.c[0][0]) || 0, u0 = unseen + newToday;
+    const quota = Math.min(u0, D > NEW_LEAD ? (u0 + fN - fLate) / (D - NEW_LEAD) : u0 / (D - introLo + 1));
+    const newLeft = Math.max(0, quota - newToday);
+    const dueNow = cards.filter(c => c.modul === key && prog[c.id] && prog[c.id].due && prog[c.id].due <= t).length;
+    /* mehr als alles Fällige und alle vorhandenen neuen Karten geht heute nicht */
+    const avail = doneToday + dueNow + unseen;
+    const weeks = last ? Math.max(1, Math.ceil((daysTo(last) + 1) / 7)) : 1;
+    const sec = secFor(key), daily = R / D;
+    return {key, ex, D, R, daily, sec, min: daily * sec / 60, unseen, total, sitzt,
+      quota, newLeft, dueNow, doneToday, avail, deadline: plusDays(ex, -NEW_LEAD),
+      fN, fWeek, fLate, fSess, perWeek: fN / weeks, noPlan: !fut, perCard: intro, s: m.show, n: m.n, clean: m.clean};
+  }
+  function klausurplan(){
+    if(!decksLoaded || !progLoaded) return null;
+    const mdl = models(), better = models(.1);
+    const rows = modKeys().map(k => {
+      const r = planFor(k, mdl[k]); if(!r) return null;
+      const b = planFor(k, better[k]); r.better = b ? b.daily : r.daily;
+      r.pace = paceFor(k);
+      r.today = r.doneToday + Math.ceil(r.dueNow + r.newLeft);
+      return r;
+    }).filter(Boolean);
+    if(!rows.length) return null;
+    const sum = f => rows.reduce((s, r) => s + f(r), 0);
+    /* Ziel: der Schnitt bis zur Klausur, mindestens alles heute Fällige plus die neuen von heute (ein Rückstau
+       verschwindet so nicht im Durchschnitt), höchstens alles, was heute überhaupt lernbar ist. Was wegen noch
+       nicht erschienener Sitzungen heute nicht geht, verteilt der Plan in den Folgetagen neu. */
+    const smooth = Math.ceil(sum(r => r.daily)), now = sum(r => r.today), avail = sum(r => r.avail);
+    const target = Math.min(avail, Math.max(smooth, now));
+    const secAvg = sum(r => r.min * 60) / Math.max(1, sum(r => r.daily));
+    return {rows, target, smooth, backlog: now > smooth && target > smooth, capped: target < smooth, min: Math.round(target * secAvg / 60),
+      neu: Math.min(target, Math.ceil(sum(r => r.newLeft))), quota: Math.ceil(sum(r => r.quota)),
+      better: Math.ceil(sum(r => r.better)), pace: paceFor(rows.map(r => r.key)), hist: planHist(), snap: Object.fromEntries(rows.map(r => [r.key, Math.round(r.R)]))};
+  }
+  /* Der Klausurplan zählt nur Karten aus Modulen mit Klausurtermin (die im Schnappschuss des Tages stehen) */
+  function planDone(d, keys){
+    if(!d) return 0;
+    keys = keys || (d.plan ? Object.keys(d.plan) : []);
+    return keys.reduce((s, k) => s + ((d.mods && d.mods[k] && d.mods[k].n) || 0), 0);
+  }
+  /* Ziel des Tages: beim ersten Lernen am Tag festgeschrieben, damit es tagsüber nicht wandert */
+  function planTarget(kp){
+    const d = days[today()];
+    if(planFixed(d)) return d.pensum;
+    return kp ? kp.target : null;
+  }
+  function trendFor(key){
+    const t = today(), cur = days[t] && days[t].plan && days[t].plan[key];
+    const old = Object.keys(days).filter(d => d < shiftDay(t, -2) && d >= shiftDay(t, -14) && days[d] && days[d].plan && typeof days[d].plan[key] === 'number').sort()[0];
+    if(!old) return null;
+    return {from: old, was: days[old].plan[key], gap: daysTo(old) * -1, cur};
+  }
+  /* An wie vielen der letzten sieben Tage mit Ziel wurde es geschafft? */
+  function planHist(){
+    const t = today(); let n = 0, ok = 0;
+    for(let d = shiftDay(t, -7); d < t; d = shiftDay(d, 1)){
+      const x = days[d]; if(!x || typeof x.pensum !== 'number') continue;
+      n++; if(planDone(x) >= x.pensum) ok++;
+    }
+    return {days: n, ok};
+  }
+  function planRun(){
+    let run = 0, best = 0, prev = null;
+    Object.keys(days).sort().forEach(d => {
+      const x = days[d], ok = x && typeof x.pensum === 'number' && planDone(x) >= x.pensum;
+      run = ok ? (prev && shiftDay(prev, 1) === d ? run + 1 : 1) : 0;
+      if(ok) prev = d;
+      best = Math.max(best, run);
+    });
+    return best;
+  }
+
+  function renderGame(){
+    const btn = $('gameBtn');
+    if(!store || !progLoaded){ btn.hidden = true; $('planBtn').hidden = true; return; }
+    btn.hidden = false;
+    const act = activity(), st = streaks(act), lv = levelOf(totalXp());
+    const n = (days[today()] && days[today()].n) || 0;
+    const frac = Math.min(1, n / DAY_GOAL);
+    $('ringFg').setAttribute('stroke-dashoffset', String(113.1 * (1 - frac)));
+    $('ringN').textContent = String(n);
+    $('gLevel').textContent = 'Level ' + lv.L + ' · ' + rankOf(lv.L);
+    const streakTxt = (st.cur ? 'Serie ' + st.cur + (st.cur === 1 ? ' Tag' : ' Tage') : 'Noch keine Serie') + (st.freezes ? ' · ' + st.freezes + (st.freezes === 1 ? ' Puffertag' : ' Puffertage') : '');
+    $('gLine').textContent = streakTxt + ' · heute ' + n + ' von ' + DAY_GOAL + (n >= DAY_GOAL ? ' geschafft' : '');
+    renderPlanBtn();
+  }
+  const fmtM = m => fmtMin(Math.max(1, m) * 60000);
+  /* Ist heute in den Klausurmodulen überhaupt noch etwas fällig oder neu? */
+  const planOpen = kp => { const t = today(), ks = new Set(kp.rows.map(r => r.key)); return cards.some(c => ks.has(c.modul) && (!prog[c.id] || (prog[c.id].due && prog[c.id].due <= t))); };
+  const planKeys = kp => { const d = days[today()]; return d && d.plan ? Object.keys(d.plan) : kp ? kp.rows.map(r => r.key) : []; };
+  function renderPlanBtn(){
+    const pb = $('planBtn'), kp = klausurplan(), tg = planTarget(kp);
+    if(!kp || tg == null){ pb.hidden = true; return; }
+    const n = planDone(days[today()], planKeys(kp));
+    pb.hidden = false;
+    const done = n >= tg, open = planOpen(kp), rest = Math.max(0, tg - n), pc = kp.pace;
+    $('pLine').textContent = n + ' von ' + num(tg) + ' Karten';
+    $('pFill').style.width = Math.min(100, Math.round(n / Math.max(1, tg) * 100)) + '%';
+    const pill = $('pPill'), h = kp.hist;
+    if(done || !open){ pill.className = 'pill good'; pill.textContent = done ? 'geschafft' : 'alles erledigt'; }
+    else if(h.days >= 2){ pill.className = 'pill ' + (h.ok === h.days ? 'good' : 'mid'); pill.textContent = h.ok + ' von ' + h.days + ' Tagen im Plan'; }
+    else if(pc){ pill.className = 'pill'; pill.textContent = 'zuletzt Ø ' + Math.round(pc.avg) + ' pro Tag'; }
+    else pill.textContent = '';
+    pill.hidden = !pill.textContent;
+    const secAvg = kp.min * 60 / Math.max(1, kp.target);
+    const sub = done ? ['Für heute geschafft.'] : !open ? ['Alles Fällige und alle neuen Karten sind durch, mehr geht heute nicht.'] : ['Noch ' + kart(rest) + ', etwa ' + fmtM(rest * secAvg / 60) + '.'];
+    const capped = tg < kp.smooth;
+    if(!done && open && capped) sub[0] = sub[0].replace(/\.$/, ': alles Fällige und alle neuen Karten, die es schon gibt.');
+    else if(!done && open && kp.neu) sub.push('Darin noch mindestens ' + kp.neu + ' neue.');
+    if(capped) sub.push('Schnitt bis zur Klausur ' + num(kp.smooth) + ' pro Tag; der Rest kommt mit den nächsten Sitzungen.');
+    else if(kp.rows.length > 1) sub.push(kp.rows.map(r => (modOf(r.key).short || modOf(r.key).name) + ' ' + Math.ceil(r.daily)).join(' · ') + ' im Schnitt pro Tag.');
+    $('pSub').textContent = sub.join(' ');
+  }
+  function renderPlan(){
+    const sec = $('planSec'), kp = klausurplan();
+    if(!kp){ sec.hidden = true; return; }
+    sec.hidden = false;
+    const t = today(), n = planDone(days[t], planKeys(kp)), tg = planTarget(kp);
+    const sum = $('planSum'); sum.textContent = '';
+    const big = el('div', 'big');
+    big.append(el('b', null, num(tg) + ' Karten'), el('span', null, 'heute · etwa ' + fmtM(kp.min) + ' · ' + n + ' geschafft · Schnitt bis zur Klausur ' + num(kp.smooth) + ' pro Tag'));
+    sum.appendChild(big);
+    const R = kp.rows.reduce((s, r) => s + r.R, 0);
+    const lines = ['Bis ' + (kp.rows.length > 1 ? 'zu den Klausuren' : 'zur Klausur') + ' noch etwa ' + num(Math.round(R / 10) * 10) + ' Wiederholungen, mit den Karten aus kommenden Sitzungen. Neue Karten: mindestens ' + kp.quota + ' pro Tag' + (kp.neu < kp.quota ? ', heute noch ' + kp.neu : '') + '. Das 20er-Ziel bleibt dein Minimum, das hier ist das, was für „alles sitzt“ nötig ist.'];
+    if(kp.capped) lines.push('Heute ist weniger lernbar, als der Schnitt verlangt, weil ein Teil des Stoffs noch nicht erschienen ist. Ziel ist dann alles Fällige und alle vorhandenen neuen Karten; den Rest verteilt der Plan auf die Tage, an denen die Sitzungen da sind, und der Schnitt steigt entsprechend.');
+    else if(kp.backlog) lines.push('Heute liegt mehr an als der Schnitt, weil sich fällige Karten gestaut haben; das Ziel deckt sie ab.');
+    if(kp.pace) lines.push('Dein Tempo ' + (kp.pace.days === 1 ? 'gestern' : 'der letzten ' + kp.pace.days + ' Tage') + ': Ø ' + Math.round(kp.pace.avg) + ' Karten pro Tag in den Klausurmodulen' + (kp.hist.days ? ', Tagesziel an ' + kp.hist.ok + ' von ' + kp.hist.days + (kp.hist.days === 1 ? ' Tag' : ' Tagen') + ' geschafft.' : '.'));
+    if(kp.better < kp.smooth) lines.push('Der größte Hebel ist die Trefferquote: mit 10 Prozentpunkten mehr läge der Schnitt bei etwa ' + num(kp.better) + ' statt ' + num(kp.smooth) + ' pro Tag.');
+    lines.forEach(s => sum.appendChild(el('p', null, s)));
+    const noEx = modKeys().filter(k => !examOf(k) && cards.some(c => c.modul === k)).map(k => modOf(k).short || modOf(k).name);
+    if(noEx.length) sum.appendChild(el('p', 'k', 'Ohne Klausurtermin, daher nicht eingerechnet: ' + noEx.join(', ') + '.'));
+
+    const box = $('pstats'); box.textContent = '';
+    kp.rows.forEach(r => {
+      const row = el('div', 'mrow'), head = el('div', 'mhead');
+      head.append(el('b', null, modOf(r.key).name), el('span', null, 'Klausur ' + dayLabel(r.ex) + ', in ' + r.D + ' Tagen'));
+      const strong = el('strong', null, String(Math.ceil(r.daily))); strong.appendChild(el('small', null, 'Ø pro Tag')); head.appendChild(strong);
+      /* Fortschritt zum Ziel „alles sitzt“: Karten in Fach 4–5 von allen, auch den noch kommenden */
+      const all = Math.max(1, Math.round(r.total + r.fN)), pc = r.pace;
+      const bar = el('div', 'pace ok');
+      const fill = el('i'); fill.style.width = Math.min(100, r.sitzt / all * 100) + '%'; bar.appendChild(fill);
+      bar.title = r.sitzt + ' von etwa ' + all + ' Karten sitzen';
+      const foot = el('div', 'pfoot');
+      const add = (k, v) => { const p = el('div'); p.append(el('span', 'k', k + ': '), v); foot.appendChild(p); };
+      add('Stand', r.sitzt + ' von etwa ' + all + ' Karten sitzen (Fach 4–5), ' + r.total + ' gibt es schon');
+      add('Tempo', pc ? 'Ø ' + (Math.round(pc.avg * 10) / 10).toLocaleString('de-DE') + ' pro Tag ' + (pc.days === 1 ? 'gestern' : 'in den letzten ' + pc.days + ' Tagen') : 'noch keine Daten');
+      add('Aufwand', 'noch etwa ' + num(Math.round(r.R / 10) * 10) + ' Wiederholungen, ' + fmtM(r.min) + ' pro Tag bei Ø ' + Math.round(r.sec) + ' s pro Karte');
+      add('Trefferquote', 'etwa ' + r.s + ' % bei planmäßigen Wiederholungen' + (r.clean < MEASURE_N ? (r.clean ? ' (erst ' + r.clean + ' eigene Messungen, Rest Erfahrungswert)' : ' (noch Erfahrungswert, deine Messung läuft seit dem Klausurplan)') : '') + '; eine neue Karte kommt bei dir bis zur Klausur rund ' + Math.round(r.perCard) + '-mal dran');
+      add('Neue Karten', r.unseen ? r.unseen + ' noch nicht gesehen, ' + (r.D > NEW_LEAD ? 'alle bis ' + dayLabel(r.deadline) + ': mindestens ' + Math.ceil(r.quota) + ' pro Tag' + (r.newLeft < r.quota ? ', heute noch ' + Math.ceil(r.newLeft) : '') : 'am besten sofort') : 'alle vorhandenen gesehen');
+      add('Kommt dazu', r.noPlan ? 'Sitzungsplan fehlt, gezählt sind nur vorhandene Karten' : r.fSess ? 'etwa ' + Math.round(r.fN) + ' Karten aus ' + r.fSess + (r.fSess === 1 ? ' Sitzung' : ' Sitzungen') + ', rund ' + Math.round(r.perWeek) + ' pro Woche' + (r.fWeek ? ', davon ~' + Math.round(r.fWeek) + ' bis ' + dayLabel(plusDays(t, 7)) : '') : 'keine weiteren Sitzungen');
+      if(r.fLate) add('Spät dran', 'etwa ' + Math.round(r.fLate) + ' Karten kommen erst nach dem ' + dayLabel(r.deadline) + ' und schaffen den vollen Rhythmus nicht mehr; die gleich nach Erscheinen lernen');
+      const tr = trendFor(r.key);
+      if(tr){
+        const now = Math.round(r.R), per = (tr.was - now) / Math.max(1, tr.gap);
+        add('Verlauf', 'Restaufwand ' + dayLabel(tr.from) + ' ' + num(tr.was) + ', jetzt ' + num(now) + ', also ' + (per >= 0 ? '−' : '+') + Math.round(Math.abs(per)) + ' pro Tag. Er sinkt mit jeder Wiederholung und steigt, wenn Karten öfter danebengehen als gedacht');
+      }
+      row.append(head, bar, foot); box.appendChild(row);
+    });
+  }
+
+  function openStats(){
+    if(!calMonth) calMonth = today().slice(0, 7);
+    selDay = null; show('stats'); renderStats();
+  }
+
+  function renderStats(){
+    const act = activity(), st = streaks(act), xp = totalXp(), lv = levelOf(xp), t = today();
+    $('statsTotal').textContent = num(totalReviews()) + ' Wiederholungen insgesamt';
+    $('sLvl').textContent = String(lv.L);
+    $('sRank').textContent = rankOf(lv.L);
+    $('sXp').textContent = num(xp) + ' XP · noch ' + num(lv.need - lv.cur) + ' bis Level ' + (lv.L + 1) + ' (' + rankOf(lv.L + 1) + ')';
+    $('sXpFill').style.width = Math.round(lv.cur / lv.need * 100) + '%';
+    $('kStreak').textContent = String(st.cur);
+    $('kStreakL').textContent = 'Tage Serie' + (st.freezes ? ' · ' + st.freezes + (st.freezes === 1 ? ' Puffertag' : ' Puffertage') : '');
+    $('kBest').textContent = String(st.best);
+    $('kToday').textContent = String((days[t] && days[t].n) || 0);
+    const kpT = planTarget(klausurplan());
+    $('kTodayL').textContent = 'Karten heute (Ziel 20' + (kpT != null ? ' · Plan ' + num(kpT) : '') + ')';
+    $('kDays').textContent = String(st.days);
+
+    /* Klausurplan */
+    renderPlan();
+    renderBackup();
+
+    /* Kalender */
+    const exams = {};
+    modKeys().forEach(k => { const ex = examOf(k); if(ex) (exams[ex] = exams[ex] || []).push(modOf(k).short || modOf(k).name); });
+    const actDates = Object.keys(act).filter(d => act[d].n > 0).sort();
+    const minMonth = [(actDates[0] || t).slice(0,7), t.slice(0,7)].sort()[0];
+    const maxMonth = [t.slice(0,7), ...Object.keys(exams).filter(e => e >= t).map(e => e.slice(0,7))].sort().pop();
+    if(calMonth < minMonth) calMonth = minMonth;
+    if(calMonth > maxMonth) calMonth = maxMonth;
+    $('calPrev').disabled = calMonth <= minMonth;
+    $('calNext').disabled = calMonth >= maxMonth;
+    const [y, m] = calMonth.split('-').map(Number);
+    $('calTitle').textContent = MONTHS[m-1] + ' ' + y;
+    const cal = $('cal'); cal.textContent = '';
+    ['Mo','Di','Mi','Do','Fr','Sa','So'].forEach(w => cal.appendChild(el('div', 'wd', w)));
+    const first = new Date(y, m-1, 1, 12), offset = (first.getDay() + 6) % 7, dim = new Date(y, m, 0).getDate();
+    for(let i = 0; i < offset; i++) cal.appendChild(el('div'));
+    let mDays = 0, mCards = 0, mMs = 0, mEst = false;
+    for(let dd = 1; dd <= dim; dd++){
+      const ds = calMonth + '-' + pad(dd), a = act[ds], n = a ? a.n : 0;
+      const b = el('button', 'day'); b.type = 'button'; b.dataset.d = ds;
+      const lvl = n === 0 ? 0 : n < 10 ? 1 : n < 25 ? 2 : n < 50 ? 3 : 4;
+      if(ds > t) b.classList.add('future'); else if(lvl) b.classList.add('h' + lvl);
+      if(a && a.est && n) b.classList.add('est');
+      if(ds === t) b.classList.add('today');
+      if(ds === selDay) b.classList.add('sel');
+      b.appendChild(el('span', 'dn', String(dd)));
+      b.appendChild(el('span', 'dc', n ? String(n) : ''));
+      if(exams[ds]){ const x = el('span', 'ex', exams[ds].join(' · ')); b.appendChild(x); }
+      b.setAttribute('aria-label', dayLabel(ds) + ': ' + (n ? n + ' Karten' : 'nicht gelernt') + (exams[ds] ? ', Klausur ' + exams[ds].join(', ') : ''));
+      cal.appendChild(b);
+      if(n){ mDays++; mCards += n; mMs += a.ms || 0; if(a.est) mEst = true; }
+    }
+    const sum = [mDays + (mDays === 1 ? ' Lerntag' : ' Lerntage'), (mEst ? 'mindestens ' : '') + num(mCards) + ' Karten'];
+    if(mMs) sum.push(fmtMin(mMs) + ' Lernzeit');
+    $('monthSum').textContent = MONTHS[m-1] + ': ' + sum.join(' · ');
+    const det = $('dayDetail');
+    if(selDay){
+      const a = act[selDay];
+      let txt = dayLabel(selDay) + ': ';
+      if(!a || !a.n) txt += selDay > t ? 'liegt noch vor dir.' : 'nicht gelernt.';
+      else {
+        txt += (a.est ? 'mindestens ' : '') + a.n + ' Karten';
+        if(a.ms) txt += ' in ' + fmtMin(a.ms);
+        const parts = Object.keys(a.mods).sort((p,q) => a.mods[q].n - a.mods[p].n).map(k => (modOf(k).short || modOf(k).name) + ' ' + a.mods[k].n);
+        if(parts.length) txt += ' · ' + parts.join(', ');
+        if(a.est) txt += ' (geschätzt)';
+      }
+      if(exams[selDay]) txt += ' · Klausur ' + exams[selDay].join(', ');
+      det.textContent = txt;
+    } else det.textContent = 'Tipp auf einen Tag für Details.';
+
+    /* Fächer */
+    const box = $('mstats'); box.textContent = '';
+    let maxPct = 0, f5 = 0;
+    modKeys().forEach(k => {
+      const s = modStats(k); if(!s.total) return;
+      maxPct = Math.max(maxPct, s.pct); f5 += s.f5;
+      const row = el('div', 'mrow');
+      const head = el('div', 'mhead');
+      head.appendChild(el('b', null, modOf(k).name));
+      head.appendChild(el('span', null, examShort(k) === 'Termin offen' ? 'Klausur: Termin offen' : 'Klausur ' + examShort(k)));
+      const strong = el('strong', null, s.pct + ' %'); strong.appendChild(el('small', null, 'sicher')); head.appendChild(strong);
+      const bar = el('div', 'stack');
+      [['sitzt','c-sitzt'],['auf','c-auf'],['wack','c-wack']].forEach(([f, cls]) => { if(s[f]){ const i = el('i', cls); i.style.width = (s[f] / s.total * 100) + '%'; i.title = s[f] + ' Karten'; bar.appendChild(i); } });
+      const foot = [s.seen + ' von ' + s.total + ' Karten gesehen', s.sitzt + ' sitzen', num(s.reviews) + ' Wiederholungen'];
+      if(s.ms) foot.push(fmtMin(s.ms));
+      row.append(head, bar, el('div', 'mfoot', foot.join(' · ')));
+      box.appendChild(row);
+    });
+
+    /* Fehlermuster */
+    renderRadar(t);
+
+    /* Abzeichen */
+    const list = computeBadges(act);
+    const bx = $('badges'); bx.textContent = '';
+    list.forEach(bd => {
+      const on = bd.ok || !!earned[bd.id];
+      const b = el('div', 'badge' + (on ? ' on' : ''));
+      const txt = el('div'); txt.append(el('b', null, bd.name), el('span', null, bd.desc + (!on && bd.progress ? ' · ' + bd.progress : '') + (on && earned[bd.id] ? ' · seit ' + dayLabel(earned[bd.id]) : '')));
+      b.append(el('div', 'seal', bd.mark), txt);
+      b.setAttribute('aria-label', bd.name + (on ? ', erreicht' : ', noch offen'));
+      bx.appendChild(b);
+    });
+    persistBadges(list);
+  }
+
+  function computeBadges(act){
+    const st = streaks(act), reviews = totalReviews();
+    let written = 0, f5 = 0, rescued = 0, disputs = 0;
+    Object.values(prog).forEach(p => { written += p.written || 0; disputs += p.disput || 0; if((p.box||0) >= 5) f5++; if((p.wrong||0) >= LEECH && (p.box||0) >= 4) rescued++; });
+    let maxPct = 0, ready = false;
+    modKeys().forEach(k => {
+      const sm = modStats(k); if(!sm.total) return;
+      maxPct = Math.max(maxPct, sm.pct);
+      const ex = examOf(k);
+      if(ex && sm.neu === 0 && daysTo(ex) >= FINAL_DAYS) ready = true;
+    });
+    const mixDay = Object.values(act).some(a => Object.keys(a.mods || {}).length >= 3);
+    let clean = 0, bestClean = 0;
+    answers.slice().sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0).forEach(a => {
+      if(!a.feedback) return;
+      const n = Array.isArray(a.feedback.muster) ? a.feedback.muster.filter(m => m && m.id).length : 0;
+      clean = n ? 0 : clean + 1; bestClean = Math.max(bestClean, clean);
+    });
+    return [
+      {id:'start', mark:'1', name:'Erster Durchgang', desc:'die erste Karte bewertet', ok: reviews >= 1},
+      {id:'s3', mark:'3', name:'Dranbleiben', desc:'3 Tage in Folge gelernt', ok: st.best >= 3, progress: st.best + '/3'},
+      {id:'s7', mark:'7', name:'Wochenserie', desc:'7 Tage in Folge gelernt', ok: st.best >= 7, progress: st.best + '/7'},
+      {id:'s21', mark:'21', name:'Gewohnheit', desc:'21 Tage in Folge gelernt', ok: st.best >= 21, progress: st.best + '/21'},
+      {id:'r100', mark:'100', name:'Hundert', desc:'100 Wiederholungen', ok: reviews >= 100, progress: num(reviews) + '/100'},
+      {id:'r1000', mark:'1k', name:'Tausend', desc:'1.000 Wiederholungen', ok: reviews >= 1000, progress: num(reviews) + '/1.000'},
+      {id:'f5', mark:'V', name:'Fach 5', desc:'eine Karte bis ins letzte Fach gebracht', ok: f5 >= 1},
+      {id:'mix', mark:'3×', name:'Querbeet', desc:'an einem Tag in drei Modulen gelernt', ok: mixDay},
+      {id:'half', mark:'½', name:'Halbzeit', desc:'ein Modul zu 50 % sicher', ok: maxPct >= 50, progress: maxPct + ' %/50 %'},
+      {id:'p90', mark:'90', name:'Prüfungsreif', desc:'ein Modul zu 90 % sicher', ok: maxPct >= 90, progress: maxPct + ' %/90 %'},
+      {id:'w10', mark:'✎', name:'Schreibtisch', desc:'10 Antworten ausformuliert', ok: written >= 10, progress: written + '/10'},
+      {id:'clean5', mark:'5✓', name:'Scharfschütze', desc:'5 schriftliche Antworten in Folge ohne Fehlermuster', ok: bestClean >= 5, progress: bestClean + '/5'},
+      {id:'rescue', mark:'↑4', name:'Sorgenkind-Retter', desc:'eine Karte nach dreimal „nicht gewusst“ bis Fach 4 gebracht', ok: rescued >= 1},
+      {id:'plan5', mark:'P5', name:'Im Plan', desc:PLAN_RUN + ' Tage in Folge das Klausurplan-Ziel geschafft', ok: planRun() >= PLAN_RUN, progress: Math.min(planRun(), PLAN_RUN) + '/' + PLAN_RUN},
+      {id:'ready', mark:'−7', name:'Klausurbereit', desc:'alle Karten eines Moduls spätestens 7 Tage vor der Klausur gesehen', ok: ready},
+    ];
+  }
+  function persistBadges(list){
+    if(!store || !progLoaded || badgeBusy) return;
+    const fresh = list.filter(b => b.ok && !earned[b.id]);
+    if(!fresh.length) return;
+    const next = Object.assign({}, earned); fresh.forEach(b => { next[b.id] = today(); });
+    earned = next;
+    if(store === 'local'){ localSave(); return; }
+    badgeBusy = true;
+    db.collection('data/users/' + uid).doc('badges').set({earned: next}).catch(() => {}).finally(() => { badgeBusy = false; });
+  }
+
+  function weekOf(s){ const d = noon(s); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); return iso(d); }
+  function renderRadar(t){
+    const box = $('radar'); box.textContent = '';
+    const thisWk = weekOf(t), weeks = [3, 2, 1, 0].map(i => shiftDay(thisWk, -7 * i));
+    const W = {}; weeks.forEach(w => { W[w] = {n:0, P:{}}; });
+    answers.forEach(a => {
+      if(!a || !a.date || !a.feedback || a.disputation) return;
+      const w = W[weekOf(a.date)]; if(!w) return;
+      w.n++;
+      const ids = new Set((Array.isArray(a.feedback.muster) ? a.feedback.muster : []).map(m => m && String(m.id || '').slice(0, 4)).filter(id => PNAMES[id]));
+      ids.forEach(id => { w.P[id] = (w.P[id] || 0) + 1; });
+    });
+    const total = weeks.reduce((s, w) => s + W[w].n, 0);
+    if(!total){
+      box.appendChild(el('p', 'empty', 'Noch keine schriftlichen Antworten in den letzten vier Wochen. Im Schreibmodus zählt die Kartei hier, wie oft Verwechslungen, Lücken, fehlende Fachbegriffe und ungenaue Zahlen vorkommen.'));
+      return;
+    }
+    const grid = el('div', 'radar');
+    grid.appendChild(el('div'));
+    weeks.forEach((w, i) => grid.appendChild(el('div', 'rh', i === 3 ? 'diese Woche' : 'ab ' + noon(w).getDate() + '.' + (noon(w).getMonth() + 1) + '.')));
+    Object.keys(PNAMES).forEach(id => {
+      const name = el('button', 'rn'); name.type = 'button'; name.setAttribute('aria-expanded', String(radarOpen === id));
+      name.append(el('b', null, id), el('span', null, PNAMES[id]));
+      name.addEventListener('click', () => { radarOpen = radarOpen === id ? null : id; renderRadar(today()); });
+      grid.appendChild(name);
+      weeks.forEach(w => {
+        const n = W[w].n, k = W[w].P[id] || 0;
+        const cell = el('div', 'rc', n ? k + '/' + n : '–');
+        const share = n ? k / n : 0;
+        cell.style.background = n ? 'color-mix(in srgb, var(--bad) ' + Math.round(8 + share * 52) + '%, var(--card))' : 'var(--h0)';
+        cell.title = n ? id + ': in ' + k + ' von ' + n + ' Antworten' : 'keine Antworten';
+        grid.appendChild(cell);
+      });
+    });
+    box.appendChild(grid);
+    if(radarOpen){
+      const hits = [];
+      answers.slice().sort((a, b) => a.id < b.id ? 1 : a.id > b.id ? -1 : 0).forEach(a => {
+        if(!a || a.disputation) return;
+        const ms = a.feedback && Array.isArray(a.feedback.muster) ? a.feedback.muster : [];
+        ms.forEach(m => { if(m && String(m.id || '').startsWith(radarOpen) && hits.length < 3) hits.push({m, a}); });
+      });
+      const ul = el('ul', 'quotes');
+      if(!hits.length) ul.appendChild(el('li', null, 'Zu ' + radarOpen + ' ist noch kein Zitat gespeichert.'));
+      hits.forEach(({m, a}) => {
+        const li = el('li');
+        if(m.stelle) li.appendChild(el('span', 'qt', '„' + String(m.stelle) + '“ '));
+        if(m.hinweis) li.append(String(m.hinweis));
+        li.appendChild(el('small', null, (a.date ? dayLabel(a.date) + ' · ' : '') + (a.title || a.cardId || '')));
+        ul.appendChild(li);
+      });
+      box.appendChild(ul);
+    }
+    const cur = W[weeks[3]], prev = W[weeks[2]], notes = [];
+    if(cur.n && prev.n){
+      Object.keys(PNAMES).forEach(id => {
+        const a = (cur.P[id] || 0) / cur.n, b = (prev.P[id] || 0) / prev.n;
+        if(a < b - 0.1) notes.push(id + ' seltener als letzte Woche');
+        else if(a > b + 0.1) notes.push(id + ' häufiger als letzte Woche');
+      });
+    }
+    box.appendChild(el('p', 'radarnote', (cur.n ? 'Diese Woche ' + cur.n + (cur.n === 1 ? ' Antwort' : ' Antworten') : 'Diese Woche noch keine schriftliche Antwort') + (notes.length ? ' · ' + notes.join(' · ') : '') + '.'));
+    box.appendChild(el('p', 'fine', 'Tipp auf ein Muster für deine letzten Zitate. Zählt Antworten aus Schreibmodus und Klausur-Simulation, bewertet von Claude.'));
+  }
+
+
+
+  /* Handschrift: Bild oder PDF in ein JPEG umwandeln, das Claude sicher lesen kann */
+  function clearPhoto(){
+    photoBlob = null; photoName = ''; photoBusy = false;
+    if(thumbUrl){ try { URL.revokeObjectURL(thumbUrl); } catch(e){} thumbUrl = null; }
+    $('photo').value = ''; $('thumbRow').hidden = true; $('thumb').removeAttribute('src'); $('photoName').textContent = '';
+  }
+  function loadScript(src){ return new Promise((res, rej) => { const sc = document.createElement('script'); sc.src = src; sc.onload = res; sc.onerror = () => rej(new Error('script')); document.head.appendChild(sc); }); }
+  let pdfjsP = null;
+  const PDFJS = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+  async function decodeImage(file){
+    if(window.createImageBitmap){ try { return await createImageBitmap(file); } catch(e){} }
+    return await new Promise((res, rej) => {
+      const img = new Image(), u = URL.createObjectURL(file);
+      const free = () => { try { URL.revokeObjectURL(u); } catch(e){} };
+      img.onload = () => { res(img); setTimeout(free, 0); }; img.onerror = () => { free(); rej(new Error('decode')); }; img.src = u;
+    });
+  }
+  async function pdfPages(file){
+    if(!pdfjsP) pdfjsP = loadScript(PDFJS + 'pdf.worker.min.js').then(() => loadScript(PDFJS + 'pdf.min.js'));
+    await pdfjsP;
+    const lib = window.pdfjsLib;
+    if(!lib) throw new Error('pdfjs');
+    const doc = await lib.getDocument({data: new Uint8Array(await file.arrayBuffer())}).promise;
+    const out = [];
+    for(let i = 1; i <= Math.min(doc.numPages, 2); i++){
+      const pg = await doc.getPage(i), v1 = pg.getViewport({scale:1});
+      const vp = pg.getViewport({scale: Math.min(2.5, 1400 / v1.width)});
+      const cv = document.createElement('canvas'); cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
+      const g = cv.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, cv.width, cv.height);
+      await pg.render({canvasContext: g, viewport: vp}).promise;
+      out.push(cv);
+    }
+    return out;
+  }
+  function toJpeg(sources){
+    const w0 = Math.max(...sources.map(x => x.width)), hSum = sources.reduce((a, x) => a + x.height, 0);
+    const k = Math.min(1, 1800 / w0, 2600 / hSum);
+    const cv = document.createElement('canvas'); cv.width = Math.max(1, Math.round(w0 * k)); cv.height = Math.max(1, Math.round(hSum * k));
+    const g = cv.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, cv.width, cv.height);
+    let y = 0; sources.forEach(x => { const h = Math.round(x.height * k); g.drawImage(x, 0, y, Math.round(x.width * k), h); y += h; });
+    return new Promise((res, rej) => cv.toBlob(b => b ? res(b) : rej(new Error('encode')), 'image/jpeg', 0.88));
+  }
+  async function takeImageEl(img){
+    clearPhoto(); photoBusy = true; hint('Bild wird vorbereitet …', true);
+    try {
+      const blob = await toJpeg([img]);
+      photoBlob = blob; photoName = 'eingefügtes Bild'; thumbUrl = URL.createObjectURL(blob);
+      $('thumb').src = thumbUrl; $('thumbRow').hidden = false; $('photoName').textContent = photoName; hint(''); $('pickHelp').hidden = true;
+    } catch(e){ hint('Das eingefügte Bild ließ sich nicht verarbeiten. Versuch einen Screenshot.'); }
+    finally { photoBusy = false; }
+  }
+  async function takePhoto(file){
+    const isPdf = file.type === 'application/pdf' || /\.pdf$/i.test(file.name || '');
+    if(!isPdf && file.type && !/^image\//.test(file.type)){ hint('Das ist weder Bild noch PDF. Nimm ein Foto, einen Screenshot oder einen PDF-Export der Seite.'); return; }
+    clearPhoto(); photoBusy = true; hint(isPdf ? 'PDF wird gelesen …' : 'Bild wird vorbereitet …', true);
+    try {
+      const src = isPdf ? await pdfPages(file) : [await decodeImage(file)];
+      const blob = await toJpeg(src);
+      photoBlob = blob; photoName = file.name || (isPdf ? 'PDF' : 'Bild');
+      thumbUrl = URL.createObjectURL(blob);
+      $('thumb').src = thumbUrl; $('thumbRow').hidden = false;
+      $('photoName').textContent = photoName + (isPdf && src.length > 1 ? ' (Seite 1–2)' : '');
+      hint(''); $('pickHelp').hidden = true;
+    } catch(e){
+      hint(isPdf
+        ? 'Das PDF ließ sich nicht lesen. Exportiere die Seite als Bild (PNG oder JPG) oder mach einen Screenshot.'
+        : 'Dieses Bild kann der Browser nicht öffnen (oft HEIC). Mach einen Screenshot der Seite oder exportiere sie als PNG/JPG.');
+    } finally { photoBusy = false; }
+  }
+
+  /* Schriftlich: Antwort tippen oder fotografieren, Rückmeldung von Claude */
+  function opName(q){ const t = String(q).trim(); for(const [re, name, steps] of SKEL){ if(re.test(t)) return {name, steps}; } return null; }
+  function setupWrite(c){
+    const on = mode !== 'karte';
+    $('writeBox').hidden = !on; $('fb').hidden = true; $('peekBtn').hidden = true; $('fbLz').hidden = true;
+    $('dispBox').hidden = true; $('dispBox').textContent = '';
+    $('ansLbl').textContent = 'Deine Antwort, so wie in der Klausur'; $('checkBtn').textContent = 'Antwort prüfen';
+    $('count').classList.remove('late');
+    $('keys').textContent = TOUCH ? 'In der Mitte nach rechts wischen: vorige Karten mit Lösung ansehen' : (on ? 'Strg + Enter prüft · danach 1 / 2 / 3 bewertet · Z nimmt zurück · ← vorige Karten' : 'Tastatur: Leertaste deckt auf · 1 / 2 / 3 bewertet · Z nimmt zurück · ← vorige Karten');
+    attempt = null; suggested = null; clearPhoto(); hint('');
+    $('rate').querySelectorAll('button').forEach(b => b.classList.remove('suggest'));
+    if(!on) return;
+    $('ans').value = ''; $('ans').disabled = false; $('checkBtn').disabled = false;
+    $('photoLbl').hidden = !(sample && !aiOff); $('photoTip').hidden = $('photoLbl').hidden; $('pasteZone').hidden = $('photoLbl').hidden; $('pasteZone').textContent = ''; $('pickHelp').hidden = !(IN_APP && !$('photoLbl').hidden);
+    const op = opName(c.q), list = $('skelList'); list.textContent = '';
+    if(op){ $('skel').hidden = false; $('skelSum').textContent = 'Skelett für „' + op.name + '“ zuerst an den Rand'; op.steps.forEach(x => list.appendChild(el('li', null, x))); }
+    else $('skel').hidden = true;
+    $('skel').open = false;
+    setTimeout(focusAns, 50);
+  }
+  function scanInto(box, text){
+    box.textContent = ''; let last = 0, hits = []; QUANT.lastIndex = 0; let m;
+    while((m = QUANT.exec(text))){
+      box.append(text.slice(last, m.index)); box.appendChild(el('mark', null, m[0])); hits.push(m[0].toLowerCase()); last = m.index + m[0].length;
+    }
+    box.append(text.slice(last));
+    return hits;
+  }
+  function showOwn(text){
+    const hits = scanInto($('ownTxt'), text || '');
+    $('qscan').textContent = !text ? '' : hits.length
+      ? 'Quantoren-Scan: ' + [...new Set(hits)].map(h => '„' + h + '“').join(', ') + '. Stimmt jede dieser Allaussagen? In Multiple-Choice-Aufgaben sind sie oft der Haken.'
+      : 'Quantoren-Scan: keine Allaussagen gefunden.';
+  }
+  /* Was auf genau dieser Karte schon schiefging, damit Claude sagen kann, ob es diesmal behoben ist */
+  function cardHistory(c){
+    const p = prog[c.id], out = [];
+    if(p && ((p.wrong || 0) + (p.half || 0)) > 0) out.push('Bisher auf dieser Karte: ' + (p.wrong || 0) + '× nicht gewusst, ' + (p.half || 0) + '× halb, ' + (p.right || 0) + '× gewusst' + (isLeech(p) ? ' (Sorgenkind)' : '') + '.');
+    const prev = answers.filter(a => a && a.cardId === c.id && a.feedback && !a.disputation)
+      .sort((a, b) => a.id < b.id ? 1 : a.id > b.id ? -1 : 0)[0];
+    if(prev){
+      const fb = prev.feedback, ms = (Array.isArray(fb.muster) ? fb.muster : []).filter(x => x && x.id).map(x => x.id + (x.stelle ? ' („' + String(x.stelle).slice(0, 80) + '“)' : '')).join(', ');
+      const gap = [fb.fehlt ? 'Fehlte: ' + fb.fehlt : '', fb.falsch ? 'Ungenau: ' + fb.falsch : '', ms ? 'Muster: ' + ms : ''].filter(Boolean).join(' · ');
+      out.push('Letzter schriftlicher Versuch auf genau diese Frage (' + (prev.date || '') + ', bewertet ' + ({good: 'gewusst', half: 'halb', again: 'nicht gewusst'}[prev.rating] || 'ohne Bewertung') + '): „' + String(prev.answer || '').slice(0, 280) + (String(prev.answer || '').length > 280 ? ' …' : '') + '“' + (gap ? ' ' + gap : ''));
+      if(gap) out.push('Sag in "traegt" oder "fehlt" in einem Halbsatz, ob diese Lücke diesmal geschlossen ist oder wieder auftritt. Bewerte trotzdem nur die heutige Antwort.');
+    }
+    return out.length ? ['', 'Verlauf dieser Karte:', ...out] : [];
+  }
+  function promptFor(c, text, viaPhoto){
+    const m = modOf(c.modul);
+    return [
+      'Du bist Lernpartner:in für die Vorlesung Funktionelle Sportanatomie (Prof. Dr. Lina Rahlf) an der Europa-Universität Flensburg: freundlich, auf Augenhöhe, kein Prüfer. Bewerte ehrlich, eine halbe Antwort ist eine halbe Antwort. Die Klausur (60 Minuten) hat Multiple-Choice-Aufgaben und offene Fragen.',
+      '', 'Modul: ' + (m.name || c.modul) + ' · ' + sessLine(c),
+      'Klausurfrage: ' + c.q,
+      'Erwartungshorizont aus den Vorlesungsfolien (für die Klausur gilt diese Fassung):', c.a,
+      c.hint ? 'Klausurtipp: ' + c.hint : null,
+      '', viaPhoto ? 'die Person hat ihre Antwort handschriftlich geschrieben; sie steht auf dem Bild (bei mehreren Seiten untereinander). Lies sie zuerst wörtlich ab und bewerte dann die abgelesene Fassung. Durchgestrichenes gehört nicht zur Antwort.' + (text ? ' Ihre getippte Notiz dazu: ' + text : '') : 'Die Antwort steht zwischen <antwort> und </antwort>:\n<antwort>\n' + text + '\n</antwort>',
+      ...cardHistory(c),
+      '', 'Typische Fehlerquellen in dieser Klausur (nur nennen, wenn eine davon hier wirklich auftritt):',
+      ...MUSTER,
+      '', 'Regeln: Miss die Antwort am Erwartungshorizont und an gesichertem Fachwissen. Ein Muster nur nennen, wenn es in dieser Antwort eindeutig auftritt, mit wörtlichem Zitat. Mit ** markierte Begriffe im Erwartungshorizont sind Ankerbegriffe: Fehlt einer in ihrer Antwort, nenne ihn unter "fehlt"; steht statt des Fachbegriffs nur ein Alltagswort, ist das P-03. Bei einer Verwechslung (P-01) nicht selbst korrigieren, sondern die Person in "praezisieren" fragen, wie die zitierte Stelle richtig heißen müsste. Deutsch, knapp, freundlich, inklusive Formen mit Doppelpunkt, keine Aufzählungszeichen in den Texten.',
+      '', 'Antworte nur mit einem JSON-Objekt dieser Form:',
+      '{"transkript": "' + (viaPhoto ? 'die abgelesene Antwort' : '') + '", "bewertung": "good|half|again", "traegt": "ein bis zwei Sätze, was sitzt", "fehlt": "was für die volle Punktzahl fehlt, oder leer", "falsch": "was sachlich falsch oder ungenau ist, oder leer", "muster": [{"id": "P-01", "stelle": "wörtliches Zitat", "hinweis": "ein Satz"}], "praezisieren": "eine Rückfrage an die Person oder leer"}',
+      'good = sitzt, half = teilweise, again = nicht gewusst.'
+    ].filter(x => x !== null).join('\n');
+  }
+  async function checkPrecision(ta, btn, out, r){
+    const txt = ta.value.trim(); if(!txt){ ta.focus(); return; }
+    if(!attempt || pos >= queue.length) return;
+    const c = queue[pos], forCard = c.id;
+    attempt.praezisierung = {text: txt};
+    btn.disabled = true; out.textContent = 'Claude liest …';
+    const p01 = Array.isArray(r.muster) ? r.muster.find(m => m && m.stelle) : null;
+    const prompt = [
+      'Prüfe kurz eine Korrektur. die Person hatte in einer Klausurantwort etwas verwechselt oder ungenau formuliert und soll die Stelle jetzt richtig fassen.',
+      'Klausurfrage: ' + c.q,
+      'Erwartungshorizont: ' + c.a,
+      p01 && p01.stelle ? 'Ursprüngliche Stelle: ' + p01.stelle : null,
+      'Rückfrage an sie: ' + r.praezisieren,
+      'Ihre Korrektur: ' + txt,
+      'Antworte nur mit JSON: {"ok": true oder false, "kommentar": "ein Satz auf Deutsch: was jetzt trägt oder was noch überzogen ist"}'
+    ].filter(x => x !== null).join('\n');
+    try {
+      const res = await sample.json(prompt, {modelTier: 'quick'});
+      if(!attempt || attempt.cardId !== forCard) return;
+      const ok = !!(res && res.ok === true);
+      attempt.praezisierung = {text: txt, ok, kommentar: String(res && res.kommentar || '')};
+      out.textContent = (ok ? 'Passt. ' : 'Noch nicht ganz. ') + attempt.praezisierung.kommentar;
+      if(ok){ btn.textContent = 'Geprüft'; showSolution(); }
+      else { btn.disabled = false; btn.textContent = 'Nochmal prüfen'; out.append(' Versuch es noch einmal, oder tippe auf „Lösung zeigen“.'); }
+    } catch(e){
+      if(!attempt || attempt.cardId !== forCard) return;
+      out.textContent = 'Deine Korrektur ist gespeichert; die Kurzprüfung kam nicht an' + (e && e.code ? ' (' + e.code + ')' : '') + '.';
+      btn.disabled = false; showSolution();
+    }
+  }
+  function fbLine(label, text){ const p = el('p'); p.append(el('span', 'k', label + ' '), text); return p; }
+  function renderFeedback(r){
+    const box = $('fbTxt'); box.textContent = '';
+    if(r.traegt) box.appendChild(fbLine('Trägt:', String(r.traegt)));
+    if(r.fehlt) box.appendChild(fbLine('Fehlt:', String(r.fehlt)));
+    if(r.falsch) box.appendChild(fbLine('Ungenau:', String(r.falsch)));
+    (Array.isArray(r.muster) ? r.muster : []).forEach(mu => {
+      if(!mu || !mu.id) return;
+      const p = el('p'); p.appendChild(el('span', 'chip', String(mu.id)));
+      if(mu.stelle) p.append('„' + String(mu.stelle) + '“ ');
+      if(mu.hinweis) p.append(String(mu.hinweis));
+      box.appendChild(p);
+    });
+    if(r.praezisieren){
+      box.appendChild(el('p', 'ask', String(r.praezisieren)));
+      const wrap = el('div', 'prec');
+      const lab = el('label', 'modehint', 'Stelle selbst richtig fassen (+' + XP_PREC + ' XP)'); lab.htmlFor = 'precIn';
+      const ta = document.createElement('textarea'); ta.id = 'precIn'; ta.rows = 2; ta.className = 'precin';
+      const btn = el('button', 'secondary precbtn', 'Korrektur prüfen'); btn.type = 'button';
+      const out = el('p', 'qscan');
+      btn.addEventListener('click', () => checkPrecision(ta, btn, out, r));
+      ta.addEventListener('keydown', e => { if(e.key === 'Enter' && (e.ctrlKey || e.metaKey)){ e.preventDefault(); if(!btn.disabled) btn.click(); } });
+      wrap.append(lab, ta, btn, out); box.appendChild(wrap);
+    }
+    const sug = ['good','half','again'].includes(r.bewertung) ? r.bewertung : null;
+    suggested = sug;
+    $('rate').querySelectorAll('button').forEach(b => b.classList.toggle('suggest', b.dataset.r === sug));
+    if(sug) box.appendChild(el('p', 'qscan', 'Vorschlag: ' + {good:'gewusst', half:'halb', again:'nicht gewusst'}[sug] + '. Du entscheidest.'));
+  }
+  async function checkAnswer(){
+    if(mode === 'disput'){ disputTurn(); return; }
+    if(mode === 'klausur'){ examSubmit(); return; }
+    if(mode !== 'schrift' || revealed || pos >= queue.length) return;
+    if(photoBusy){ hint('Das Bild wird noch vorbereitet, einen Moment.', true); return; }
+    const c = queue[pos], text = $('ans').value.trim(), viaPhoto = !!photoBlob;
+    if(!text && !photoBlob){ hint('Schreib erst eine Antwort' + ($('photoLbl').hidden ? '.' : ' oder häng deine Handschrift an.')); focusAns(); return; }
+    if(viaPhoto && imgChecked && !imgOk){ hint('Diese Ansicht kann keine Bilder an Claude schicken. Öffne die Kartei im Browser auf claude.ai oder in der Desktop-App, oder tippe die Antwort.'); return; }
+    hint('');
+    $('ans').disabled = true; $('checkBtn').disabled = true;
+    attempt = {cardId:c.id, modul:c.modul, deck:c.group, nr:c.nr, title:c.title, src:c.src, q:c.q, answer:text, photo:viaPhoto, date:today(), time:new Date().toTimeString().slice(0,5)};
+    $('writeBox').hidden = true; $('fb').hidden = false;
+    showOwn(text || '');
+    if(viaPhoto){ const im = el('img', 'ownimg'); im.alt = 'Deine Handschrift'; im.src = thumbUrl; $('ownTxt').textContent = ''; $('ownTxt').appendChild(im); if(text) $('ownTxt').appendChild(el('p', 'qscan', 'Notiz dazu: ' + text)); }
+    const box = $('fbTxt'); box.textContent = '';
+    if(!sample || aiOff){ $('fbWrap').hidden = true; showSolution(); return; }
+    $('fbWrap').hidden = false; $('peekBtn').hidden = false;
+    const wait = el('p', 'thinking', 'Claude liest deine Antwort …'); box.appendChild(wait);
+    const stop = el('button', 'linkbtn', 'Abbrechen'); stop.type = 'button'; box.appendChild(stop);
+    const ctl = new AbortController(); aiCtl = ctl; stop.addEventListener('click', () => ctl.abort());
+    const forCard = c.id;
+    try {
+      const opts = {signal: ctl.signal};
+      if(viaPhoto) opts.images = [photoBlob];
+      const r = await sample.json(promptFor(c, text, viaPhoto), opts);
+      if(aiCtl !== ctl || !attempt || attempt.cardId !== forCard) return;
+      aiCtl = null;
+      if(!r || typeof r !== 'object'){ box.textContent = 'Die Rückmeldung kam unlesbar an. Vergleiche diesmal selbst mit der Lösung.'; showSolution(); return; }
+      if(viaPhoto && r.transkript){ attempt.answer = String(r.transkript); const keep = $('ownTxt').querySelector('img'); showOwn(attempt.answer); if(keep) $('ownTxt').appendChild(keep); }
+      attempt.feedback = {traegt:r.traegt||'', fehlt:r.fehlt||'', falsch:r.falsch||'', muster:Array.isArray(r.muster) ? r.muster.slice(0,6) : [], praezisieren:r.praezisieren||''};
+      attempt.suggested = ['good','half','again'].includes(r.bewertung) ? r.bewertung : null;
+      renderFeedback(r);
+      if(!r.praezisieren) showSolution();
+    } catch(e){
+      if(aiCtl === ctl) aiCtl = null;
+      if(!attempt || attempt.cardId !== forCard) return;
+      const code = e && e.code;
+      box.textContent = '';
+      showSolution();
+      if(code === 'cancelled'){ box.appendChild(el('p', 'qscan', 'Abgebrochen. Vergleiche selbst mit der Lösung.')); return; }
+      if(['not_granted','sampling_disabled','not_declared','capability_disabled','capability_removed'].includes(code)){
+        aiOff = true; box.appendChild(el('p', 'qscan', 'Rückmeldung von Claude ist hier nicht freigegeben. Vergleiche selbst mit der Lösung; deine Antwort wird trotzdem gespeichert.')); return;
+      }
+      if(code === 'images_unavailable'){ imgOk = false; imgChecked = true; box.appendChild(el('p', 'qscan', 'Diese Ansicht kann keine Bilder an Claude schicken (images_unavailable). Öffne die Kartei im Browser auf claude.ai oder in der Desktop-App, oder tippe die Antwort.')); return; }
+      const msg = {rate_limited:'Gerade zu viele Anfragen an Claude. Vergleiche selbst; später geht es wieder.', session_expired:'Bitte melde dich neu an, dann geht die Rückmeldung wieder.', image_rejected:'Das Foto ließ sich nicht lesen. Tippe die Antwort oder nimm ein schärferes Bild.', refused:'Claude hat diese Antwort nicht bewertet. Vergleiche selbst mit der Lösung.'}[code]
+        || 'Die Rückmeldung ist nicht angekommen' + (code ? ' (' + code + ')' : '') + '.';
+      box.appendChild(el('p', 'qscan', msg));
+      if(code === 'upstream_error' || code === 'invalid_json' || !code){
+        const again = el('button', 'linkbtn', 'Nochmal versuchen'); again.type = 'button';
+        again.addEventListener('click', () => { revealed = false; $('fbLz').hidden = true; $('fb').hidden = true; $('writeBox').hidden = false; $('ans').disabled = false; $('checkBtn').disabled = false; $('rate').hidden = true; $('cA').hidden = true; checkAnswer(); });
+        box.appendChild(again);
+      }
+    }
+  }
+  /* Disputation: Aus einer Karte wird eine strittige These. die Person verteidigt sie (oder greift sie an), DISP_ROUNDS Züge,
+     dann ein Urteil. Gespeichert wie eine schriftliche Antwort (mit Feld "disputation"), also landet sie sonntags im
+     Abfrage-Archiv und von dort im Lernprofil; Lücken werden zu Nacharbeit-Karten. */
+  const DISP_OP = /^(nimm stellung|beurteile|bewerte|diskutiere|spricht|welcher einwand|was spricht|wer vertritt|rekonstruiere|erläutere|erkläre|begründe|inwiefern|warum|vergleiche|unterscheide|worin|wie würde|welche position|an welchem punkt)/i;
+  function sessLine(c){
+    if(c.syn) return 'Synthese über mehrere Sitzungen (' + c.src + ')';
+    if(c.prio) return 'Nacharbeit (' + c.src + ')';
+    return 'Sitzung ' + pad(c.nr) + ': ' + c.title + ' · Abschnitt: ' + c.src;
+  }
+  const stripA = s => String(s || '').replace(/\*\*/g, '');
+  function dispCandidates(list){
+    const ok = list.filter(c => DISP_OP.test(String(c.q).trim()) && !/Präzisierung/.test(String(c.src || '')));
+    return ok.length ? ok : list;
+  }
+  function pickSeed(list){
+    const cand = dispCandidates(list); if(!cand.length) return null;
+    const seen = cand.filter(c => prog[c.id]);
+    const pool = seen.length >= 3 ? seen : cand;
+    const w = c => { const p = prog[c.id]; return 1 + (p ? score(p) : 0) + (p && p.disput ? 0 : 2) + (c.syn ? 2 : 0); };
+    let r = Math.random() * pool.reduce((s, c) => s + w(c), 0);
+    for(const c of pool){ r -= w(c); if(r <= 0) return c; }
+    return pool[pool.length - 1];
+  }
+  let dispPool = [];
+  function startDisput(list){ dispPool = list.slice(); const c = pickSeed(list); if(c) start([c]); }
+  /* Karte ohne Bewertung überspringen; in der Disputation stattdessen eine andere Ausgangskarte ziehen */
+  function skipCard(){
+    if(pos >= queue.length || revealed || hi !== null || mode === 'klausur') return;
+    if(aiCtl){ try { aiCtl.abort(); } catch(e){} aiCtl = null; }
+    const c = queue[pos];
+    if(mode === 'disput'){
+      const next = pickSeed(dispPool.filter(x => x.id !== c.id));
+      if(next){ queue[pos] = next; showCard(); }
+      return;
+    }
+    queue.splice(pos, 1);
+    if(!queue.length){ show('home'); renderHome(); return; }
+    showCard();
+  }
+  /* Stoff für die Disputation: bei einer Synthese-Karte die Karten aller Sitzungen, die ihr src nennt
+     (z. B. "VO 02 × VO 04"), sonst die übrigen Karten derselben Sitzung */
+  const GROUP_RE = /(VL)\s*0?(\d{1,2})/g;
+  function stoffFor(c){
+    let pool;
+    if(c.syn){
+      const ids = new Set([...String(c.src || '').matchAll(GROUP_RE)]
+        .map(m => decks.find(d => d.modul === c.modul && d.deck === m[1] && Number(d.nr) === Number(m[2])))
+        .filter(Boolean).map(d => d.id));
+      pool = cards.filter(x => ids.has(x.deckId) && !x.prio);
+      if(!pool.length) pool = cards.filter(x => x.modul === c.modul && !x.prio && !x.syn && x.id !== c.id);
+      if(pool.length > 18) pool = shuffle(pool).slice(0, 18);
+    } else pool = cards.filter(x => x.deckId === c.deckId && x.id !== c.id && !x.prio).slice(0, 14);
+    return pool.map(x => '- ' + (c.syn ? '[' + groupLabel(x.modul, x.group) + ' ' + pad(x.nr) + '] ' : '') + x.q + ' → ' + stripA(x.a).split('\n')[0]).join('\n').slice(0, 3600);
+  }
+  const ROLE_TXT = r => r === 'verteidigen' ? 'die Person verteidigt die Position, du greifst sie an.' : 'Du verteidigst die Position, die Person greift sie an.';
+  function dispIntro(c){
+    const m = modOf(c.modul);
+    return [
+      'Du bist Gegenüber in einer Disputation an der Europa-Universität Flensburg: ein philosophischer Freund auf Augenhöhe, der hart, aber fair streitet. Du suchst den stärksten Einwand, nicht den bequemsten. Hält ein Zug von die Person nicht, sag es; trifft er, gib es zu.',
+      '', 'Modul: ' + (m.name || c.modul) + ' · ' + (c.syn ? sessLine(c) : 'Sitzung ' + pad(c.nr) + ': ' + c.title),
+      'Ausgangskarte: ' + c.q,
+      'Erwartungshorizont aus dem Lernzettel (für die Klausur gilt diese Fassung): ' + stripA(c.a),
+      c.hint ? 'Klausurtipp: ' + c.hint : null,
+      c.syn ? 'Stoff der beteiligten Sitzungen (in Klammern die Sitzung, Frage → Kernantwort). Nutze die Spannung zwischen ihnen:' : 'Weiterer Stoff dieser Sitzung (Frage → Kernantwort):',
+      (disp && disp.cardId === c.id && disp.stoff != null ? disp.stoff : stoffFor(c)) || '–',
+      '', 'Regeln: Argumentiere mit diesem Stoff und gesichertem Fachwissen. Ein Einwand, der über den Lernzettel hinausgeht, ist erlaubt, wenn du ihn in "quelle" als "über den Zettel hinaus" kennzeichnest. Erfinde keine Zitate, Namen oder Jahreszahlen. Jeder deiner Züge höchstens etwa 80 Wörter und ein Gedanke. Deutsch, inklusive Formen mit Doppelpunkt, keine Aufzählungszeichen.'
+    ].filter(x => x !== null).join('\n');
+  }
+  function openPrompt(c){
+    const v = disp.role === 'verteidigen';
+    return [dispIntro(c), '', 'Rollen: ' + ROLE_TXT(disp.role),
+      'Aufgabe jetzt: Mach aus der Ausgangskarte eine strittige, klausurnahe Position in einem Satz, die sich mit dem Stoff verteidigen lässt, aber angreifbar ist (keine bloße Definition, keine Aufzählung). ' + (v ? 'Dann eröffne mit deinem stärksten Einwand gegen sie.' : 'Dann begründe sie so stark, wie der Stoff es erlaubt, damit die Person etwas Greifbares angreifen kann.'),
+      '', 'Antworte nur mit einem JSON-Objekt dieser Form:',
+      '{"position": "die strittige These in einem Satz", "kontext": "worum der Streit geht, ein Satz", "zug": "' + (v ? 'dein erster Einwand' : 'deine Begründung der Position') + '", "quelle": "Zettel oder über den Zettel hinaus"}'
+    ].join('\n');
+  }
+  function turnPrompt(c, text, viaPhoto, last){
+    const v = disp.role === 'verteidigen';
+    const lines = [dispIntro(c), '', 'Rollen: ' + ROLE_TXT(disp.role), 'Position: ' + disp.position, '', 'Bisheriger Verlauf:',
+      disp.turns.map(t => (t.who === 'claude' ? 'Du: ' : 'die Person: ') + t.text).join('\n'), '',
+      viaPhoto ? 'Die neuer Zug ist handschriftlich und steht auf dem Bild. Lies ihn zuerst wörtlich ab; Durchgestrichenes gehört nicht dazu.' + (text ? ' Seine getippte Notiz dazu: ' + text : '') : 'Die neuer Zug steht zwischen <zug> und </zug>:\n<zug>\n' + text + '\n</zug>',
+      '', 'Die bekannte Fehlermuster aus seinem Lernprofil:', ...MUSTER,
+      'Ein Muster nur nennen, wenn es in seinem Zug eindeutig auftritt, mit wörtlichem Zitat. Redet er am Einwand vorbei, statt ihn aufzugreifen, ist das P-02.'];
+    if(!last){
+      lines.push('', 'Aufgabe jetzt: Sag in je einem Satz, was an seinem Zug trägt und wo er angreifbar bleibt. Dann mach deinen nächsten Zug: ' + (v ? 'einen Einwand, der genau an seiner Erwiderung ansetzt, oder, wenn sie hält, einen neuen, schärferen.' : 'verteidige die Position gegen seinen Einwand, gib zu, was er trifft, und zeig, was danach von der These bleibt.'),
+        'Antworte nur mit JSON: {"transkript": "' + (viaPhoto ? 'der abgelesene Zug' : '') + '", "traegt": "ein Satz", "schwachstelle": "ein Satz oder leer", "muster": [{"id": "P-01", "stelle": "wörtliches Zitat", "hinweis": "ein Satz"}], "zug": "dein nächster Zug", "quelle": "Zettel oder über den Zettel hinaus"}');
+    } else {
+      lines.push('', 'Das war Die letzter Zug. Mach keinen weiteren Zug, sondern urteile über die ganze Disputation, gemessen am Stoff und daran, ob seine Züge in einer Klausur tragen würden.',
+        'Antworte nur mit JSON: {"transkript": "' + (viaPhoto ? 'der abgelesene Zug' : '') + '", "staerke": "sein stärkster Zug, ein Satz", "gehalten": "was von seiner Seite am Ende steht, ein bis zwei Sätze", "gefallen": "was er aufgeben musste oder nicht verteidigt hat, oder leer", "luecke": "die wichtigste Lücke mit Bezug auf den Lernzettel, oder leer", "muster": [{"id": "P-01", "stelle": "wörtliches Zitat", "hinweis": "ein Satz"}], "bewertung": "good|half|again", "empfehlung": "eine Sache für die nächste Lerneinheit"}',
+        'good = er hat seine Seite klausurtauglich vertreten, half = teilweise, again = die Position ist ihm entglitten oder seine Züge gingen am Streitpunkt vorbei.');
+    }
+    return lines.join('\n');
+  }
+  function dispState(){
+    if(!disp) return;
+    $('cState').textContent = 'Disputation · ' + (disp.done ? 'Urteil' : 'Zug ' + Math.max(1, Math.min(disp.round, DISP_ROUNDS)) + ' von ' + DISP_ROUNDS);
+  }
+  function turnEl(who, text, quelle){
+    const v = disp && disp.role === 'verteidigen', d = el('div', 'turn ' + (who === 'claude' ? 'c' : 'l'));
+    d.appendChild(el('h4', null, who === 'claude' ? (v ? 'Claude · Einwand' : 'Claude · Verteidigung') : (v ? 'Du · Erwiderung' : 'Du · Einwand')));
+    d.appendChild(el('div', who === 'claude' ? 'zug' : 'own', String(text || '')));
+    if(who === 'claude' && quelle && /hinaus/i.test(String(quelle))) d.appendChild(el('span', 'note', 'Geht über den Lernzettel hinaus.'));
+    return d;
+  }
+  function setDispSkel(){
+    const steps = role === 'verteidigen'
+      ? ['Den Einwand in einem Satz aufgreifen', 'Wo er ansetzt: Prämisse, Begriff oder Beispiel', 'Erwiderung mit Beleg aus dem Stoff', 'Zugeständnis, wo nötig, und was danach von der Position bleibt']
+      : ['Prämisse oder Begriff wählen, an dem die Position hängt', 'Gegenbeispiel oder unerwünschte Folge', 'Warum die Begründung das nicht auffängt', 'Genau sagen, was fällt und was nicht (P-01)'];
+    const list = $('skelList'); list.textContent = '';
+    steps.forEach(x => list.appendChild(el('li', null, x)));
+    $('skel').hidden = false; $('skel').open = false;
+    $('skelSum').textContent = role === 'verteidigen' ? 'Skelett für eine Erwiderung' : 'Skelett für einen Einwand';
+  }
+  function dispErrMsg(e){
+    const code = e && e.code;
+    if(code === 'cancelled') return 'Abgebrochen.';
+    if(['not_granted','sampling_disabled','not_declared','capability_disabled','capability_removed'].includes(code)){ aiOff = true; return 'Rückmeldung von Claude ist hier nicht freigegeben; ohne sie geht die Disputation nicht.'; }
+    if(code === 'images_unavailable'){ imgOk = false; imgChecked = true; return 'Diese Ansicht kann keine Bilder an Claude schicken. Tippe den Zug, oder öffne die Kartei im Browser auf claude.ai.'; }
+    return {rate_limited:'Gerade zu viele Anfragen an Claude. Versuch es gleich noch einmal.', session_expired:'Bitte melde dich neu an, dann geht es weiter.', image_rejected:'Das Foto ließ sich nicht lesen. Tippe den Zug oder nimm ein schärferes Bild.', refused:'Claude hat darauf nicht geantwortet. Formuliere den Zug anders.'}[code]
+      || 'Claudes Antwort ist nicht angekommen' + (code ? ' (' + code + ')' : '') + '.';
+  }
+  function setupDisput(c){
+    disp = {cardId: c.id, role, position: '', kontext: '', turns: [], muster: [], round: 0, done: false, stoff: null};
+    disp.stoff = stoffFor(c);
+    $('dispBox').hidden = false; $('writeBox').hidden = true;
+    $('ansLbl').textContent = role === 'verteidigen' ? 'Deine Erwiderung' : 'Dein Einwand';
+    $('checkBtn').textContent = 'Zug senden';
+    setDispSkel(); dispState();
+    if(!skipOpen) openDisput(c);
+  }
+  async function openDisput(c){
+    const box = $('dispBox'); box.textContent = '';
+    $('cQ').textContent = c.q;
+    const wait = el('p', 'thinking', 'Claude sucht die Streitfrage …'); box.appendChild(wait);
+    if(!sample || aiOff){ wait.className = 'qscan'; wait.textContent = 'Die Disputation braucht Rückmeldung von Claude, und die ist hier gerade nicht verfügbar.'; return; }
+    const ctl = new AbortController(); aiCtl = ctl; const forCard = c.id;
+    try {
+      const r = await sample.json(openPrompt(c), {signal: ctl.signal});
+      if(aiCtl !== ctl || !disp || disp.cardId !== forCard) return;
+      aiCtl = null;
+      if(!r || typeof r !== 'object' || !r.position || !r.zug) throw {code: 'invalid_json'};
+      disp.position = String(r.position); disp.kontext = String(r.kontext || '');
+      disp.turns.push({who: 'claude', text: String(r.zug), quelle: String(r.quelle || '')});
+      box.textContent = '';
+      $('cQ').textContent = disp.position;
+      box.appendChild(el('p', 'ctx', (disp.kontext ? disp.kontext + ' ' : '') + 'Aus der Karte: „' + c.q + '“'));
+      box.appendChild(turnEl('claude', r.zug, r.quelle));
+      disp.round = 1; dispState();
+      $('writeBox').hidden = false; $('ans').value = ''; $('ans').disabled = false; $('checkBtn').disabled = false;
+      setTimeout(focusAns, 50);
+    } catch(e){
+      if(aiCtl === ctl) aiCtl = null;
+      if(!disp || disp.cardId !== forCard) return;
+      wait.className = 'qscan'; wait.textContent = dispErrMsg(e);
+      if(!aiOff && !(e && e.code === 'cancelled')){
+        const b = el('button', 'linkbtn', 'Nochmal versuchen'); b.type = 'button';
+        b.addEventListener('click', () => openDisput(c)); wait.append(' '); wait.appendChild(b);
+      }
+    }
+  }
+  async function disputTurn(){
+    if(mode !== 'disput' || !disp || disp.done || disp.round < 1 || pos >= queue.length) return;
+    if(photoBusy){ hint('Das Bild wird noch vorbereitet, einen Moment.', true); return; }
+    const c = queue[pos], text = $('ans').value.trim(), viaPhoto = !!photoBlob;
+    if(!text && !photoBlob){ hint('Schreib erst deinen Zug' + ($('photoLbl').hidden ? '.' : ' oder häng deine Handschrift an.')); focusAns(); return; }
+    if(viaPhoto && imgChecked && !imgOk){ hint('Diese Ansicht kann keine Bilder an Claude schicken. Tippe den Zug, oder öffne die Kartei im Browser auf claude.ai.'); return; }
+    hint('');
+    const last = disp.round >= DISP_ROUNDS, blob = photoBlob, box = $('dispBox');
+    const mine = turnEl('louis', text);
+    let imgUrl = null;
+    if(viaPhoto){
+      imgUrl = keepUrl(blob);
+      const own = mine.querySelector('.own'); own.textContent = '';
+      const im = el('img', 'ownimg'); im.alt = 'Dein Zug in Handschrift'; im.src = imgUrl; own.appendChild(im);
+      if(text) own.appendChild(el('p', 'qscan', 'Notiz dazu: ' + text));
+    }
+    box.appendChild(mine);
+    $('writeBox').hidden = true; $('ans').disabled = true; $('checkBtn').disabled = true;
+    const wait = el('p', 'thinking', last ? 'Claude wägt die Disputation ab …' : 'Claude liest deinen Zug …'); box.appendChild(wait);
+    const ctl = new AbortController(); aiCtl = ctl; const forCard = c.id;
+    try {
+      const opts = {signal: ctl.signal}; if(viaPhoto) opts.images = [blob];
+      const r = await sample.json(turnPrompt(c, text, viaPhoto, last), opts);
+      if(aiCtl !== ctl || !disp || disp.cardId !== forCard) return;
+      aiCtl = null;
+      if(!r || typeof r !== 'object' || (!last && !r.zug)) throw {code: 'invalid_json'};
+      const said = viaPhoto && r.transkript ? String(r.transkript) : text;
+      if(viaPhoto && r.transkript) mine.querySelector('.own').prepend(el('div', null, said));
+      disp.turns.push({who: 'louis', text: said, photo: viaPhoto});
+      const mu = (Array.isArray(r.muster) ? r.muster : []).filter(m => m && m.id).slice(0, 3);
+      mu.forEach(m => disp.muster.push(m));
+      clearPhoto(); $('ans').value = ''; wait.remove();
+      if(!last){
+        const fb = el('div', 'tfb');
+        if(r.traegt) fb.appendChild(fbLine('Trägt:', String(r.traegt)));
+        if(r.schwachstelle) fb.appendChild(fbLine('Angreifbar:', String(r.schwachstelle)));
+        mu.forEach(m => { const p = el('p'); p.appendChild(el('span', 'chip', String(m.id))); if(m.stelle) p.append('„' + String(m.stelle) + '“ '); if(m.hinweis) p.append(String(m.hinweis)); fb.appendChild(p); });
+        if(fb.childNodes.length) mine.appendChild(fb);
+        disp.turns.push({who: 'claude', text: String(r.zug), quelle: String(r.quelle || '')});
+        box.appendChild(turnEl('claude', r.zug, r.quelle));
+        disp.round++; dispState();
+        $('checkBtn').textContent = disp.round >= DISP_ROUNDS ? 'Letzten Zug senden' : 'Zug senden';
+        $('writeBox').hidden = false; $('ans').disabled = false; $('checkBtn').disabled = false;
+        setTimeout(focusAns, 50);
+      } else finishDisput(c, r);
+    } catch(e){
+      if(aiCtl === ctl) aiCtl = null;
+      if(!disp || disp.cardId !== forCard) return;
+      mine.remove(); wait.remove(); if(imgUrl){ try { URL.revokeObjectURL(imgUrl); } catch(err){} }
+      $('writeBox').hidden = false; $('ans').disabled = false; $('checkBtn').disabled = false;
+      hint(dispErrMsg(e) + (aiOff ? '' : ' Dein Zug steht noch im Feld, schick ihn einfach noch einmal.'));
+    }
+  }
+  function finishDisput(c, r){
+    disp.done = true; dispState();
+    const box = $('dispBox'), v = el('div', 'verdict');
+    v.appendChild(el('h4', null, 'Urteil'));
+    if(r.staerke) v.appendChild(fbLine('Stärkster Zug:', String(r.staerke)));
+    if(r.gehalten) v.appendChild(fbLine('Hat gehalten:', String(r.gehalten)));
+    if(r.gefallen) v.appendChild(fbLine('Musste fallen:', String(r.gefallen)));
+    if(r.luecke) v.appendChild(fbLine('Lücke im Stoff:', String(r.luecke)));
+    const seen = new Set(), mus = [...disp.muster, ...(Array.isArray(r.muster) ? r.muster : [])].filter(m => {
+      if(!m || !m.id) return false; const k = String(m.id) + '|' + String(m.stelle || ''); if(seen.has(k)) return false; seen.add(k); return true;
+    }).slice(0, 6);
+    mus.forEach(m => { const p = el('p'); p.appendChild(el('span', 'chip', String(m.id))); if(m.stelle) p.append('„' + String(m.stelle) + '“ '); if(m.hinweis) p.append(String(m.hinweis)); v.appendChild(p); });
+    if(r.empfehlung) v.appendChild(fbLine('Nächstes Mal:', String(r.empfehlung)));
+    const sug = ['good','half','again'].includes(r.bewertung) ? r.bewertung : null;
+    suggested = sug;
+    $('rate').querySelectorAll('button').forEach(b => b.classList.toggle('suggest', b.dataset.r === sug));
+    v.appendChild(el('p', 'qscan', (sug ? 'Vorschlag für die Ausgangskarte: ' + {good:'gewusst', half:'halb', again:'nicht gewusst'}[sug] + '. ' : '') + 'Du entscheidest. Was gefallen ist, wird sonntags zur Nacharbeit-Karte.'));
+    box.appendChild(v);
+    box.appendChild(el('h4', null, 'Lernzettel zur Ausgangskarte'));
+    const lz = disp.turns.filter(t => t.who === 'louis');
+    attempt = {cardId: c.id, modul: c.modul, deck: c.group, nr: c.nr, title: c.title, src: c.src,
+      q: 'Disputation (' + (disp.role === 'verteidigen' ? 'verteidigt' : 'angegriffen') + '): ' + disp.position,
+      answer: lz.map((t, i) => (i + 1) + ') ' + t.text).join(' '), photo: lz.some(t => t.photo), date: today(), time: new Date().toTimeString().slice(0, 5),
+      disputation: {rolle: disp.role, position: disp.position, ausgangskarte: c.q,
+        verlauf: disp.turns.map(t => ({wer: t.who === 'claude' ? 'Claude' : 'die Person', text: t.text})),
+        urteil: {staerke: String(r.staerke || ''), gehalten: String(r.gehalten || ''), gefallen: String(r.gefallen || ''), luecke: String(r.luecke || ''), empfehlung: String(r.empfehlung || '')}},
+      feedback: {traegt: String(r.gehalten || ''), fehlt: String(r.luecke || ''), falsch: String(r.gefallen || ''), muster: mus, praezisieren: ''},
+      suggested: sug};
+    showSolution();
+  }
+  function restoreDisput(s){
+    disp = s.disp; attempt = s.attempt; suggested = (s.attempt && s.attempt.suggested) || null;
+    $('writeBox').hidden = true; $('fb').hidden = true;
+    const box = $('dispBox'); box.replaceChildren(...s.dispNode.cloneNode(true).childNodes); box.hidden = false;
+    if(s.dispQ) $('cQ').textContent = s.dispQ;
+    dispState();
+    $('rate').querySelectorAll('button').forEach(b => b.classList.toggle('suggest', b.dataset.r === suggested));
+    showSolution();
+  }
+
+  /* Klausur-Simulation: EXAM_N Aufgaben aus einem Modul, ohne Sitzungsangabe und Skelett, EXAM_MIN Minuten für alle.
+     Antworten werden beim Abgeben schon an Claude geschickt, die Rückmeldung zeigt die Kartei aber erst in der Auswertung.
+     Gespeichert wie schriftliche Antworten (Feld klausur: true). */
+  const EXAM_OP = /^(erläutere|erkläre|begründe|unterscheide|grenze|vergleiche|rekonstruiere|nimm stellung|beurteile|bewerte|diskutiere|berechne|bestimme|ermittle|prüfe|interpretiere|inwiefern|warum|worin|wie würde|an welchem punkt)/i;
+  function mmss(ms){ const s = Math.max(0, Math.round(Math.abs(ms) / 1000)); return Math.floor(s / 60) + ':' + pad(s % 60); }
+  function examModule(list){
+    if(filt.modul !== 'alle') return filt.modul;
+    const ks = [...new Set(list.map(c => c.modul))];
+    const next = ks.filter(k => examOf(k) && daysTo(examOf(k)) >= 0).sort((a, b) => examOf(a) < examOf(b) ? -1 : 1)[0];
+    return next || ks[0] || null;
+  }
+  function examPick(list){
+    const key = examModule(list); if(!key) return [];
+    const pool = list.filter(c => c.modul === key && !/Präzisierung|Muster P-|Fallfalle/.test(String(c.src || '')));
+    const big = pool.filter(c => EXAM_OP.test(String(c.q).trim()));
+    const base = big.length >= EXAM_N ? big : pool;
+    const seen = base.filter(c => prog[c.id]);
+    const src = shuffle(seen.length >= EXAM_N ? seen : base), out = [], used = new Set();
+    for(const c of src){ if(out.length >= EXAM_N) break; if(!used.has(c.deckId)){ out.push(c); used.add(c.deckId); } }
+    for(const c of src){ if(out.length >= EXAM_N) break; if(!out.includes(c)) out.push(c); }
+    return out;
+  }
+  function startExam(picked){
+    if(!picked.length) return;
+    if(exam && exam.timer) clearInterval(exam.timer);
+    exam = {items: [], phase: 'write', t0: Date.now(), used: 0, timer: null};
+    start(picked);
+    exam.timer = setInterval(examTick, 1000); examTick();
+  }
+  function examTick(){
+    if(!exam || exam.phase !== 'write' || mode !== 'klausur' || $('study').hidden) return;
+    const left = EXAM_MIN * 60000 - (Date.now() - exam.t0), cnt = $('count');
+    cnt.textContent = 'Aufgabe ' + Math.min(pos + 1, queue.length) + ' / ' + queue.length + ' · ' + (left > 0 ? 'noch ' + mmss(left) : 'Zeit um (+' + mmss(left) + ')');
+    cnt.classList.toggle('late', left <= 0);
+  }
+  function setupExam(c){
+    if(!exam) return;
+    $('skel').hidden = true;
+    if(exam.phase === 'write'){
+      $('cMeta').textContent = 'Klausur-Simulation';
+      $('cState').textContent = 'Aufgabe ' + (pos + 1) + ' von ' + queue.length;
+      $('ansLbl').textContent = 'Deine Antwort';
+      $('checkBtn').textContent = pos + 1 < queue.length ? 'Abgeben, weiter' : 'Abgeben und auswerten';
+      examTick();
+      return;
+    }
+    const it = exam.items[pos];
+    if(!it) return;
+    $('cMeta').textContent = 'Auswertung ' + (pos + 1) + ' / ' + queue.length + ' · ' + label(c);
+    $('cState').textContent = 'stammt aus dieser Sitzung';
+    $('count').textContent = 'Zeit: ' + mmss(exam.used) + ' von ' + EXAM_MIN + ':00';
+    $('writeBox').hidden = true; $('fb').hidden = false;
+    const showMine = txt => {
+      showOwn(txt || '');
+      if(it.photo){ const im = el('img', 'ownimg'); im.alt = 'Deine Handschrift'; im.src = it.imgUrl; if(!txt) $('ownTxt').textContent = ''; $('ownTxt').appendChild(im); if(it.text && txt !== it.text) $('ownTxt').appendChild(el('p', 'qscan', 'Notiz dazu: ' + it.text)); }
+    };
+    showMine(it.attempt.answer);
+    attempt = it.attempt;
+    if(skipOpen) return;
+    const box = $('fbTxt'); box.textContent = '';
+    if(!it.promise){ $('fbWrap').hidden = true; showSolution(); return; }
+    $('fbWrap').hidden = false; $('peekBtn').hidden = revealed;
+    box.appendChild(el('p', 'thinking', 'Claude liest deine Antwort …'));
+    const forCard = c.id;
+    it.promise.then(res => {
+      if(!exam || exam.phase !== 'review' || pos >= queue.length || queue[pos].id !== forCard || !attempt || attempt.cardId !== forCard) return;
+      box.textContent = '';
+      if(res.error){
+        const p = el('p', 'qscan', dispErrMsg(res.error) + ' Vergleiche selbst mit der Lösung; deine Antwort wird trotzdem gespeichert.');
+        const code = res.error && res.error.code;
+        if(it.ask && !aiOff && !['refused', 'cancelled', 'image_rejected', 'images_unavailable'].includes(code)){
+          const b = el('button', 'linkbtn', 'Nochmal versuchen'); b.type = 'button';
+          b.addEventListener('click', () => { it.promise = it.ask(); setupExam(c); });
+          p.append(' '); p.appendChild(b);
+        }
+        box.appendChild(p); showSolution(); return;
+      }
+      const r = res.r;
+      if(!r || typeof r !== 'object'){ box.textContent = 'Die Rückmeldung kam unlesbar an. Vergleiche diesmal selbst mit der Lösung.'; showSolution(); return; }
+      if(it.photo && r.transkript){ attempt.answer = String(r.transkript); showMine(attempt.answer); }
+      attempt.feedback = {traegt: r.traegt || '', fehlt: r.fehlt || '', falsch: r.falsch || '', muster: Array.isArray(r.muster) ? r.muster.slice(0, 6) : [], praezisieren: r.praezisieren || ''};
+      attempt.suggested = ['good','half','again'].includes(r.bewertung) ? r.bewertung : null;
+      renderFeedback(r);
+      if(!r.praezisieren) showSolution();
+    });
+  }
+  function examSubmit(){
+    if(!exam || exam.phase !== 'write' || pos >= queue.length) return;
+    if(photoBusy){ hint('Das Bild wird noch vorbereitet, einen Moment.', true); return; }
+    const c = queue[pos], text = $('ans').value.trim(), viaPhoto = !!photoBlob;
+    if(!text && !photoBlob){ hint('Schreib erst eine Antwort' + ($('photoLbl').hidden ? '.' : ' oder häng deine Handschrift an.')); focusAns(); return; }
+    if(viaPhoto && imgChecked && !imgOk){ hint('Diese Ansicht kann keine Bilder an Claude schicken. Tippe die Antwort, oder öffne die Kartei im Browser auf claude.ai.'); return; }
+    const it = {cardId: c.id, text, photo: viaPhoto, imgUrl: viaPhoto ? keepUrl(photoBlob) : null, blob: viaPhoto ? photoBlob : null, promise: null,
+      attempt: {cardId: c.id, modul: c.modul, deck: c.group, nr: c.nr, title: c.title, src: c.src, q: c.q, answer: text, photo: viaPhoto, date: today(), time: new Date().toTimeString().slice(0, 5), klausur: true}};
+    if(sample && !aiOff){
+      const opts = {}; if(viaPhoto) opts.images = [photoBlob];
+      it.ask = () => { exam.chain = (exam.chain || Promise.resolve()).then(() => sample.json(promptFor(c, text, viaPhoto), opts).then(r => ({r}), e => ({error: e}))); return exam.chain; };
+      it.promise = it.ask();
+    }
+    exam.items[pos] = it;
+    clearPhoto(); $('ans').value = ''; hint('');
+    pos++;
+    if(pos < queue.length){ showCard(); window.scrollTo(0, 0); return; }
+    exam.phase = 'review'; exam.used = Date.now() - exam.t0;
+    if(exam.timer){ clearInterval(exam.timer); exam.timer = null; }
+    $('count').classList.remove('late');
+    pos = 0; showCard(); window.scrollTo(0, 0);
+  }
+
+  const attemptChain = {p: Promise.resolve()};
+  /* Zurückgenommene Bewertung: die Antwort gilt als nicht abgegeben, bis sie neu bewertet wird */
+  function dropAttempt(id){
+    if(store === 'local'){ answers = answers.filter(a => a.id !== id); localSave(); return; }
+    if(!db || !uid) return;
+    const ref = db.collection('data/users/' + uid + '/schrift/antworten').doc(id);
+    attemptChain.p = attemptChain.p.then(() => ref.delete()).catch(() => {});
+  }
+  function saveAttempt(a, fixedId){
+    if(!store) return null;
+    const now = new Date();
+    const id = fixedId || a.date + '_' + pad(now.getHours()) + pad(now.getMinutes()) + pad(now.getSeconds()) + '_' + a.cardId;
+    if(store === 'local'){ answers = answers.filter(x => x.id !== id); answers.push(Object.assign({id}, JSON.parse(JSON.stringify(a)))); localSave(); return id; }
+    const ref = db.collection('data/users/' + uid + '/schrift/antworten').doc(id);
+    const data = JSON.parse(JSON.stringify(Object.assign({}, a, {exported:false})));
+    attemptChain.p = attemptChain.p.then(() => ref.set(data)).catch(e => {
+      setStatus('Eine schriftliche Antwort konnte nicht gespeichert werden (' + (e && e.code || 'Fehler') + '). Die Bewertung der Karte ist gespeichert.');
+    });
+    return id;
+  }
+
+  /* Browserspeicher: wenn das Konto nicht speichern darf (z. B. Person außerhalb der Organisation des Eigentümers),
+     liegt der ganze Fortschritt als ein JSON im localStorage dieses Browsers; Sicherung als Code oder Datei. */
+  function lsAvailable(){ try { const k = 'kk-probe'; localStorage.setItem(k, '1'); localStorage.removeItem(k); return true; } catch(e){ lsErr = (e && e.name) || 'Fehler'; return false; } }
+  function localData(){ return {v: 1, prog, days, notes, earned, answers: answers.slice(-300)}; }
+  function localSave(){
+    try { lsSaved = new Date().toISOString(); lsCreated = lsCreated || lsSaved; localStorage.setItem(LKEY, JSON.stringify(Object.assign(localData(), {saved: lsSaved, created: lsCreated, backup: lastBackup}))); lsBroken = false; renderStoreLine(); }
+    catch(e){ if(!lsBroken){ lsBroken = true; setStatus('Der Browser lässt die Kartei gerade nichts speichern (' + (e && e.name || 'Fehler') + '). Mach jetzt eine Sicherung unter „Fortschritt“, sonst ist diese Runde beim Schließen weg.'); } }
+  }
+  function localLoad(){
+    try {
+      const x = JSON.parse(localStorage.getItem(LKEY) || 'null');
+      lsFound = !!(x && typeof x === 'object');
+      if(lsFound){ prog = x.prog || {}; days = x.days || {}; notes = x.notes || {}; earned = x.earned || {}; answers = Array.isArray(x.answers) ? x.answers : []; lastBackup = x.backup || null; lsCreated = x.created || x.saved || null; lsSaved = x.saved || null; }
+    } catch(e){ lsFound = false; lsErr = (e && e.name) || 'Fehler'; }
+  }
+  function switchToLocal(){
+    if(store === 'local' || !lsAvailable()) return false;
+    store = 'local'; aiOff = true; localSave();
+    setStatus('Dein Fortschritt liegt auf diesem Gerät; mach ab und zu eine Sicherung unter „Fortschritt“.');
+    return true;
+  }
+  /* Diagnosezeile: wo gespeichert wird und ob beim Öffnen ein früherer Stand gefunden wurde */
+  function renderStoreLine(){
+    const p = $('storeLine'); if(!p) return;
+    const fmt = s => { if(!s) return '?'; const d = new Date(s); return d.getDate() + '.' + (d.getMonth() + 1) + '. ' + pad(d.getHours()) + ':' + pad(d.getMinutes()); };
+    const sa = (() => { try { return navigator.standalone === true || matchMedia('(display-mode: standalone)').matches; } catch(e){ return false; } })();
+    const where = sa ? ' (Home-Bildschirm)' : ' (Browser)';
+    if(!progLoaded){ p.textContent = ''; return; }
+    if(store === 'cloud'){ p.textContent = 'Speicherort: dein Claude-Konto.'; return; }
+    if(store === 'local'){
+      p.textContent = 'Speicherort: dieses Gerät' + where + '. ' + (lsFound ? 'Beim Öffnen gefunden: Stand vom ' + fmt(lsSaved) + ', angelegt ' + fmt(lsCreated) + '.' : 'Beim Öffnen war hier noch nichts gespeichert.') + ' Karten mit Fortschritt: ' + Object.keys(prog).length + (lsSaved ? ', zuletzt gespeichert ' + fmt(lsSaved) : '') + '.';
+      return;
+    }
+    p.textContent = 'Speicherort: keiner' + where + '. Dieser Browser lässt die Kartei nichts speichern' + (lsErr ? ' (' + lsErr + ')' : '') + '.';
+  }
+  function reviewCount(){ let n = 0; Object.values(prog).forEach(p => { n += (p.right||0) + (p.half||0) + (p.wrong||0); }); return n; }
+  function localStatus(){
+    if(reviewCount() < 20) return '';
+    const age = lastBackup ? -daysTo(lastBackup) : null;
+    if(age !== null && age < 7) return '';
+    return 'Dein Fortschritt liegt nur auf diesem Gerät. ' + (age === null ? 'Noch keine Sicherung' : 'Letzte Sicherung vor ' + age + ' Tagen') + ': oben auf „Fortschritt“ tippen, dann „Sicherung kopieren“.';
+  }
+  function b64e(str){ const b = new TextEncoder().encode(str); let bin = ''; for(let i = 0; i < b.length; i += 0x8000) bin += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000)); return btoa(bin); }
+  function b64d(t){ const bin = atob(t), b = new Uint8Array(bin.length); for(let i = 0; i < bin.length; i++) b[i] = bin.charCodeAt(i); return new TextDecoder().decode(b); }
+  function backupCode(){ return 'KARTEI1:' + b64e(JSON.stringify(Object.assign(localData(), {at: new Date().toISOString()}))); }
+  function parseBackup(txt){
+    const m = String(txt || '').replace(/\s+/g, '').match(/KARTEI1:([A-Za-z0-9+/=]+)/);
+    if(!m) throw new Error('kein Code');
+    const x = JSON.parse(b64d(m[1]));
+    if(!x || typeof x !== 'object' || !x.prog) throw new Error('leer');
+    return x;
+  }
+  /* Zusammenführen statt Ersetzen: je Karte gilt der Stand mit dem späteren letzten Lerntag */
+  function mergeBackup(x){
+    let n = 0;
+    const rv = p => (p.right||0) + (p.half||0) + (p.wrong||0);
+    Object.entries(x.prog || {}).forEach(([id, p]) => { const q = prog[id]; if(p && (!q || (p.last||'') > (q.last||'') || ((p.last||'') === (q.last||'') && rv(p) > rv(q)))){ prog[id] = p; n++; } });
+    Object.entries(x.days || {}).forEach(([d, v]) => { if(v && (!days[d] || (v.n||0) > (days[d].n||0))) days[d] = v; });
+    Object.entries(x.notes || {}).forEach(([id, t]) => { if(t && (!notes[id] || (t !== notes[id] && t.includes(notes[id])))) notes[id] = t; });
+    Object.entries(x.earned || {}).forEach(([b, d]) => { if(d && (!earned[b] || d < earned[b])) earned[b] = d; });
+    const have = new Set(answers.map(a => a.id));
+    (Array.isArray(x.answers) ? x.answers : []).forEach(a => { if(a && a.id && !have.has(a.id)){ answers.push(a); have.add(a.id); } });
+    return n;
+  }
+  function renderBackup(){
+    const sec = $('backupSec'); sec.hidden = store !== 'local';
+    if(sec.hidden) return;
+    const age = lastBackup ? -daysTo(lastBackup) : null;
+    $('bkInfo').textContent = 'Dein Fortschritt liegt nur auf diesem Gerät. Öffne die Kartei immer über das Symbol auf dem Home-Bildschirm: Safari und das Symbol haben getrennte Speicher. Kopier etwa einmal pro Woche eine Sicherung in eine Notiz; auf einem neuen Gerät fügst du sie unten wieder ein. Letzte Sicherung: ' + (age === null ? 'noch keine.' : age === 0 ? 'heute.' : 'vor ' + age + (age === 1 ? ' Tag.' : ' Tagen.'));
+    $('bkFile').hidden = !dl;
+  }
+  function backupDone(msg){ lastBackup = today(); localSave(); $('bkMsg').textContent = msg; renderBackup(); if($('status').textContent) setStatus(localStatus()); }
+  let resumeDismissed = false;
+  function renderResume(){
+    const show = store === 'local' && progLoaded && decksLoaded && lsFound === false && !resumeDismissed && Object.keys(prog).length === 0;
+    $('resumeBox').hidden = !show;
+  }
+
+  /* Persistence: one document per card in the viewer's private subtree */
+  const chains = {};
+  function save(id, p){
+    prog[id] = p;
+    if(store === 'local'){ localSave(); return; }
+    if(!db || !uid) return;
+    const ref = db.collection('data/users/' + uid).doc('p-' + id);
+    chains[id] = (chains[id] || Promise.resolve()).then(() => ref.set(p)).catch(e => {
+      if(switchToLocal()) return;
+      setStatus('Eine Bewertung konnte nicht gespeichert werden (' + (e && e.code || 'Fehler') + '). Lade die Seite neu, bevor du weiterlernst.');
+    });
+  }
+
+  function unsave(id){
+    delete prog[id];
+    if(store === 'local'){ localSave(); return; }
+    if(!db || !uid) return;
+    const ref = db.collection('data/users/' + uid).doc('p-' + id);
+    chains[id] = (chains[id] || Promise.resolve()).then(() => ref.delete()).catch(e => {
+      setStatus('Das Zurücknehmen konnte nicht gespeichert werden (' + (e && e.code || 'Fehler') + '). Lade die Seite neu, bevor du weiterlernst.');
+    });
+  }
+
+  /* Eigene Notiz pro Karte: eigene Dokumente n-<Karte>, getrennt vom Fortschritt; geht nie an Claude */
+  const noteChain = {p: Promise.resolve()};
+  function saveNote(id, text){
+    if(text === (notes[id] || '')) return;
+    if(text) notes[id] = text; else delete notes[id];
+    if(store === 'local'){ localSave(); return; }
+    if(!db || !uid){ setStatus('Ohne Anmeldung gilt die Notiz nur, solange die Seite offen ist.'); return; }
+    const ref = db.collection('data/users/' + uid).doc('n-' + id);
+    noteChain.p = noteChain.p.then(() => text ? ref.set({text, updated: today()}) : ref.delete()).catch(e => {
+      setStatus('Die Notiz konnte nicht gespeichert werden (' + (e && e.code || 'Fehler') + ').');
+    });
+  }
+  function noteBox(c){
+    const box = el('div', 'mynote');
+    const draw = () => {
+      box.textContent = ''; const txt = notes[c.id] || '';
+      box.classList.toggle('empty', !txt);
+      if(txt) box.append(el('span', 'nk', 'Deine Notiz'), el('div', 'nt', txt));
+      const b = el('button', 'linkbtn', txt ? 'Notiz bearbeiten' : '+ Eigene Notiz (Eselsbrücke, Verwechslung, Beispiel)'); b.type = 'button';
+      b.addEventListener('click', edit); box.appendChild(b);
+    };
+    const edit = () => {
+      box.textContent = ''; box.classList.remove('empty');
+      const lab = el('label', 'nk', 'Deine Notiz zu dieser Karte'); lab.htmlFor = 'noteIn';
+      const ta = document.createElement('textarea'); ta.id = 'noteIn'; ta.rows = 2; ta.className = 'precin'; ta.maxLength = 600; ta.value = notes[c.id] || '';
+      const row = el('div', 'nrow'), ok = el('button', 'secondary precbtn', 'Speichern'), no = el('button', 'linkbtn', 'Abbrechen');
+      ok.type = 'button'; no.type = 'button';
+      ok.addEventListener('click', () => { saveNote(c.id, ta.value.trim()); draw(); });
+      no.addEventListener('click', draw);
+      ta.addEventListener('keydown', e => { if(e.key === 'Enter' && (e.ctrlKey || e.metaKey)){ e.preventDefault(); ok.click(); } else if(e.key === 'Escape'){ e.preventDefault(); draw(); } });
+      row.append(ok, no); box.append(lab, ta, row); ta.focus();
+    };
+    draw(); return box;
+  }
+
+  /* Rückgängig: nimmt die letzte Bewertung samt Tagesprotokoll zurück und zeigt die Karte wieder aufgedeckt */
+  function restoreAttempt(s){
+    const a = s.attempt; attempt = a;
+    $('writeBox').hidden = true; $('fb').hidden = false;
+    const own = $('ownTxt'); own.replaceChildren(...s.own.cloneNode(true).childNodes); $('qscan').textContent = s.scan;
+    const im = own.querySelector('img');
+    if(im && s.photo){ photoBlob = s.photo; thumbUrl = URL.createObjectURL(s.photo); im.src = thumbUrl; }
+    else if(im) im.remove();
+    $('fbTxt').textContent = '';
+    if(a.feedback){
+      $('fbWrap').hidden = false;
+      renderFeedback(Object.assign({}, a.feedback, {bewertung: a.suggested}));
+      const pr = a.praezisierung, pi = document.getElementById('precIn');
+      if(pr && pi){
+        pi.value = pr.text || '';
+        const wrap = pi.parentNode, out = wrap.querySelector('p.qscan'), btn = wrap.querySelector('button');
+        if(typeof pr.ok === 'boolean'){ out.textContent = (pr.ok ? 'Passt. ' : 'Noch nicht ganz. ') + (pr.kommentar || ''); if(pr.ok){ btn.disabled = true; btn.textContent = 'Geprüft'; } else btn.textContent = 'Nochmal prüfen'; }
+      }
+    } else $('fbWrap').hidden = true;
+    showSolution();
+  }
+  function undo(){
+    const s = lastStep; if(!s) return;
+    if(hi !== null) setHistView(false);
+    lastStep = null; reuseId = null; hist.length = s.hlen;
+    if(aiCtl){ try { aiCtl.abort(); } catch(e){} aiCtl = null; }
+    if(s.prev) save(s.id, s.prev); else unsave(s.id);
+    if(s.docId) dropAttempt(s.docId);
+    days[s.t] = s.day || {date:s.t, n:0, good:0, half:0, again:0, ms:0, mods:{}};
+    logDirty = s.t; flushLog();
+    queue = s.queue; tally = s.tally; miss = s.miss; halfAgain = s.half; sessionXp = s.xp; pos = s.pos;
+    $('goalHit').hidden = true;
+    skipOpen = !!s.dispNode || mode === 'klausur';
+    show('study'); showCard();
+    skipOpen = false;
+    cardT0 = Date.now() - s.elapsed;
+    if(s.attempt){ if(s.dispNode) restoreDisput(s); else restoreAttempt(s); if(s.docId) reuseId = {card: s.id, id: s.docId}; }
+    else reveal();
+  }
+
+  /* Rückblick: bereits bewertete Karten dieser Runde mit offener Lösung ansehen, ohne die aktuelle Karte zu verändern */
+  const RLABEL = {good: ['gewusst', 'good'], half: ['halb', 'mid'], again: ['nicht gewusst', 'bad']};
+  function setHistView(on, dir){
+    const was = hi !== null;
+    $('hist').hidden = !on; $('histNav').hidden = !on;
+    $('card').hidden = on; $('keys').hidden = on;
+    if(on){ $('rate').hidden = true; $('undo').hidden = true; $('histBtn').hidden = true; $('goalHit').hidden = true; $('skipBtn').hidden = true; }
+    if(!on){
+      hi = null;
+      if(was && histFrom === 'study' && pos < queue.length){
+        $('rate').hidden = !revealed; $('undo').hidden = !lastStep; $('histBtn').hidden = !hist.length; $('skipBtn').hidden = revealed || mode === 'klausur';
+        cardT0 = Date.now() - histPaused; anim($('card'), dir || 'inR');
+      }
+    }
+  }
+  function anim(node, cls){ node.classList.remove('inL', 'inR'); void node.offsetWidth; node.classList.add(cls); }
+  function renderHist(dir){
+    const h = hist[hi], c = h.c;
+    $('hMeta').textContent = 'Rückblick ' + (hi + 1) + ' / ' + hist.length + ' · ' + label(c);
+    const st = $('hState'); st.textContent = ''; const r = RLABEL[h.kind]; st.appendChild(el('span', 'pill ' + r[1], r[0]));
+    $('hQ').textContent = c.q;
+    const own = $('hOwn'); own.textContent = '';
+    const a = h.attempt;
+    if(a){
+      if(a.disputation && a.disputation.position){ const d0 = el('div'); d0.append(el('h4', null, 'Position'), el('div', 'own', a.disputation.position)); own.appendChild(d0); }
+      const d1 = el('div'); d1.append(el('h4', null, (a.disputation ? 'Deine Züge' : 'Deine Antwort') + (a.photo ? ' (abgelesen)' : '')), el('div', 'own', a.answer || '–')); own.appendChild(d1);
+      const f = a.feedback;
+      if(f && (f.traegt || f.fehlt || f.falsch || (f.muster && f.muster.length))){
+        const box = el('div', 'fbbox');
+        if(f.traegt) box.appendChild(fbLine('Trägt:', String(f.traegt)));
+        if(f.fehlt) box.appendChild(fbLine('Fehlt:', String(f.fehlt)));
+        if(f.falsch) box.appendChild(fbLine('Ungenau:', String(f.falsch)));
+        (f.muster || []).forEach(mu => { if(!mu || !mu.id) return; const pp = el('p'); pp.appendChild(el('span', 'chip', String(mu.id))); if(mu.stelle) pp.append('„' + String(mu.stelle) + '“ '); if(mu.hinweis) pp.append(String(mu.hinweis)); box.appendChild(pp); });
+        if(a.praezisierung && a.praezisierung.text) box.appendChild(fbLine('Präzisiert:', '„' + a.praezisierung.text + '“' + (a.praezisierung.ok === true ? ' (passt)' : '')));
+        const d2 = el('div'); d2.append(el('h4', null, 'Rückmeldung'), box); own.appendChild(d2);
+      }
+      own.appendChild(el('h4', null, 'Lösung'));
+    }
+    const box = $('hA'); box.textContent = '';
+    if(renderAnswer(box, c.a)) box.appendChild(el('p', 'anchorhint', 'Fett: Fachbegriffe, die in die Antwort gehören.'));
+    if(c.hint){ const tip = el('div', 'tip'); tip.append(el('b', null, 'Klausurtipp '), c.hint); box.appendChild(tip); }
+    box.appendChild(noteBox(c));
+    $('hPrev').disabled = hi === 0;
+    $('hClose').textContent = histFrom === 'done' ? 'Zum Ergebnis' : 'Aktuelle Karte';
+    $('hNext').disabled = histFrom === 'done' && hi === hist.length - 1;
+    if(dir) anim($('hist'), dir);
+  }
+  function openHist(at, from){
+    if(!hist.length) return;
+    histFrom = from || 'study';
+    if(hi === null && histFrom === 'study') histPaused = Date.now() - cardT0;
+    if(histFrom === 'done') show('study');
+    hi = Math.max(0, Math.min(hist.length - 1, at));
+    setHistView(true); renderHist('inL'); window.scrollTo(0, 0);
+  }
+  function closeHist(dir){
+    if(hi === null) return;
+    const from = histFrom;
+    setHistView(false, dir);
+    if(from === 'done'){ show('done'); }
+  }
+  function histBack(){
+    if(hi === null){ if(!$('study').hidden && hist.length && pos < queue.length) openHist(hist.length - 1, 'study'); return; }
+    if(hi > 0){ hi--; renderHist('inL'); window.scrollTo(0, 0); }
+  }
+  function histFwd(){
+    if(hi === null) return;
+    if(hi < hist.length - 1){ hi++; renderHist('inR'); window.scrollTo(0, 0); }
+    else if(histFrom === 'study') closeHist('inR');
+  }
+  (function swipe(){
+    let x0 = null, y0 = 0, t0 = 0;
+    const area = $('study');
+    area.addEventListener('touchstart', e => {
+      x0 = null;
+      if(e.touches.length !== 1) return;
+      const t = e.touches[0], tg = e.target;
+      if(tg.closest && tg.closest('textarea, input, select, [contenteditable="true"]')) return;
+      if(t.clientX < 24 || t.clientX > window.innerWidth - 24) return;
+      x0 = t.clientX; y0 = t.clientY; t0 = Date.now();
+    }, {passive: true});
+    area.addEventListener('touchend', e => {
+      if(x0 === null) return;
+      const t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0; x0 = null;
+      if(Date.now() - t0 > 900 || Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+      if(dx > 0) histBack(); else histFwd();
+    }, {passive: true});
+  })();
+
+  /* Wiring */
+  $('sitzung').addEventListener('change', e => { filt.sitzung = e.target.value; renderHome(); });
+  function shuffle(arr){ const a = arr.slice(); for(let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); const x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
+  /* Fällige Karten gemischt (schwierige zuerst), neue in Lernzettel-Reihenfolge nach je drei fälligen eingestreut */
+  function buildQueue(list){
+    const due = dueList(list).slice(0, MAX_DUE);
+    const hard = due.filter(c => score(prog[c.id]) >= 2), lo = due.filter(c => score(prog[c.id]) < 2);
+    const fp = freshPick(list), d = [...shuffle(hard), ...shuffle(lo)], n = [...fp.nw.slice(0, 4), ...fp.sy, ...fp.nw.slice(4)], out = [...fp.pr];
+    let k = 0;
+    d.forEach((c, i) => { out.push(c); if((i + 1) % 3 === 0 && k < n.length) out.push(n[k++]); });
+    while(k < n.length) out.push(n[k++]);
+    return out;
+  }
+  $('peekBtn').addEventListener('click', showSolution);
+  $('undo').addEventListener('click', undo);
+  $('histBtn').addEventListener('click', histBack);
+  $('hPrev').addEventListener('click', histBack);
+  $('hNext').addEventListener('click', histFwd);
+  $('hClose').addEventListener('click', () => closeHist('inR'));
+  $('histDone').addEventListener('click', () => openHist(0, 'done'));
+  $('undoDone').addEventListener('click', undo);
+  $('learn').addEventListener('click', () => {
+    const list = cards.filter(inFilter);
+    if(mode === 'disput'){ startDisput(list); return; }
+    if(mode === 'klausur'){ startExam(examPick(list)); return; }
+    const q = buildQueue(list);
+    if(mode === 'schrift'){
+      const leech = dueList(list).filter(c => isLeech(prog[c.id]));
+      const ids = new Set(leech.map(c => c.id));
+      start([...leech, ...q.filter(c => !ids.has(c.id))].slice(0, WRITE_SESSION));
+    } else start(q);
+  });
+  $('modeSeg').addEventListener('click', e => {
+    const b = e.target.closest('button[data-mode]'); if(!b) return;
+    mode = b.dataset.mode; try { localStorage.setItem('kk-mode', mode); } catch(err){}
+    renderHome();
+  });
+  $('roleSeg').addEventListener('click', e => {
+    const b = e.target.closest('button[data-role]'); if(!b) return;
+    role = b.dataset.role; try { localStorage.setItem('kk-role', role); } catch(err){}
+    renderMode();
+  });
+  $('checkBtn').addEventListener('click', checkAnswer);
+  $('ans').addEventListener('keydown', e => { if(e.key === 'Enter' && (e.ctrlKey || e.metaKey)){ e.preventDefault(); checkAnswer(); } });
+  $('photo').addEventListener('change', e => { clearTimeout(pickT); $('pickHelp').hidden = true; const f = e.target.files && e.target.files[0]; if(f) takePhoto(f); });
+  $('photoDel').addEventListener('click', () => { clearPhoto(); focusAns(); });
+  function pastedFile(e){
+    const cd = e.clipboardData; if(!cd) return null;
+    const files = cd.files && cd.files.length ? [...cd.files] : [];
+    const items = cd.items ? [...cd.items].filter(i => i.kind === 'file').map(i => i.getAsFile()).filter(Boolean) : [];
+    return [...files, ...items].find(f => /^image\/|pdf/.test(f.type || '')) || null;
+  }
+  $('ans').addEventListener('paste', e => { const f = pastedFile(e); if(f){ e.preventDefault(); takePhoto(f); } });
+  const pz = $('pasteZone');
+  pz.addEventListener('paste', e => {
+    const f = pastedFile(e);
+    if(f){ e.preventDefault(); pz.textContent = ''; takePhoto(f); return; }
+    setTimeout(() => takeFromZone(true), 60);
+  });
+  pz.addEventListener('input', () => takeFromZone(false));
+  function takeFromZone(fromPaste){
+    const img = pz.querySelector('img');
+    if(img){
+      const go = () => { takeImageEl(img); pz.textContent = ''; };
+      if(img.complete && img.naturalWidth) go(); else { img.onload = go; img.onerror = () => { pz.textContent = ''; hint('Das eingefügte Bild ließ sich nicht lesen. Versuch einen Screenshot.'); }; }
+      return;
+    }
+    if(pz.textContent.trim()){ pz.textContent = ''; if(fromPaste) hint('In der Zwischenablage war Text, kein Bild. Kopiere die Seite als Bild oder mach einen Screenshot und füge den ein. Text gehört ins große Feld.'); }
+  }
+  let pickT = null, pickLeft = false;
+  var IN_APP = (() => { try { const ua = navigator.userAgent || ''; return (/iPhone|iPad|iPod/.test(ua) && !/Safari\//.test(ua)) || (/Android/.test(ua) && /; wv\)/.test(ua)); } catch(e){ return false; } })();
+  const leftPage = () => { pickLeft = true; };
+  $('photo').addEventListener('click', () => {
+    pickLeft = false; clearTimeout(pickT); hint('Auswahl wird geöffnet …', true);
+    window.addEventListener('blur', leftPage, {once:true});
+    document.addEventListener('visibilitychange', leftPage, {once:true});
+    pickT = setTimeout(() => { if($('whint').textContent === 'Auswahl wird geöffnet …') hint(''); if(!pickLeft && !photoBlob && !photoBusy) $('pickHelp').hidden = false; }, 1500);
+  });
+  $('photo').addEventListener('cancel', () => { clearTimeout(pickT); if($('whint').textContent === 'Auswahl wird geöffnet …') hint(''); });
+  const wb = $('writeBox');
+  wb.addEventListener('dragover', e => { if(mode === 'schrift'){ e.preventDefault(); wb.classList.add('drop'); } });
+  wb.addEventListener('dragleave', () => wb.classList.remove('drop'));
+  wb.addEventListener('drop', e => { wb.classList.remove('drop'); const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]; if(f){ e.preventDefault(); takePhoto(f); } });
+  $('weakBtn').addEventListener('click', () => {
+    const weak = weakList(cards.filter(inFilter));
+    if(mode === 'disput'){ startDisput(weak.slice(0, 10)); return; }
+    if(mode === 'klausur'){ startExam(examPick(weak)); return; }
+    start(weakPractice(weak).slice(0, mode === 'schrift' ? WRITE_SESSION : WEAK_SESSION));
+  });
+  $('revealBtn').addEventListener('click', reveal);
+  $('rate').addEventListener('click', e => { const b = e.target.closest('button[data-r]'); if(b) rate(b.dataset.r); });
+  $('quit').addEventListener('click', () => {
+    if(hi !== null){ const f = histFrom; closeHist(); if(f === 'done') return; }
+    if(mode === 'disput' && aiCtl){ try { aiCtl.abort(); } catch(e){} aiCtl = null; }
+    if(mode === 'klausur' && exam){
+      if(exam.timer){ clearInterval(exam.timer); exam.timer = null; }
+      if(exam.phase === 'write'){ exam = null; $('count').classList.remove('late'); show('home'); renderHome(); return; }
+    }
+    if(mode === 'disput') disp = null;
+    if(pos > 0) finish(); else { show('home'); renderHome(); }
+  });
+  $('back').addEventListener('click', () => { show('home'); renderHome(); });
+  $('skipBtn').addEventListener('click', skipCard);
+  $('gameBtn').addEventListener('click', openStats);
+  $('planBtn').addEventListener('click', () => { openStats(); const sec = $('planSec'); if(sec && !sec.hidden) sec.scrollIntoView({block: 'start'}); });
+  $('statsBack').addEventListener('click', () => { show('home'); renderHome(); });
+  function copyBackup(msgId, outId){
+    const msg = $(msgId), out = $(outId);
+    let code; try { code = backupCode(); } catch(e){ msg.textContent = 'Die Sicherung ließ sich in diesem Browser nicht erstellen (' + (e && e.name || 'Fehler') + ').'; return; }
+    const done = t => { lastBackup = today(); localSave(); msg.textContent = t; renderBackup(); if($('status').textContent) setStatus(localStatus()); };
+    const manual = () => { out.hidden = false; out.value = code; out.focus(); out.select(); done('Kopieren ging hier nicht automatisch. Der Code steht markiert im Feld: von Hand kopieren und in die Notiz legen.'); };
+    try { navigator.clipboard.writeText(code).then(() => { out.hidden = true; done('Kopiert. Füg den Code jetzt in deine Notiz ein (alte Fassung ersetzen) oder leg ihn in den Drive-Ordner.'); }, manual); }
+    catch(e){ manual(); }
+  }
+  $('bkCopy').addEventListener('click', () => copyBackup('bkMsg', 'bkOut'));
+  $('bkDone').addEventListener('click', () => copyBackup('bkDoneMsg', 'bkOutDone'));
+  $('bkFile').addEventListener('click', async () => {
+    if(!dl) return;
+    try { await dl.save({filename: 'Anatomie-Kartei Sicherung ' + today() + '.txt', data: backupCode()}); backupDone('Datei gespeichert. Leg sie am besten in den Drive-Ordner.'); }
+    catch(e){ const c = e && e.code; $('bkMsg').textContent = c === 'declined' ? 'Nicht gespeichert.' : 'Als Datei speichern geht hier nicht (' + (c || 'Fehler') + '). Nimm „Sicherung kopieren“.'; if(c && c !== 'declined' && c !== 'rate_limited'){ dl = null; renderBackup(); } }
+  });
+  function importBackup(txt, msgId){
+    const msg = $(msgId || 'bkMsg');
+    let x;
+    try { x = parseBackup(txt); } catch(e){ msg.textContent = 'Das ist kein vollständiger Sicherungscode. Er beginnt mit „KARTEI1:“; achte darauf, ihn ganz zu kopieren.'; return false; }
+    const n = mergeBackup(x);
+    if(store === 'local') localSave();
+    else if(store === 'cloud') Object.keys(x.prog || {}).forEach(id => { if(prog[id]) save(id, prog[id]); });
+    $('bkIn').value = '';
+    msg.textContent = 'Eingespielt: ' + n + (n === 1 ? ' Karte' : ' Karten') + ' mit neuerem Stand übernommen' + (x.at ? ' (Sicherung vom ' + dayLabel(String(x.at).slice(0, 10)) + ')' : '') + '.';
+    if(!$('stats').hidden) renderStats(); else renderHome();
+    return true;
+  }
+  $('rsGo').addEventListener('click', () => { if(importBackup($('rsIn').value, 'rsMsg')){ resumeDismissed = true; $('rsIn').value = ''; setStatus($('rsMsg').textContent); renderResume(); } });
+  $('rsSkip').addEventListener('click', () => { resumeDismissed = true; renderResume(); });
+  $('bkLoad').addEventListener('click', () => importBackup($('bkIn').value));
+  $('bkPick').addEventListener('change', e => { const f = e.target.files && e.target.files[0]; if(!f) return; f.text().then(importBackup, () => { $('bkMsg').textContent = 'Die Datei ließ sich nicht lesen.'; }); e.target.value = ''; });
+  window.addEventListener('pagehide', () => { if(store === 'local') localSave(); });
+  $('calPrev').addEventListener('click', () => { calMonth = shiftMonth(calMonth, -1); selDay = null; renderStats(); });
+  $('calNext').addEventListener('click', () => { calMonth = shiftMonth(calMonth, 1); selDay = null; renderStats(); });
+  $('cal').addEventListener('click', e => { const b = e.target.closest('button[data-d]'); if(b){ selDay = b.dataset.d; renderStats(); } });
+  window.addEventListener('pagehide', flushLog);
+  document.addEventListener('visibilitychange', () => { if(document.visibilityState === 'hidden') flushLog(); });
+  document.addEventListener('keydown', e => {
+    if(['SELECT','TEXTAREA','INPUT'].includes(e.target.tagName) || e.target.isContentEditable) return;
+    if(hi !== null){ if(e.key === 'ArrowLeft') histBack(); else if(e.key === 'ArrowRight') histFwd(); else if(e.key === 'Escape') closeHist('inR'); return; }
+    if((e.key === 'z' || e.key === 'Z') && lastStep && (!$('study').hidden || !$('done').hidden)){ e.preventDefault(); undo(); return; }
+    if($('study').hidden) return;
+    if(e.key === 'ArrowLeft'){ histBack(); return; }
+    if(e.key === ' ' || e.key === 'Enter'){ if(!revealed && mode === 'karte'){ e.preventDefault(); reveal(); } }
+    else if(revealed && ['1','2','3'].includes(e.key)){ rate({'1':'again','2':'half','3':'good'}[e.key]); }
+    else if(e.key === 'Escape'){ $('quit').click(); }
+  });
+
+  renderHome();
+
+  let deepLinked = false;
+  function settle(){
+    if(!decksLoaded) return;
+    if(!cards.length) setStatus('Noch keine Karten in der Kartei.');
+    else if(!store) setStatus(progLoaded ? 'Dein Fortschritt kann hier nicht gespeichert werden: weder im Konto noch im Browser.' : 'Fortschritt wird geladen …');
+    else if(progLoaded && !lsBroken) setStatus(store === 'local' ? localStatus() : '');
+    if($('study').hidden) renderHome();
+    if(!$('stats').hidden) renderStats();
+    if(progLoaded && !deepLinked){ deepLinked = true; if(location.hash === '#fortschritt' && $('study').hidden) openStats(); }
+  }
+
+  (async function init(){
+    if(!(window.claude && typeof window.claude.use === 'function')){
+      setStatus('Die Kartei lädt Karten und Fortschritt aus deinem Claude-Konto. Öffne sie angemeldet in Claude.');
+      return;
+    }
+    const [dbNs, userNs] = await Promise.all([window.claude.use('db'), window.claude.use('user')]);
+    db = dbNs;
+    if(!db){ setStatus('Die Kartei lädt Karten und Fortschritt aus deinem Claude-Konto. Öffne sie angemeldet in Claude.'); return; }
+    uid = userNs ? await userNs.id() : null;
+    window.claude.use('downloads').then(d => { dl = d || null; if(!$('stats').hidden) renderBackup(); }).catch(() => {});
+    window.claude.use('sample').then(async sm => {
+      sample = sm || null;
+      if(sample){ try { const lim = await sample.limits(); imgOk = !!(lim && lim.images); } catch(e){ imgOk = false; if(['not_granted','sampling_disabled','not_declared','capability_disabled','capability_removed','unavailable'].includes(e && e.code)) aiOff = true; } imgChecked = true; }
+      if($('study').hidden) renderHome();
+      else if(mode !== 'karte' && !$('writeBox').hidden){ $('photoLbl').hidden = !(sample && !aiOff); $('photoTip').hidden = $('photoLbl').hidden; $('pasteZone').hidden = $('photoLbl').hidden; }
+    }).catch(() => { sample = null; });
+    const fail = what => e => setStatus(what + ' konnte nicht geladen werden (' + (e && e.code || 'Fehler') + '). Lade die Seite neu.');
+
+    db.collection('modules').onSnapshot(snap => {
+      const next = {}; snap.docs.forEach(d => { next[d.id] = d.data(); });
+      modules = next; flatten(); settle();
+    }, fail('Die Modulliste'));
+
+    db.collection('decks').onSnapshot(snap => {
+      decks = snap.docs.map(d => ({id:d.id, ...d.data()}));
+      decksLoaded = true; flatten(); settle();
+    }, fail('Die Karten'));
+
+    /* Darf das Konto speichern? Ein kleiner Probeeintrag entscheidet, sonst Browserspeicher */
+    if(uid){
+      try {
+        await Promise.race([db.collection('data/users/' + uid).doc('ping').set({t: today()}), new Promise((_, rej) => setTimeout(() => rej({code: 'timeout'}), 8000))]);
+        store = 'cloud';
+      } catch(e){ store = null; }
+    }
+    if(!store && lsAvailable()) store = 'local';
+    /* Wer nicht im Konto speichern darf (außerhalb der Organisation des Eigentümers), darf auch Claude nicht fragen */
+    if(store !== 'cloud'){ aiOff = true; if($('study').hidden) renderHome(); }
+    if(store === 'cloud'){
+      db.collection('data/users/' + uid).onSnapshot(snap => {
+        if(store !== 'cloud') return;
+        const next = {};
+        const nextDays = {}, nextNotes = {};
+        snap.docs.forEach(d => {
+          if(d.id.startsWith('p-')) next[d.id.slice(2)] = d.data();
+          else if(d.id.startsWith('n-')){ const x = d.data(); if(x && typeof x.text === 'string' && x.text) nextNotes[d.id.slice(2)] = x.text; }
+          else if(d.id.startsWith('d-')) nextDays[d.id.slice(2)] = d.data();
+          else if(d.id === 'ping') return;
+          else if(d.id === 'badges'){ const e = d.data() && d.data().earned; if(e && typeof e === 'object') earned = Object.assign({}, e, earned); }
+        });
+        const t = today();
+        if(days[t] && (logDirty === t || logPending > 0 || !nextDays[t])) nextDays[t] = days[t];
+        prog = next; days = nextDays; notes = nextNotes; progLoaded = true; settle();
+      }, e => {
+        if(progLoaded) return;
+        if(lsAvailable()){ store = 'local'; aiOff = true; localLoad(); progLoaded = true; settle(); setStatus('Dein Fortschritt im Konto ließ sich nicht laden (' + (e && e.code || 'Fehler') + '); er liegt jetzt in diesem Browser.'); }
+        else { fail('Dein Fortschritt')(e); progLoaded = true; settle(); }
+      });
+      db.collection('data/users/' + uid + '/schrift/antworten').onSnapshot(snap => {
+        answers = snap.docs.map(d => Object.assign({id: d.id}, d.data()));
+        if(!$('stats').hidden) renderStats();
+      }, () => {});
+    } else if(store === 'local'){ localLoad(); progLoaded = true; settle(); }
+    else { progLoaded = true; settle(); }
+  })();
+})();
+</script>
+
+</body></html>

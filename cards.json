@@ -1,0 +1,1247 @@
+{
+ "updated": "2026-10-29",
+ "modules": {
+  "anatomie": {
+   "name": "Funktionelle Sportanatomie",
+   "short": "Anatomie",
+   "sub": "Prof. Dr. Lina Rahlf · Klausur 60 min, Multiple Choice und offene Fragen",
+   "exam": "2026-12-15",
+   "examLabel": "15.12.2026, 16 Uhr",
+   "order": 1,
+   "groups": {
+    "VL": "VL"
+   },
+   "plan": {
+    "VL": [
+     "2026-09-15",
+     "2026-09-22",
+     "2026-09-29",
+     "2026-10-06",
+     "2026-10-20",
+     "2026-10-27"
+    ]
+   }
+  }
+ },
+ "decks": {
+  "fa01": {
+   "nr": 1,
+   "title": "Einführung, Knochen",
+   "date": "2026-09-15",
+   "sourceFile": "VL1_Einführung_HS26_Moodle.pdf",
+   "sourceModified": "2026-10-29T14:28:39.936Z",
+   "modul": "anatomie",
+   "deck": "VL",
+   "cards": [
+    {
+     "id": "fa01-01",
+     "src": "Folie 8",
+     "q": "Nenne die Bestandteile des passiven und des aktiven Bewegungsapparates.",
+     "a": "**Passiver Bewegungsapparat:** Knochen, Bänder, Sehnen, Knorpel.\n**Aktiver Bewegungsapparat:** Skelettmuskulatur."
+    },
+    {
+     "id": "fa01-02",
+     "src": "Folie 8",
+     "q": "Grenze deskriptive, topographische und funktionelle Anatomie voneinander ab.",
+     "a": "**Deskriptiv:** detaillierte Beschreibung von Strukturen und Organen.\n**Topographisch:** Lagebezeichnung von Strukturen und Organen.\n**Funktionell:** fragt „Warum?“, also nach den Funktionen der Strukturen."
+    },
+    {
+     "id": "fa01-03",
+     "src": "Folie 9",
+     "q": "Wofür stehen die Abkürzungen M., Mm., Lig., Ligg. und Art.?",
+     "a": "M. = **Musculus** (Muskel), Mm. = Musculi (Muskeln)\nLig. = **Ligamentum** (Band), Ligg. = Ligamenta (Bänder)\nArt. = **Articulatio** (Gelenk)"
+    },
+    {
+     "id": "fa01-04",
+     "src": "Folie 9",
+     "q": "Was bedeuten die Namenszusätze brevis, longus, minor und major? Nenne ein Beispiel.",
+     "a": "brevis = kürzere, longus = längere Struktur; minor = kleinere, major = größere Struktur.\nBeispiel: **M. pectoralis minor** und **M. pectoralis major**."
+    },
+    {
+     "id": "fa01-05",
+     "src": "Folie 10",
+     "q": "Ein Punkt liegt näher am Rumpf als ein anderer. Welcher Lagebegriff ist gemeint, und wie heißt das Gegenteil?",
+     "a": "**proximal** (rumpfnah); Gegenteil **distal** (rumpffern)."
+    },
+    {
+     "id": "fa01-06",
+     "src": "Folie 10",
+     "q": "Welche Lagebegriffe gehören zusammen: ventral, dorsal, anterior, posterior?",
+     "a": "**ventral = anterior** (vorne, bauchwärts)\n**dorsal = posterior** (hinten, rückenwärts)"
+    },
+    {
+     "id": "fa01-07",
+     "src": "Folie 10",
+     "q": "Was bedeuten kranial, kaudal, medial und lateral?",
+     "a": "**kranial:** kopfwärts, **kaudal:** steißwärts\n**medial:** zur Körpermitte hin, **lateral:** von der Mitte weg, seitlich"
+    },
+    {
+     "id": "fa01-08",
+     "src": "Folie 10",
+     "q": "Was bedeuten dexter und sinister?",
+     "a": "**dexter** = rechts, **sinister** = links."
+    },
+    {
+     "id": "fa01-09",
+     "src": "Folie 14",
+     "q": "Nenne die vier Bewegungspaare, mit denen Gelenkbewegungen beschrieben werden.",
+     "a": "**Flexion/Extension** (Beugung/Streckung)\n**Abduktion/Adduktion** (Abspreizen/Heranführen)\n**Innenrotation/Außenrotation**\n**Anteversion/Retroversion** (nach vorn/nach hinten führen)"
+    },
+    {
+     "id": "fa01-10",
+     "src": "Folie 14",
+     "q": "Das Bein wird seitlich vom Körper weggeführt. Welche Bewegungsrichtung ist das, und wie heißt die Gegenbewegung?",
+     "a": "**Abduktion**; Gegenbewegung **Adduktion** (zum Körper heranführen)."
+    },
+    {
+     "id": "fa01-11",
+     "src": "Folie 16",
+     "q": "Was gibt die Neutral-0-Methode an, und wie liest man „Extension/Flexion 0/0/140°“?",
+     "a": "Sie misst das **Bewegungsausmaß** eines Gelenks von der **Neutral-Null-Stellung** aus in beide Richtungen.\n0/0/140°: keine Überstreckung, Nullstellung wird erreicht, Beugung bis 140°."
+    },
+    {
+     "id": "fa01-12",
+     "src": "Folie 16",
+     "q": "Was bedeutet der Befund „Extension/Flexion 0/20/140°“?",
+     "a": "Die **Nullstellung wird nicht erreicht**: Das Gelenk bleibt mindestens 20° gebeugt, also ein **Streckdefizit** von 20°. Beugung bis 140° ist möglich.\nDas ist ein unphysiologisches Bewegungsausmaß.",
+     "hint": "Steht die Null nicht in der Mitte, wird die Nullstellung nicht erreicht."
+    },
+    {
+     "id": "fa01-13",
+     "src": "Folie 19",
+     "q": "Wie viele Knochen hat das Skelett ungefähr, und welche Aufgaben hat es laut Vorlesung?",
+     "a": "Ca. **206 Knochen**.\nTeil des **passiven Bewegungsapparates**, formt die äußere Gestalt des Körpers."
+    },
+    {
+     "id": "fa01-14",
+     "src": "Folie 20",
+     "q": "Nenne die vier Knochenformen.",
+     "a": "**Röhrenknochen**, **kurze Knochen**, **platte Knochen**, **unregelmäßige Knochen**."
+    },
+    {
+     "id": "fa01-15",
+     "src": "Folie 23",
+     "q": "Wie ist die Knochenmatrix zusammengesetzt, und welcher Anteil sorgt wofür?",
+     "a": "10–15 % **Wasser**\n20–25 % **organisches Material** (v. a. Kollagen Typ I) → Elastizität\n60–70 % **anorganische Stoffe** (Salze, z. B. Calciumphosphat) → Stabilität"
+    },
+    {
+     "id": "fa01-16",
+     "src": "Folie 24",
+     "q": "Wie hängen Mineralanteil, E-Modul und Bruchfestigkeit des Knochens zusammen?",
+     "a": "Hoher **mineralischer Anteil**: große Steifigkeit, hohes **E-Modul**, geringe Bruchfestigkeit.\nOrganisches Material (**Kollagen Typ I**): geringes E-Modul, druck- und zugfester, größere Bruchfestigkeit."
+    },
+    {
+     "id": "fa01-17",
+     "src": "Folie 24",
+     "q": "Wie unterscheidet sich das E-Modul von kindlichen und erwachsenen Knochen?",
+     "a": "Kinder ca. **5–10 GPa**, Erwachsene ca. **15–20 GPa**.\nKindlicher Knochen ist also weniger steif (weniger mineralisiert) und verformbarer."
+    },
+    {
+     "id": "fa01-18",
+     "src": "Folie 25",
+     "q": "Grenze Spongiosa und Kompakta voneinander ab.",
+     "a": "**Spongiosa** (Substantia spongiosa): „Schwammstruktur“, räumliches Geflecht aus **Knochenbälkchen (Trabekeln)**.\n**Kompakta** (Substantia compacta): dichte äußere Knochenschicht."
+    },
+    {
+     "id": "fa01-19",
+     "src": "Folie 26",
+     "q": "Nenne die Vorteile der Trabekelstruktur der Spongiosa.",
+     "a": "Einsparung an Knochensubstanz bei Erhalt der **Stabilität** (geringeres Gewicht)\n**Anpassung** an verschiedene Belastungssituationen\nUnterbringung des **Knochenmarks**"
+    },
+    {
+     "id": "fa01-20",
+     "src": "Folie 27",
+     "q": "Was ist die Aufgabe von Osteoblasten und Osteoklasten?",
+     "a": "**Osteoblasten:** Knochenaufbau.\n**Osteoklasten:** Knochenabbau."
+    },
+    {
+     "id": "fa01-21",
+     "src": "Folie 27",
+     "q": "Grenze Periost und Endost voneinander ab.",
+     "a": "**Periost:** Knochenhaut, umgibt den Knochen von außen.\n**Endost:** kleidet die Innenwände des Knochens aus."
+    },
+    {
+     "id": "fa01-22",
+     "src": "Folie 28",
+     "q": "Nenne Aufbau und Funktionen des Periosts.",
+     "a": "Aufbau: äußere **Kollagenschicht**, innere Schicht mit **Nerven und Blutgefäßen**.\nFunktionen: Schutz, **Anheftungsstelle für Bänder und Sehnen**, Knochenheilung nach Bruch, enthält Osteoblasten (**Dickenwachstum**)."
+    },
+    {
+     "id": "fa01-23",
+     "src": "Folie 29",
+     "q": "Wie heißt die Baueinheit des Lamellenknochens, und was liegt in ihrer Mitte?",
+     "a": "**Osteon** (Havers-System); in der Mitte der **Havers-Kanal**."
+    },
+    {
+     "id": "fa01-24",
+     "src": "Folie 30",
+     "q": "Nenne vier Merkmale des kindlichen Knochens.",
+     "a": "Blutbildendes Knochenmark in der **Diaphyse**\nAktive **Epiphysenfugen**\n**Weniger mineralisiert** (weicher)\nIntensivere Durchblutung (bessere Heilung)"
+    },
+    {
+     "id": "fa01-25",
+     "src": "Folie 31",
+     "q": "Welche typischen Risiken haben Kinder von 2 bis 10 Jahren und Jugendliche von 11 bis 18 Jahren?",
+     "a": "2–10 Jahre: **Grünholzfrakturen**, Überlastung der Wachstumsfugen (z. B. **Osgood-Schlatter**).\n11–18 Jahre: **Epiphysenfugenverletzungen**, muskuläre Dysbalancen, Koordinationsprobleme."
+    },
+    {
+     "id": "fa01-26",
+     "src": "Folie 34",
+     "q": "Was bedeutet die trajektorielle Anordnung der Spongiosabälkchen?",
+     "a": "Die **Trabekel** richten sich entlang der **Hauptspannungslinien** aus: funktionelle Anpassung der Spongiosa an die Belastung."
+    },
+    {
+     "id": "fa01-27",
+     "src": "Folie 38",
+     "q": "Erläutere das Zuggurtungsprinzip am Beispiel des Oberschenkels.",
+     "a": "Das Körpergewicht belastet den **Femur** exzentrisch und biegt ihn. Seitliche Muskeln wirken wie ein Gummiband als **Zuggurtung** und wandeln die Biegung in **Druckbelastung** um.\nOhne diese Muskeln drohte ein Bruch.",
+     "hint": "Verknüpfung VL 04: Die kleinen Gluten verhindern die Biegebeanspruchung des Oberschenkels nach lateral."
+    },
+    {
+     "id": "fa01-28",
+     "src": "Folie 42",
+     "q": "Was besagt das Gesetz der Transformation der Knochen, und von wem stammt es?",
+     "a": "**Julius Wolff** (1892): Der Knochen passt sich an seine Belastung an; er „ernährt“ sich von **Druck- und Zugbelastung**."
+    },
+    {
+     "id": "fa01-29",
+     "src": "Folie 42",
+     "q": "Wie viel der Last erfährt der Knochen durch Muskelkraft, und was folgt daraus fürs Training?",
+     "a": "Ca. **90 %** der Last kommt durch **Muskelkraft**.\nFür Knochenaufbau ist deshalb **Muskelkraft** entscheidend, nicht Muskelausdauer."
+    },
+    {
+     "id": "fa01-30",
+     "src": "Folie 42",
+     "q": "Wie schnell passt sich der Knochen an, und was passiert bei Immobilisation?",
+     "a": "Stoffwechsel passt sich in Stunden bis Tagen an, **signifikante Änderungen nach ca. 40 Tagen**. Schneller Abbau, langsamer Aufbau.\nBei Immobilisation oder Paraplegie: Verlust der Knochendichte um bis zu **75–80 %**."
+    },
+    {
+     "id": "fa01-31",
+     "src": "Folie 43",
+     "q": "Zu welchem Anteil ist die Knochenmasse genetisch bestimmt?",
+     "a": "**60 %** genetisch, **40 %** durch Ernährung und Bewegung/Sport."
+    },
+    {
+     "id": "fa01-32",
+     "src": "Folie 41",
+     "q": "Welche Trainingsformen schützten in Bettruhe-Studien vor Knochenabbau?",
+     "a": "**Vibrationstraining** und **Sprungtraining**."
+    },
+    {
+     "id": "fa01-33",
+     "src": "MC · Folien 23–27",
+     "q": "Welche Aussagen zum Knochen treffen zu?\na) Der anorganische Anteil der Matrix sorgt vor allem für Stabilität.\nb) Osteoklasten bauen Knochen auf.\nc) Das Periost ist Anheftungsstelle für Bänder und Sehnen.\nd) Die Spongiosa besteht aus Knochenbälkchen (Trabekeln).",
+     "a": "Richtig: **a, c, d**.\nb) falsch: Osteoklasten bauen **ab**, Osteoblasten bauen auf."
+    }
+   ]
+  },
+  "fa02": {
+   "nr": 2,
+   "title": "Gelenke",
+   "date": "2026-09-22",
+   "sourceFile": "VL2_Glenkstrukturen_HS26_Moodle.pdf",
+   "sourceModified": "2026-10-29T14:28:40.254Z",
+   "modul": "anatomie",
+   "deck": "VL",
+   "cards": [
+    {
+     "id": "fa02-01",
+     "src": "Folie 13",
+     "q": "Wie unterscheiden sich echte Gelenke (Diarthrosen) von unechten Gelenken (Synarthrosen)?",
+     "a": "**Echte Gelenke:** diskontinuierliche Verbindung mit **Gelenkspalt**, Bewegung in ein bis drei Dimensionen, großer Bewegungsspielraum.\n**Unechte Gelenke:** kontinuierliche Verbindung, **kein Gelenkspalt**, geringe bis mittelgradige Bewegung."
+    },
+    {
+     "id": "fa02-02",
+     "src": "Folie 14",
+     "q": "In welche drei Formen werden unechte Gelenke eingeteilt?",
+     "a": "**Syndesmosen** (Bandhaften), **Synchondrosen** (Knorpelhaften), **Synostosen** (Knochenhaften)."
+    },
+    {
+     "id": "fa02-03",
+     "src": "Folie 15",
+     "q": "Beschreibe eine Syndesmose.",
+     "a": "**Bandhaft** aus straffem kollagenfaserigem Bindegewebe; **zugbelastet**, dient der Kraftübertragung."
+    },
+    {
+     "id": "fa02-04",
+     "src": "Folie 17",
+     "q": "Beschreibe eine Synchondrose.",
+     "a": "**Knorpelhaft** aus Faserknorpel oder hyalinem Knorpel; **druckbelastet**, Pufferstruktur; lässt durch ihre Elastizität Bewegung zu."
+    },
+    {
+     "id": "fa02-05",
+     "src": "Folie 18",
+     "q": "Warum ist eine Synostose streng genommen keine Synarthrose?",
+     "a": "Sie entsteht durch **sekundäre Verschmelzung** von Einzelknochen (**Verknöcherung**); dadurch ist **keine Bewegung** mehr möglich."
+    },
+    {
+     "id": "fa02-06",
+     "src": "Folie 21",
+     "q": "Was ist eine Amphiarthrose, und wo findet man sie?",
+     "a": "Ein **echtes Gelenk** mit Gelenkflächen und Kapsel, aber **stark eingeschränktem Bewegungsumfang** durch straffe Bandsicherung.\nBeispiel: **Iliosakralgelenk**."
+    },
+    {
+     "id": "fa02-07",
+     "src": "Folie 25",
+     "q": "Nenne die Grundstrukturen eines echten Gelenks.",
+     "a": "**Gelenkflächen** (z. B. Kopf und Pfanne) mit **Gelenkknorpel**\n**Gelenkspalt** und **Gelenkhöhle** mit Synovialflüssigkeit\n**Gelenkkapsel** mit Synovialmembran\nBänder, Sehnen, Muskulatur"
+    },
+    {
+     "id": "fa02-08",
+     "src": "Folie 27",
+     "q": "Wo kommen hyaliner Knorpel, Faserknorpel und elastischer Knorpel vor?",
+     "a": "**Hyaliner Knorpel:** Gelenkflächen, Epiphysenfuge.\n**Faserknorpel:** Bandscheiben, Menisken, Sehnen- und Bandansätze.\n**Elastischer Knorpel:** Ohrmuschel, Kehldeckel, Nase."
+    },
+    {
+     "id": "fa02-09",
+     "src": "Folie 29",
+     "q": "Wie ist hyaliner Gelenkknorpel zusammengesetzt?",
+     "a": "65 % **Wasser**, 15 % **Proteoglykane**, 15 % **Kollagen Typ II**, 5 % Knorpelzellen (Chondrozyten)."
+    },
+    {
+     "id": "fa02-10",
+     "src": "Folie 30",
+     "q": "Welche Aufgabe haben die Proteoglykane im Knorpel?",
+     "a": "Sie **binden Wasser**, lassen den Knorpel „anschwellen“ und **stabilisieren** dadurch die Kollagenfasern."
+    },
+    {
+     "id": "fa02-11",
+     "src": "Folie 31",
+     "q": "Was passiert im Knorpel bei Druckbelastung?",
+     "a": "Volumen sinkt, **Wasser wird verschoben**; der Anteil negativer Ladung nimmt zu, der **Innendruck steigt** und erzeugt **Rückstellkräfte**."
+    },
+    {
+     "id": "fa02-12",
+     "src": "Folie 32",
+     "q": "Wo kommt Kollagen Typ I vor, wo Kollagen Typ II?",
+     "a": "**Typ I:** Knochen, Sehnen, Bänder, Haut.\n**Typ II:** Gelenkknorpel und knorpeliger Anteil der Epiphysenfuge."
+    },
+    {
+     "id": "fa02-13",
+     "src": "Folie 33",
+     "q": "Warum heißt Knorpel „passives“ Gewebe, und wie wird er ernährt?",
+     "a": "Er ist kaum mit Blut-, Lymphgefäßen oder Nerven versorgt. Ernährung passiv durch **Diffusion**: **Belastung und Entlastung** „ernähren“ ihn, Bewegung verteilt die Synovia.\nDeshalb ist seine **Regenerationsfähigkeit sehr gering**."
+    },
+    {
+     "id": "fa02-14",
+     "src": "Folie 35",
+     "q": "Wie dick ist der Gelenkspalt, und was zeigt seine Verschmälerung im Röntgenbild an?",
+     "a": "Ein ca. **0,1–0,3 mm** dicker Film trennt die Gelenkflächen.\nVerschmälerung: frühes Zeichen für einen beginnenden **Knorpeldefekt**."
+    },
+    {
+     "id": "fa02-15",
+     "src": "Folie 40",
+     "q": "Aus welchen zwei Schichten besteht die Gelenkkapsel?",
+     "a": "**Membrana fibrosa:** äußere Faserschicht aus straffem kollagenfaserigem Bindegewebe, durch Gelenkbänder verstärkt.\n**Membrana synovialis:** innere Schicht, produziert die Gelenkflüssigkeit."
+    },
+    {
+     "id": "fa02-16",
+     "src": "Folie 41",
+     "q": "Nenne Eigenschaften der Membrana synovialis.",
+     "a": "Oberflächenvergrößerung durch **Zotten**; Gefäße, **Schmerz- und Mechanorezeptoren**; **hohe Regenerationsfähigkeit**; **produziert und resorbiert** die Synovia."
+    },
+    {
+     "id": "fa02-17",
+     "src": "Folie 42",
+     "q": "Welche Funktionen hat die Synovia, und wodurch wird ihre Produktion angeregt?",
+     "a": "Sie **reduziert Reibung** auf ein Minimum und **verhindert direkten Kontakt** der Gelenkflächen.\nProduktion angeregt durch **Druck- und Schubkraft**; sie wird etwa **alle 24 Stunden** ersetzt."
+    },
+    {
+     "id": "fa02-18",
+     "src": "Folie 43",
+     "q": "Nenne intraartikuläre Strukturen mit je einem Beispiel.",
+     "a": "**Diskus**, **Meniskus**, **Labrum** (Labrum glenoidale), intraartikuläre Bänder (**Kreuzbänder**)."
+    },
+    {
+     "id": "fa02-19",
+     "src": "Folie 46",
+     "q": "Was unterscheidet Sehnen von Bändern?",
+     "a": "**Sehne:** verbindet **Muskel** über das Gelenk mit **Knochen** (M-S-K), überträgt Muskelkraft aufs Skelett.\n**Band:** verbindet **Knochen** über das Gelenk mit **Knochen** (K-B-K), steuert und begrenzt Bewegung."
+    },
+    {
+     "id": "fa02-20",
+     "src": "Folie 46",
+     "q": "Nenne die Funktionen von Bändern.",
+     "a": "Bewegungen **steuern und begrenzen**; **Kongruenz** der Gelenkflächen erhalten; elastische Energie speichern; **Belastungs- und Kraftsensoren** (Ruffini-, Vater-Pacini-Körperchen, Golgi-Sehnenorgan)."
+    },
+    {
+     "id": "fa02-21",
+     "src": "Folie 47",
+     "q": "Welche Formen von Sehnen gibt es?",
+     "a": "**Aponeurose** (flächig), **strangförmig**, **lang und schmal**."
+    },
+    {
+     "id": "fa02-22",
+     "src": "Folie 48",
+     "q": "Welche Aufgabe hat das Peritendineum?",
+     "a": "Es **begrenzt die Sehne** zum umliegenden Gewebe und ermöglicht eine **reibungsarme Bewegung** (Synovialflüssigkeit)."
+    },
+    {
+     "id": "fa02-23",
+     "src": "Folie 50",
+     "q": "Was misst das Golgi-Sehnenorgan, und was ist autogene Inhibition?",
+     "a": "Es misst den **Spannungszustand** am Muskel-Sehnen-Übergang.\n**Autogene Inhibition:** Es **hemmt den kontrahierenden Muskel (Agonist)** und fördert seinen Gegenspieler (Antagonist)."
+    },
+    {
+     "id": "fa02-24",
+     "src": "Folie 51",
+     "q": "Nenne die Hilfseinrichtungen von Muskeln und Sehnen.",
+     "a": "**Retinacula**, **Faszien**, **Schleimbeutel**, **Sesambeine**, **Sehnenscheiden**."
+    },
+    {
+     "id": "fa02-25",
+     "src": "Folie 52",
+     "q": "Welche Funktionen hat eine Sehnenscheide?",
+     "a": "**Schutz**, **Führung** der Sehne in bestimmten Bahnen, **Umlenklager**, **Minimierung der Reibung** bei Umlenkung."
+    },
+    {
+     "id": "fa02-26",
+     "src": "Folie 53",
+     "q": "Wie gut sind Sehnen durchblutet, und woher kommen ihre Gefäße?",
+     "a": "Vergleichsweise **schlecht durchblutet**.\nGefäße aus der Muskulatur, vom Knochen und Periost sowie durch Peritendineum und Endotenon."
+    },
+    {
+     "id": "fa02-27",
+     "src": "Folie 55",
+     "q": "Worin unterscheiden sich Bänder im Aufbau von Sehnen?",
+     "a": "Ähnlich verschachtelter Aufbau mit wellenförmigen Fasern und Fibroblasten, aber ein **höherer Anteil an Elastin**."
+    },
+    {
+     "id": "fa02-28",
+     "src": "Folie 60",
+     "q": "Wie viele Freiheitsgrade hat ein Kugelgelenk? Nenne Beispiele.",
+     "a": "**3 rotatorische Freiheitsgrade**.\nBeispiele: **Schultergelenk**, Fingergrundgelenk, **Hüftgelenk** (als Nussgelenk)."
+    },
+    {
+     "id": "fa02-29",
+     "src": "Folie 61",
+     "q": "Wie viele Freiheitsgrade hat ein Eigelenk, und wo findet man es?",
+     "a": "**2 rotatorische Freiheitsgrade**; Beispiel: **proximales Handgelenk**."
+    },
+    {
+     "id": "fa02-30",
+     "src": "Folie 62",
+     "q": "Wie viele Freiheitsgrade hat ein Scharniergelenk? Nenne drei Beispiele.",
+     "a": "**1 rotatorischer Freiheitsgrad**.\nBeispiele: **Humeroulnargelenk**, **oberes Sprunggelenk**, **Kniegelenk** (als Dreh-Scharniergelenk)."
+    },
+    {
+     "id": "fa02-31",
+     "src": "Folie 62",
+     "q": "Nenne zwei Beispiele für ein Rad- oder Zapfengelenk.",
+     "a": "**Proximales Radioulnargelenk**, **medianes Atlantoaxialgelenk**."
+    },
+    {
+     "id": "fa02-32",
+     "src": "Folie 63",
+     "q": "Welches Gelenk ist das typische Sattelgelenk, und wie viele Freiheitsgrade hat es?",
+     "a": "**Daumensattelgelenk**, **2 rotatorische Freiheitsgrade**."
+    },
+    {
+     "id": "fa02-33",
+     "src": "Folie 64",
+     "q": "Wie viele Freiheitsgrade hat ein planes (ebenes) Gelenk? Nenne Beispiele.",
+     "a": "Im Idealfall **2 translatorische und 1 rotatorischer**.\nBeispiele: **kleine Wirbelbogengelenke**, Lisfranc-Gelenk (Fußwurzel)."
+    },
+    {
+     "id": "fa02-34",
+     "src": "Folie 65",
+     "q": "Nenne die Faktoren, die die Bewegung eines Gelenks begrenzen.",
+     "a": "**Form der Gelenkflächen**, **umgebende Weichteile**, **Anordnung der Muskeln** über dem Gelenk, Verlauf und Stärke des **Kapsel-Band-Apparates**."
+    },
+    {
+     "id": "fa02-35",
+     "src": "MC · Folien 13–21",
+     "q": "Welche Aussagen zu Gelenken treffen zu?\na) Synarthrosen haben einen Gelenkspalt.\nb) Das Iliosakralgelenk ist eine Amphiarthrose.\nc) Eine Syndesmose ist zugbelastet.\nd) Eine Synchondrose ist eine Knochenhaft.",
+     "a": "Richtig: **b, c**.\na) falsch: Synarthrosen haben **keinen** Gelenkspalt.\nd) falsch: Synchondrose = **Knorpelhaft**, Knochenhaft = Synostose."
+    }
+   ]
+  },
+  "fa03": {
+   "nr": 3,
+   "title": "Muskulatur",
+   "date": "2026-09-29",
+   "sourceFile": "VL3_Muskulatur_HS26_Moodle.pdf",
+   "sourceModified": "2026-10-29T14:28:40.383Z",
+   "modul": "anatomie",
+   "deck": "VL",
+   "cards": [
+    {
+     "id": "fa03-01",
+     "src": "Folie 5",
+     "q": "Wie groß ist der Anteil der Skelettmuskelmasse am Körpergewicht?",
+     "a": "Ca. **40–50 %**; bei Kraftsportler:innen bis **65 %**, bei der Geburt etwa **20 %**."
+    },
+    {
+     "id": "fa03-02",
+     "src": "Folie 5",
+     "q": "Nenne die allgemeinen Funktionen der Muskulatur.",
+     "a": "Aufrechterhaltung der **Körperhaltung**, **Lokomotion** (Fortbewegung), **Konvektion** (Transport), Regulation von **Druck**, **Verspannung und Schutz**.\nDie Skelettmuskulatur wirkt vor allem als **Motor, Feder, Dämpfer**."
+    },
+    {
+     "id": "fa03-03",
+     "src": "Folie 8",
+     "q": "Beschreibe die glatte Muskulatur: Vorkommen und Steuerung.",
+     "a": "Vorkommen: Wände von **Hohlorganen**, Atemwege, Augen, Haare, Drüsen.\nSteuerung: überwiegend nerval über **Sympathikus und Parasympathikus**, Kontraktion über neuromuskuläre Kontakte und **Hormone** (z. B. Adrenalin, Oxytocin); nicht willkürlich."
+    },
+    {
+     "id": "fa03-04",
+     "src": "Folie 9",
+     "q": "Worin unterscheidet sich Herzmuskulatur von Skelettmuskulatur?",
+     "a": "Beide sind **quergestreift**. Herzmuskelzellen: Zellkerne meist **zentral**, kleinerer Querschnitt, kürzer, **netzförmig** angeordnet.\nSkelettmuskelzellen gehören zu den größten Zellen des Körpers."
+    },
+    {
+     "id": "fa03-05",
+     "src": "Folie 10",
+     "q": "Nenne Muskelformen nach Köpfen und Bäuchen.",
+     "a": "**Zweiköpfig, dreiköpfig, vierköpfig** (verschiedener Ursprung, gleicher Ansatz), **zweibäuchig, mehrbäuchig**, außerdem **ringförmig** und **flächig**."
+    },
+    {
+     "id": "fa03-06",
+     "src": "Folie 11",
+     "q": "Wie können Muskelfasern angeordnet sein?",
+     "a": "**Parallel**, **spindelförmig (fusiform)**, **flach**, **gefiedert (pennat)**."
+    },
+    {
+     "id": "fa03-07",
+     "src": "Folie 12",
+     "q": "Was bedeutet Muskelfiederung, und welche Formen gibt es?",
+     "a": "Anordnung der Muskelfasern **schräg zur Sehne**.\nFormen: **unipennat**, **bipennat**, **multipennat**."
+    },
+    {
+     "id": "fa03-08",
+     "src": "Folie 13",
+     "q": "Vergleiche spindelförmige (fusiforme) und gefiederte (pennate) Muskeln in Kontraktionsweg, Geschwindigkeit und Kraft.",
+     "a": "**Fusiform:** großer Kontraktionsweg, hohe Kontraktionsgeschwindigkeit, kleinere Kraft; Sehnenkraft = Muskelkraft.\n**Pennat:** geringerer Weg, geringere Geschwindigkeit, **größere Kraft** durch größeren **physiologischen Querschnitt**; Sehnenkraft = Muskelkraft · cos α."
+    },
+    {
+     "id": "fa03-09",
+     "src": "Folie 14",
+     "q": "Ordne den Aufbau des Skelettmuskels von außen nach innen.",
+     "a": "Skelettmuskel mit **Epimysium** → Muskelfaserbündel (**Faszikel**) mit **Perimysium** → **Muskelfaser** mit **Endomysium** → **Myofibrillen** → **Sarkomere**."
+    },
+    {
+     "id": "fa03-10",
+     "src": "Folie 18",
+     "q": "Beschreibe den Weg der Muskelansteuerung vom Kortex bis zum Muskel.",
+     "a": "1. Motoneuron entspringt im **motorischen Kortex** (ZNS), verläuft ins Rückenmark und **kreuzt auf die Gegenseite**.\nUmschaltung auf das **2. Motoneuron** (peripherer Nerv) im **Vorderhorn**, über die Vorderwurzel zum Muskel."
+    },
+    {
+     "id": "fa03-11",
+     "src": "Folie 19",
+     "q": "Was ist eine motorische Endplatte?",
+     "a": "Die **Synapse** zwischen Nervenzelle (Motoneuron) und **Muskelzelle**."
+    },
+    {
+     "id": "fa03-12",
+     "src": "Folie 20",
+     "q": "Grenze extrafusale und intrafusale Muskelfasern voneinander ab.",
+     "a": "**Extrafusal:** Arbeitsmuskulatur, willkürlich ansteuerbar.\n**Intrafusal:** Fasern der **Muskelspindel** (Dehnungsrezeptor), Teil der **Propriozeption**."
+    },
+    {
+     "id": "fa03-13",
+     "src": "Folie 21",
+     "q": "Vergleiche Typ-I-, Typ-IIA- und Typ-IIX-Fasern in Kontraktionsgeschwindigkeit und Ermüdungsresistenz.",
+     "a": "**Typ I (ST):** langsam, Ermüdungsresistenz hoch\n**Typ IIA (FTO):** schnell, moderat bis gering\n**Typ IIX (FTG):** sehr schnell, gering"
+    },
+    {
+     "id": "fa03-14",
+     "src": "Folie 21",
+     "q": "Wie unterscheiden sich die Fasertypen in oxidativer Kapazität und Relaxationsrate?",
+     "a": "**Typ I:** oxidative Kapazität hoch, Relaxation langsam\n**Typ IIA:** mittel, schnell\n**Typ IIX:** gering, sehr schnell"
+    },
+    {
+     "id": "fa03-15",
+     "src": "Folie 22",
+     "q": "Wende an: Welche Fasertypen überwiegen bei einer Sprintschwimmerin und bei einem Langstrecken-Radfahrer, und warum?",
+     "a": "Sprint: eher **Typ II** (schnell, aber schnell ermüdend), weil kurze maximale Leistung zählt.\nLangstrecke: eher **Typ I** (langsam, **ermüdungsresistent**, oxidativ), weil Ausdauer zählt.",
+     "hint": "Aus dem Cocktail-Party-Moment; die Verteilung ist zum Teil genetisch, zum Teil trainierbar."
+    },
+    {
+     "id": "fa03-16",
+     "src": "Folie 28",
+     "q": "Nenne die Rezeptoren der Propriozeption und die drei Sinnesqualitäten.",
+     "a": "Rezeptoren: **Muskelspindel**, **Golgi-Sehnenorgan**, **Ruffini-Körperchen**, **Vater-Pacini-Körperchen**.\nQualitäten: **Stellungssinn**, **Kraftsinn**, **Bewegungssinn** (Geschwindigkeit)."
+    },
+    {
+     "id": "fa03-17",
+     "src": "Folie 29",
+     "q": "Was misst die Muskelspindel, was das Golgi-Sehnenorgan?",
+     "a": "**Muskelspindel:** Dehnungsrezeptor, misst die **Länge(nänderung)** des Muskels.\n**Golgi-Sehnenorgan:** Spannungsrezeptor, misst den **Spannungszustand**.",
+     "hint": "Typische Verwechslung in der Klausur: Spannung = Golgi, Dehnung = Spindel."
+    },
+    {
+     "id": "fa03-18",
+     "src": "Folie 30",
+     "q": "Was ist ein monosynaptischer Reflex? Nenne ein Beispiel.",
+     "a": "Reflex mit **kurzem Erregungsweg** von der **Muskelspindel** direkt zurück zum Muskel (eine Synapse).\nBeispiel: **Patellarsehnenreflex**."
+    },
+    {
+     "id": "fa03-19",
+     "src": "Folie 31",
+     "q": "Erläutere die reziproke Inhibition.",
+     "a": "Die **Muskelspindel** misst die Längendehnung; sie **aktiviert Agonist und Synergist** und **hemmt den Antagonisten**."
+    },
+    {
+     "id": "fa03-20",
+     "src": "Folie 31",
+     "q": "Grenze reziproke und autogene Inhibition voneinander ab.",
+     "a": "**Reziproke Inhibition:** ausgelöst von der **Muskelspindel**, hemmt den **Antagonisten**.\n**Autogene Inhibition:** ausgelöst vom **Golgi-Sehnenorgan**, hemmt den **Agonisten** selbst und fördert den Antagonisten."
+    },
+    {
+     "id": "fa03-21",
+     "src": "Folie 34",
+     "q": "Welche Aufgaben haben Muskelbindegewebe und Faszien?",
+     "a": "Bindegewebige Hüllen um Muskelfasern und -gruppen; sorgen für **reibungslosen Bewegungsablauf**, für die **Muskelpumpe** und bilden **Ursprungs- und Ansatzfläche** für Muskelfasern. Vorsicht bei Immobilisation."
+    },
+    {
+     "id": "fa03-22",
+     "src": "Folie 35",
+     "q": "Erläutere die Muskelpumpe.",
+     "a": "Kontrahiert der Muskel in seinem **Faszienschlauch**, werden die **Venen komprimiert**; in der Relaxation füllen sie sich wieder.\nVon außen lässt sie sich durch **Kompression** unterstützen."
+    },
+    {
+     "id": "fa03-23",
+     "src": "Folie 37",
+     "q": "Erläutere das Kompartmentsyndrom: Ursache, Mechanismus, Folge, Behandlung.",
+     "a": "Ursache meist **Muskelkontusion mit massiver Einblutung**. Der **Druck in der Muskelloge** (bindegewebige Hülle) steigt.\nUnbehandelt **irreversible Schäden** an Gefäßen, Muskeln und Nerven. Behandlung: **Fasziotomie**."
+    },
+    {
+     "id": "fa03-24",
+     "src": "Folie 40",
+     "q": "Wie unterscheidet sich die topographische von der funktionellen Beschreibung von Ursprung und Ansatz?",
+     "a": "**Topographisch:** Ursprung **proximal**, Ansatz **distal**.\n**Funktionell:** **Fixpunkt und Bewegungspunkt** können wechseln (Beispiel **M. iliopsoas**)."
+    },
+    {
+     "id": "fa03-25",
+     "src": "Folie 40",
+     "q": "Was meint der Begriff kinetische Kette?",
+     "a": "Muskulatur und Skelettteile bilden eine **Kette**: Ein Muskel überzieht ein **Gelenk** und verursacht dadurch Bewegung."
+    },
+    {
+     "id": "fa03-26",
+     "src": "Folie 41",
+     "q": "Nenne die drei Arbeitsweisen des Muskels und was dabei mit der Muskellänge passiert.",
+     "a": "**Isometrisch** (haltend, statisch): Länge **gleichbleibend**\n**Konzentrisch** (überwindend): Länge **abnehmend**\n**Exzentrisch** (nachgebend): Länge **zunehmend**"
+    },
+    {
+     "id": "fa03-27",
+     "src": "Folie 43",
+     "q": "Wie arbeiten Agonist und Antagonist bei einer Bewegung typischerweise?",
+     "a": "Der **Agonist** arbeitet **konzentrisch**, der **Antagonist** **exzentrisch**."
+    },
+    {
+     "id": "fa03-28",
+     "src": "Folie 44",
+     "q": "Was ist eine Muskelgruppe?",
+     "a": "Ein Zusammenschluss mehrerer Einzelmuskeln, die in ihrer **Funktion das gleiche Ziel** verfolgen (z. B. die Beuger des Ellenbogens)."
+    },
+    {
+     "id": "fa03-29",
+     "src": "Folie 45",
+     "q": "Was sind Muskelschlingen?",
+     "a": "**Muskuläre Funktionsketten**, die für einen reibungslosen, **ökonomischen** und ästhetischen Bewegungsablauf sorgen."
+    },
+    {
+     "id": "fa03-30",
+     "src": "Folie 4 · Wiederholung Gelenke",
+     "q": "Analysiere das Pritschen im Stehen: Welche Gelenke sind beteiligt, mit welcher Gelenkform und wie vielen Freiheitsgraden?",
+     "a": "Handgelenk: **Eigelenk**, 2 Freiheitsgrade\nEllenbogen (Humeroulnargelenk): **Scharniergelenk**, 1 Freiheitsgrad (Flexion/Extension)\nSchultergelenk: **Kugelgelenk**, 3 Freiheitsgrade\nDazu die Fingergelenke."
+    },
+    {
+     "id": "fa03-31",
+     "src": "MC · Beispielfrage Modulklausur",
+     "q": "Welche Aussagen zur glatten Muskulatur treffen zu?\na) Sie ist willkürlich beeinflussbar.\nb) Glatte Muskulatur findet sich u. a. in Hohlorganen, Atemwegen, Augen, Drüsen.\nc) Sie kontrahiert über neuromuskuläre Kontakte und Hormone.\nd) Sie wird mithilfe von Sympathikus- und Parasympathikus-Aktivität gesteuert.\n1: Nur a ist richtig · 2: Nur a, b und c · 3: Nur c und d · 4: Nur b, c und d",
+     "a": "Lösung: **4 (b, c, d)**.\na) falsch: glatte Muskulatur ist **nicht willkürlich** beeinflussbar.",
+     "hint": "Beispielfrage der Dozentin aus VL 04, so ist die Klausur aufgebaut."
+    },
+    {
+     "id": "fa03-32",
+     "src": "MC · Beispielfrage Modulklausur",
+     "q": "Die Muskelspindel …\na) gehört zu den extrafusalen Fasern des Muskels.\nb) überprüft den Spannungszustand der Muskulatur.\nc) leitet ihre Erregung ausschließlich zum Gehirn, um eine Reaktion am Muskel auszulösen.\nd) besteht aus einem dehnungsempfindlichen Rezeptor.\n1: Alle richtig · 2: Nur d · 3: Nur c und d · 4: Nur a",
+     "a": "Lösung: **2 (nur d)**.\na) falsch: Muskelspindel = **intrafusal**. b) falsch: Spannung misst das **Golgi-Sehnenorgan**. c) falsch: Beim monosynaptischen Reflex geht die Erregung im Rückenmark direkt zurück zum Muskel; „ausschließlich“ ist der Haken.",
+     "hint": "Beispielfrage der Dozentin aus VL 04."
+    }
+   ]
+  },
+  "fa04": {
+   "nr": 4,
+   "title": "Untere Extremität",
+   "date": "2026-10-06",
+   "sourceFile": "VL4_UE_Funktionelle Anatomie_HS26_Moodle.pdf",
+   "sourceModified": "2026-10-29T14:28:40.523Z",
+   "modul": "anatomie",
+   "deck": "VL",
+   "cards": [
+    {
+     "id": "fa04-01",
+     "src": "Folie 10",
+     "q": "Nenne die Extensoren und Flexoren des Ellenbogens.",
+     "a": "**Extensoren:** M. triceps brachii, M. anconaeus.\n**Flexoren:** M. biceps brachii, M. brachialis, M. brachioradialis.",
+     "hint": "In VL 04 korrigiert: Als Beuger des Ellenbogens gilt jetzt der M. brachioradialis, nicht der M. coracobrachialis wie auf der Folie in VL 03."
+    },
+    {
+     "id": "fa04-02",
+     "src": "Folie 13",
+     "q": "Wo treten Verletzungen in Teamsportarten am häufigsten auf?",
+     "a": "An der **unteren Extremität**."
+    },
+    {
+     "id": "fa04-03",
+     "src": "Folie 15",
+     "q": "Nenne die Knochen der unteren Extremität von proximal nach distal.",
+     "a": "**Ilium** (Becken), **Femur** (Oberschenkel), **Tibia** (Schienbein) und **Fibula** (Wadenbein), **Fußwurzelknochen**, **Mittelfußknochen**, **Zehenknochen**."
+    },
+    {
+     "id": "fa04-04",
+     "src": "Folie 18",
+     "q": "Nenne die Gelenke des Beckens.",
+     "a": "**Hüftgelenk**, **Iliosakralgelenk** (Amphiarthrose), **Schambeinfuge**."
+    },
+    {
+     "id": "fa04-05",
+     "src": "Folie 20",
+     "q": "Wie groß sind lumbosakraler Winkel und Sakrumneigungswinkel normalerweise?",
+     "a": "**Lumbosakraler Winkel** (Übergang L5 zum Sakrum): ca. **140°**.\n**Sakrumneigungswinkel** (S1 zur Horizontalen): ca. **30°**."
+    },
+    {
+     "id": "fa04-06",
+     "src": "Folie 20",
+     "q": "Welche Strukturen werden bei steiler und bei horizontaler Stellung des Kreuzbeins mehr belastet?",
+     "a": "**Steil:** **ventrale** Strukturen → Gefahr eines **Diskusprolaps**.\n**Horizontal:** **dorsale** Strukturen → Gefahr für Erkrankungen der **Facettengelenke**."
+    },
+    {
+     "id": "fa04-07",
+     "src": "Folie 21",
+     "q": "Welche zwei Arten der Beinlängendifferenz unterscheidet man beim Beckenschiefstand?",
+     "a": "**Reelle** (anatomisch tatsächlich ungleich lange Beine) und **funktionelle** Beinlängendifferenz."
+    },
+    {
+     "id": "fa04-08",
+     "src": "Folie 22",
+     "q": "Welche Gelenkform hat das Hüftgelenk, und welche Knochen bilden es?",
+     "a": "**Kugelgelenk** in der Sonderform **Nussgelenk**, gebildet aus **Beckenknochen** und **Oberschenkelknochen (Femur)**; gesichert durch eine **Bänderschraube**."
+    },
+    {
+     "id": "fa04-09",
+     "src": "Folie 23",
+     "q": "Welche Winkel beschreiben die Achsenstellung des Hüftgelenks?",
+     "a": "**CD-Winkel** (Collum-Diaphysen-Winkel) und **Antetorsionswinkel**."
+    },
+    {
+     "id": "fa04-10",
+     "src": "Folie 24",
+     "q": "Welche Muskeln abduzieren im Hüftgelenk, und welche besondere Aufgabe haben die kleinen Gluten?",
+     "a": "Abduktoren: die „kleinen Gluten“ **M. gluteus medius** und **M. gluteus minimus** sowie **M. tensor fasciae latae**.\nBesondere Aufgabe: **Statik des Oberschenkels**, sie verhindern die **Biegebeanspruchung nach lateral**.",
+     "hint": "Verknüpfung VL 01: Zuggurtungsprinzip am Femur."
+    },
+    {
+     "id": "fa04-11",
+     "src": "Folie 25",
+     "q": "Welcher Muskel ist der Hauptstrecker im Hüftgelenk, und wer unterstützt ihn?",
+     "a": "**M. gluteus maximus**; unterstützt von den **Hamstrings (ischiokrurale Muskulatur)**."
+    },
+    {
+     "id": "fa04-12",
+     "src": "Folie 25",
+     "q": "Welcher Muskel ist der Hauptbeuger im Hüftgelenk, und wer unterstützt ihn?",
+     "a": "**M. iliopsoas**; unterstützt von **M. rectus femoris** und **M. sartorius**."
+    },
+    {
+     "id": "fa04-13",
+     "src": "Folie 26",
+     "q": "Gib das Bewegungsausmaß des Hüftgelenks für Extension/Flexion nach der Neutral-0-Methode an.",
+     "a": "**10°/0°/130°**"
+    },
+    {
+     "id": "fa04-14",
+     "src": "Folie 26",
+     "q": "Gib das Bewegungsausmaß des Hüftgelenks für Abduktion/Adduktion an.",
+     "a": "**50°/0°/30°**"
+    },
+    {
+     "id": "fa04-15",
+     "src": "Folie 26",
+     "q": "Gib das Bewegungsausmaß des Hüftgelenks für Außenrotation/Innenrotation an.",
+     "a": "**50°/0°/40°**"
+    },
+    {
+     "id": "fa04-16",
+     "src": "Folie 26",
+     "q": "Was weist der Thomas-Handgriff nach?",
+     "a": "Eine **Beugekontraktur** im Hüftgelenk."
+    },
+    {
+     "id": "fa04-17",
+     "src": "Folie 6 · offene Beispielfrage",
+     "q": "Beschreibe die Anatomie des Hüftgelenks (Art des Gelenks, knöcherne Anteile, Bänder, umgebende Muskulatur).",
+     "a": "Das Hüftgelenk ist ein **Nussgelenk** (Kugelgelenk) aus **Beckenknochen** und **Oberschenkelknochen**.\nEs ist von einer festen **Bänderschraube** umgeben.\nWesentliche Muskulatur: **Adduktoren** und **Abduktoren**, der Beuger **M. iliopsoas** und der Strecker **M. gluteus maximus**.",
+     "hint": "Musterlösung der Dozentin aus VL 05 zu einer offenen Klausurfrage."
+    },
+    {
+     "id": "fa04-18",
+     "src": "Folie 34",
+     "q": "Aus welchen zwei Teilgelenken besteht das Kniegelenk, und was leistet jedes?",
+     "a": "**Kniescheibengelenk** (Patella und Femur): **Umlenkung der Kräfte** des M. quadriceps femoris.\n**Kniekehlgelenk** (Tibia und Femur): **führt die Bewegung** im Kniegelenk aus."
+    },
+    {
+     "id": "fa04-19",
+     "src": "Folie 36",
+     "q": "Welche Gelenkform hat das Kniegelenk, und wie viele Freiheitsgrade?",
+     "a": "**Dreh-Scharniergelenk** mit **2 Freiheitsgraden**: Flexion/Extension und Innen-/Außenrotation, die Rotation **nur in Flexion**."
+    },
+    {
+     "id": "fa04-20",
+     "src": "Folie 36",
+     "q": "Gib das Bewegungsausmaß des Kniegelenks an (Extension/Flexion und Außen-/Innenrotation).",
+     "a": "Extension/Flexion **0°/0°/150°**\nAußenrotation/Innenrotation **40°/0°/10°**; die **Kreuzbänder** verhindern weitere Innenrotation."
+    },
+    {
+     "id": "fa04-21",
+     "src": "Folie 39",
+     "q": "Beschreibe die Roll-Gleit-Bewegung des Kniegelenks bei Beugung.",
+     "a": "Bis ca. **25–30°** Flexion reines **Abrollen**, ab ca. 30° **Rollen und Gleiten**, ab **60°** dominiert das **Gleiten** (Zug der Kreuzbänder).\nSo bewegt sich der große Gelenkkopf auf der viel kleineren Pfanne."
+    },
+    {
+     "id": "fa04-22",
+     "src": "Folie 40",
+     "q": "Wie unterscheiden sich Innen- und Außenmeniskus in der Form?",
+     "a": "**Medialer Meniskus:** **C-förmig**.\n**Lateraler Meniskus:** nahezu **kreisförmig**."
+    },
+    {
+     "id": "fa04-23",
+     "src": "Folie 40",
+     "q": "Nenne die Funktionen der Menisken.",
+     "a": "Ausgleich der **Inkongruenz** der Gelenkflächen, Vergrößerung der Kontaktfläche, **Stabilisierung bei Rotation**, verbesserte **Druckverteilung**.\nAber: **schlechte Regenerationsfähigkeit**."
+    },
+    {
+     "id": "fa04-24",
+     "src": "Folie 44",
+     "q": "Welche Funktion haben die Seitenbänder des Knies, und wann sind sie gespannt?",
+     "a": "Führung und **Stabilität**, verhindern das **Wegknicken** zur Seite (O- bzw. X-Bein), propriozeptive Funktion.\nIn **Extension straff**, in Flexion locker."
+    },
+    {
+     "id": "fa04-25",
+     "src": "Folie 45",
+     "q": "Nenne die Funktionen der Kreuzbänder.",
+     "a": "**Passive Gelenkstabilität** und Führung, **VKB begrenzt die Kniestreckung**, **HKB verhindert das Verschieben** in der labilen Beugestellung, erzwingen den **Roll-Gleit-Mechanismus**, schränken die **Rotation** ein, propriozeptive Funktion."
+    },
+    {
+     "id": "fa04-26",
+     "src": "Folie 45",
+     "q": "Wie heißen vorderes und hinteres Kreuzband lateinisch?",
+     "a": "VKB: **Lig. cruciatum anterius**.\nHKB: **Lig. cruciatum posterius**.",
+     "hint": "Folienfehler: Auf Folie 43/45 steht beim HKB ebenfalls „anterius“; richtig ist posterius."
+    },
+    {
+     "id": "fa04-27",
+     "src": "Folie 49",
+     "q": "Welcher Muskel streckt das Kniegelenk, und welche Muskeln beugen es laut Folie?",
+     "a": "Strecker: **M. quadriceps femoris**.\nBeuger: **M. biceps femoris**, **M. semitendinosus**, **M. semimembranosus**, **M. sartorius**."
+    },
+    {
+     "id": "fa04-28",
+     "src": "Folie 54",
+     "q": "Aus wie vielen Knochen besteht der Fuß? Nenne Sprung- und Fersenbein lateinisch.",
+     "a": "**26 Knochen** (plus 2 Sesambeine).\nSprungbein = **Talus**, Fersenbein = **Calcaneus**."
+    },
+    {
+     "id": "fa04-29",
+     "src": "Folie 56",
+     "q": "Welche Gelenkform hat das obere Sprunggelenk, und wo verläuft seine Achse?",
+     "a": "**Scharniergelenk**; die Bewegungsachse verläuft durch **beide Knöchel** (Frontalebene). Ort der **Kraftübertragung** auf Vor- und Rückfuß."
+    },
+    {
+     "id": "fa04-30",
+     "src": "Folie 58",
+     "q": "Welche Funktionen hat das untere Sprunggelenk?",
+     "a": "**Ausrichtung** des Fußes im Raum, **Anpassung an Bodenunebenheiten**, **Gleichgewichtskontrolle** im Einbeinstand, **Stoßdämpfer**."
+    },
+    {
+     "id": "fa04-31",
+     "src": "Folie 59",
+     "q": "Gib das Bewegungsausmaß des oberen Sprunggelenks an.",
+     "a": "Plantarflexion/Dorsalextension **50°/0°/30°**."
+    },
+    {
+     "id": "fa04-32",
+     "src": "Folie 59",
+     "q": "Welche Teilbewegungen gehören zur Inversion, welche zur Eversion?",
+     "a": "**Inversion:** Supination, Plantarflexion, Adduktion.\n**Eversion:** Pronation, Dorsalextension, Abduktion.\nUSG Eversion/Inversion **10°/0°/20°**."
+    },
+    {
+     "id": "fa04-33",
+     "src": "Folie 61",
+     "q": "Wie heißt der dreiköpfige Wadenmuskel?",
+     "a": "**M. triceps surae**."
+    },
+    {
+     "id": "fa04-34",
+     "src": "Folie 62",
+     "q": "Nenne die Fußgewölbe und ihre Funktionen.",
+     "a": "**Längsgewölbe** und **Quergewölbe**.\nFunktionen: **Statik** (Dreipunktstütz), **Anpassung** an Bodenunebenheiten, **Stoßdämpfer**."
+    },
+    {
+     "id": "fa04-35",
+     "src": "Folie 64",
+     "q": "Welche Strukturen halten die Spannung des Fußgewölbes?",
+     "a": "**Pfannenband**, **Lig. plantare longum**, **Plantaraponeurose**."
+    },
+    {
+     "id": "fa04-36",
+     "src": "Folie 63",
+     "q": "Nenne Fehlformen des Fußgewölbes und der Rückfußachse.",
+     "a": "Gewölbe: **Hohlfuß** (verstärkt), **Spreizfuß**, **Plattfuß**.\nAchse: **Knickfuß (Pes valgus)**, **Klumpfuß (Pes varus)**."
+    },
+    {
+     "id": "fa04-37",
+     "src": "Folie 67",
+     "q": "Was zeigt die Mikulicz-Linie, und wie unterscheiden sich Genu valgum und Genu varum?",
+     "a": "Gerade Beinachse: **Hüfte, Knie und oberes Sprunggelenk** liegen auf einer Linie.\n**Genu valgum** (X-Bein): Knie weicht nach **medial** aus.\n**Genu varum** (O-Bein): Knie weicht nach **lateral** aus.",
+     "hint": "Typische Verwechslung: valgum = X, varum = O."
+    },
+    {
+     "id": "fa04-38",
+     "src": "MC · Folien 22–36",
+     "q": "Welche Aussagen treffen zu?\na) Das Hüftgelenk hat drei Freiheitsgrade.\nb) Das Kniegelenk erlaubt Rotation auch in voller Streckung.\nc) Der M. iliopsoas ist der Hauptbeuger der Hüfte.\nd) Der Innenmeniskus ist nahezu kreisförmig.",
+     "a": "Richtig: **a, c**.\nb) falsch: Rotation **nur in Flexion**.\nd) falsch: Innenmeniskus **C-förmig**, der Außenmeniskus ist nahezu kreisförmig."
+    }
+   ]
+  },
+  "fa05": {
+   "nr": 5,
+   "title": "Obere Extremität",
+   "date": "2026-10-20",
+   "sourceFile": "VL5_OE_Funktionelle Anatomie_HS26_Moodle.pdf",
+   "sourceModified": "2026-10-29T14:28:40.778Z",
+   "extraSources": [
+    {
+     "name": "Ergänzende Folien_VL5_OE_Funktionelle Anatomie_HS26_Moodle.pdf",
+     "modified": "2026-10-29T14:28:40.639Z"
+    }
+   ],
+   "modul": "anatomie",
+   "deck": "VL",
+   "cards": [
+    {
+     "id": "fa05-01",
+     "src": "Folie 13",
+     "q": "Nenne die Knochen der oberen Extremität mit lateinischem Namen, soweit auf der Folie.",
+     "a": "Schulterblatt **Scapula**, Schlüsselbein **Clavicula**, Oberarmknochen **Humerus**, Elle **Ulna**, Speiche **Radius**; dazu Handwurzel-, Mittelhand- und Fingerknochen."
+    },
+    {
+     "id": "fa05-02",
+     "src": "Folie 14",
+     "q": "Aus welchen fünf gelenkigen Verbindungen besteht der Schulterkomplex?",
+     "a": "**Sternoklavikulargelenk**, **Akromioklavikulargelenk**, **Glenohumeralgelenk**, **Scapulothorakalgelenk**, **subakromiale Fläche**."
+    },
+    {
+     "id": "fa05-03",
+     "src": "Folie 16",
+     "q": "Was ist der Schultergürtel, und wie ist er mit dem Rumpf verbunden?",
+     "a": "Ein knöcherner „Gürtel“ aus **Schulterblatt** und **Schlüsselbein**, der die Arme mit dem Rumpf verbindet.\n**Ventral gelenkig** zum Brustbein, **dorsal muskulär** zur Wirbelsäule."
+    },
+    {
+     "id": "fa05-04",
+     "src": "Folie 17",
+     "q": "Welche Gelenke bildet das Schlüsselbein, und wie bewegen sie sich?",
+     "a": "Proximal **Sternoklavikulargelenk** (mit **Diskus**), distal **Akromioklavikulargelenk**.\nBeide sind **funktionell Kugelgelenke**; Bewegung auf einem **Kegelmantel**."
+    },
+    {
+     "id": "fa05-05",
+     "src": "Folie 19",
+     "q": "Warum ist das Glenohumeralgelenk zugleich das beweglichste und ein verletzungsanfälliges Gelenk?",
+     "a": "Es ist das **beweglichste Gelenk** des Körpers, hat aber **keine knöcherne Sicherung** und nur **wenig ligamentäre Sicherung** (u. a. Lig. coracoacromiale).\nSeine Stabilität hängt von **Muskulatur und Bändern** ab."
+    },
+    {
+     "id": "fa05-06",
+     "src": "Folie 21",
+     "q": "Nenne die Bewegungen des Schultergürtels.",
+     "a": "**Retraktion**, **Protraktion**, **Elevation**, **Depression**."
+    },
+    {
+     "id": "fa05-07",
+     "src": "Folie 22",
+     "q": "Welche Gelenkform hat das Schultergelenk, und bis wohin findet Bewegung allein dort statt?",
+     "a": "**Kugelgelenk** mit **3 Freiheitsgraden**.\nBewegungen **bis 90°** finden ausschließlich im Schultergelenk statt; darüber arbeitet der Schultergürtel mit."
+    },
+    {
+     "id": "fa05-08",
+     "src": "Folie 22",
+     "q": "Gib das Bewegungsausmaß von Schultergelenk und Schultergürtel für Anteversion/Retroversion an.",
+     "a": "**150–170°/0°/40°**"
+    },
+    {
+     "id": "fa05-09",
+     "src": "Folie 22",
+     "q": "Gib das Bewegungsausmaß der Schulter für Abduktion/Adduktion an.",
+     "a": "**180°/0°/20–40°**"
+    },
+    {
+     "id": "fa05-10",
+     "src": "Folie 22",
+     "q": "Gib das Bewegungsausmaß der Schulter für Außenrotation/Innenrotation an.",
+     "a": "**60°/0°/95°**"
+    },
+    {
+     "id": "fa05-11",
+     "src": "Folie 23",
+     "q": "Welche Rolle spielt das Schulterblatt für die Beweglichkeit der Schulter?",
+     "a": "Das **thorakale Gleiten des Schulterblatts** erweitert den Aktionsradius der Arme. Schultergürtel und Schultergelenk sind deshalb immer als **Funktionseinheit** zu betrachten."
+    },
+    {
+     "id": "fa05-12",
+     "src": "Folie 24",
+     "q": "Welche Muskulatur sichert das Schultergelenk vor allem?",
+     "a": "**M. deltoideus**, die **langen Köpfe** von M. biceps brachii und M. triceps brachii, die Muskeln der **Rotatorenmanschette**."
+    },
+    {
+     "id": "fa05-13",
+     "src": "Folie 25",
+     "q": "Nenne die vier Muskeln der Rotatorenmanschette.",
+     "a": "**M. supraspinatus**, **M. infraspinatus**, **M. teres minor**, **M. subscapularis**."
+    },
+    {
+     "id": "fa05-14",
+     "src": "Ergänzende Folien · Folie 29",
+     "q": "Welche zwei Muskeln sind beim Tragen einer Last in den Händen wesentlich?",
+     "a": "**M. levator scapulae** und **M. trapezius (pars descendens)**."
+    },
+    {
+     "id": "fa05-15",
+     "src": "Ergänzende Folien · Folie 29",
+     "q": "Welche zwei Muskeln sind beim Liegestütz wesentlich?",
+     "a": "**M. serratus anterior** und **M. pectoralis major**."
+    },
+    {
+     "id": "fa05-16",
+     "src": "Ergänzende Folien · Folie 29",
+     "q": "Welcher Muskel ist sowohl beim Stützen als auch beim Hängen wesentlich?",
+     "a": "**M. latissimus dorsi**.\nDazu beim Stützen M. trapezius (pars ascendens), beim Hängen M. rhomboideus.",
+     "hint": "Zuordnung aus der Lösungsfolie zum Cocktail-Party-Moment; im Zweifel dort nachsehen."
+    },
+    {
+     "id": "fa05-17",
+     "src": "Folie 31",
+     "q": "Nenne drei typische Verletzungen der Schulter und was jeweils passiert.",
+     "a": "**Schultereckgelenksprengung:** Luxation des Akromioklavikulargelenks.\n**Impingement:** schmerzhafte Einklemmung von Weichteilen.\n**Schulterluxation:** Der Humeruskopf verlässt die Gelenkpfanne."
+    },
+    {
+     "id": "fa05-18",
+     "src": "Folie 34",
+     "q": "Aus welchen drei Teilgelenken besteht das Ellenbogengelenk?",
+     "a": "**Humero-Ulnar-Gelenk**, **Humero-Radial-Gelenk**, **proximales Radio-Ulnar-Gelenk**; zusammen ein funktionelles **Dreh-Winkel-Gelenk**."
+    },
+    {
+     "id": "fa05-19",
+     "src": "Folie 36",
+     "q": "Ordne den drei Teilgelenken des Ellenbogens ihre Gelenkform zu.",
+     "a": "Humero-Ulnar: **Scharniergelenk** (1 Freiheitsgrad)\nHumero-Radial: **formales Kugelgelenk**\nProximales Radio-Ulnar: **Zapfen-/Radgelenk** (1 Freiheitsgrad)"
+    },
+    {
+     "id": "fa05-20",
+     "src": "Folie 35",
+     "q": "Was begrenzt die Streckung im Humero-Ulnar-Gelenk, und welches Band hält das Radiusköpfchen?",
+     "a": "Die Extension ist **knöchern** eingeschränkt.\nDas **Lig. anulare radii** umgibt das Radiusköpfchen ringförmig."
+    },
+    {
+     "id": "fa05-21",
+     "src": "Folie 36",
+     "q": "Gib das Bewegungsausmaß des Ellenbogens für Extension/Flexion und für Supination/Pronation an.",
+     "a": "Extension/Flexion **10°/0°/150°**\nSupination/Pronation **85–90°/0°/85–90°**"
+    },
+    {
+     "id": "fa05-22",
+     "src": "Folie 37",
+     "q": "Welche Muskeln strecken, welche beugen den Ellenbogen?",
+     "a": "Strecker: **M. triceps brachii**.\nBeuger: **M. biceps brachii**, **M. brachialis**, **M. brachioradialis**."
+    },
+    {
+     "id": "fa05-23",
+     "src": "Folie 41",
+     "q": "Nenne die Gelenke der Hand laut Folie.",
+     "a": "**Distales Radio-Ulnar-Gelenk**, **proximales Handwurzelgelenk**, **distales Handwurzelgelenk**, **Daumensattelgelenk**."
+    },
+    {
+     "id": "fa05-24",
+     "src": "Folie 42",
+     "q": "Gib das Bewegungsausmaß des Handgelenks an.",
+     "a": "Dorsalextension/Palmarflexion **40–60°/0°/50–70°**\nRadialduktion/Ulnarduktion **25–30°/0°/30–40°**"
+    },
+    {
+     "id": "fa05-25",
+     "src": "Folie 43",
+     "q": "Welche Bewegungen ermöglicht das Daumensattelgelenk, und wozu?",
+     "a": "**Opposition** und **Zirkumduktion**; sie ermöglichen das **Greifen** mit der Hand."
+    },
+    {
+     "id": "fa05-26",
+     "src": "Folie 44",
+     "q": "Wo entspringen die Beuger und wo die Strecker des Unterarms?",
+     "a": "Beuger: **Epicondylus medialis** humeri.\nStrecker: **Epicondylus lateralis** humeri.",
+     "hint": "Merkhilfe: Beuger innen (medial), Strecker außen (lateral)."
+    },
+    {
+     "id": "fa05-27",
+     "src": "Folie 45",
+     "q": "Welche Struktur hält die Beugesehnen am Handgelenk in ihrer Bahn?",
+     "a": "Das **Retinaculum flexorum** zusammen mit den **Sehnenscheiden** (Schutz, Führung, weniger Reibung)."
+    },
+    {
+     "id": "fa05-28",
+     "src": "MC · Folien 19–25",
+     "q": "Welche Aussagen zur Schulter treffen zu?\na) Das Glenohumeralgelenk ist knöchern gut gesichert.\nb) Zur Rotatorenmanschette gehört der M. teres minor.\nc) Bewegungen bis 90° finden ausschließlich im Schultergelenk statt.\nd) Der Schultergürtel ist dorsal gelenkig mit der Wirbelsäule verbunden.",
+     "a": "Richtig: **b, c**.\na) falsch: **keine knöcherne Sicherung**.\nd) falsch: dorsal **muskulär**, ventral gelenkig zum Brustbein."
+    }
+   ]
+  },
+  "fa06": {
+   "nr": 6,
+   "title": "Rumpf und Wirbelsäule",
+   "date": "2026-10-27",
+   "sourceFile": "VL6_Wirbelsäule_HeSe26_Moodle.pdf",
+   "sourceModified": "2026-10-29T14:28:40.973Z",
+   "modul": "anatomie",
+   "deck": "VL",
+   "cards": [
+    {
+     "id": "fa06-01",
+     "src": "Folie 4",
+     "q": "Nenne die Funktionen der Wirbelsäule.",
+     "a": "**Verbindung und Kraftübertragung**, **Bewegung**, **Stütze**, **Schutz**, **Steuerung und Übermittlung von Reizen** (Rückenmark), **Puffer**."
+    },
+    {
+     "id": "fa06-02",
+     "src": "Folie 5",
+     "q": "Wie häufig sind Rücken- und Nackenschmerzen in Deutschland laut BURDEN-Studie?",
+     "a": "12-Monats-Prävalenz: Rückenschmerzen **61,3 %**, Nackenschmerzen **45,7 %**."
+    },
+    {
+     "id": "fa06-03",
+     "src": "Folie 7",
+     "q": "Grenze spezifischen, unspezifischen und chronischen Rückenschmerz voneinander ab.",
+     "a": "**Spezifisch:** strukturell nachweisbare Ursache (z. B. Fraktur, Tumor, Entzündung).\n**Unspezifisch:** kein Befund in Röntgen, MRT oder EMG.\n**Chronisch:** Schmerzen im unteren Rücken seit **mindestens 3 Monaten** an mindestens der Hälfte der Tage der letzten 6 Monate."
+    },
+    {
+     "id": "fa06-04",
+     "src": "Folie 8",
+     "q": "Aus wie vielen Wirbeln bestehen die Abschnitte der Wirbelsäule?",
+     "a": "**7** Halswirbel, **12** Brustwirbel, **5** Lendenwirbel, **5** Kreuzbeinwirbel, **3–5** Steißbeinwirbel."
+    },
+    {
+     "id": "fa06-05",
+     "src": "Folie 8",
+     "q": "Welche Krümmung hat jeder Abschnitt der Wirbelsäule?",
+     "a": "HWS **Lordose**, BWS **Kyphose**, LWS **Lordose**, sakral **Kyphose**.\nDie Wirbelkörper werden nach kaudal größer."
+    },
+    {
+     "id": "fa06-06",
+     "src": "Folie 9",
+     "q": "Welche Aufgabe haben Wirbelkörper, Wirbelbögen und Muskelfortsätze?",
+     "a": "Wirbelkörper = **Tragstück**, Wirbelbögen = **Schutzstück**, Muskelfortsätze = **Hebelwerk**."
+    },
+    {
+     "id": "fa06-07",
+     "src": "Folie 11",
+     "q": "Was ist das Besondere an Atlas und Axis?",
+     "a": "**Atlas** (1. Halswirbel): hat **keinen Wirbelkörper**.\n**Axis** (2. Halswirbel): trägt den **Dens axis** (Zahn).\nIm **Atlantoaxialgelenk** Rotation um **30–35°**; der Dens wird vom Lig. transversum atlantis gehalten."
+    },
+    {
+     "id": "fa06-08",
+     "src": "Folie 16",
+     "q": "Was sind Facettengelenke, und was ist ihre Hauptaufgabe?",
+     "a": "Kleine **Synovialgelenke** zwischen den Gelenkflächen benachbarter Wirbel.\nHauptaufgabe: **Bewegungsführung**; sie geben der Beweglichkeit eine definierte Richtung und tragen nur **wenig Druckbelastung**."
+    },
+    {
+     "id": "fa06-09",
+     "src": "Folie 17",
+     "q": "Wie verhalten sich die Gelenkflächen der Facettengelenke bei Extension, Flexion und Rotation?",
+     "a": "Extension: Gelenkflächen **konvergieren**.\nFlexion: sie **divergieren**.\nRotation: auf einer Seite divergieren, auf der anderen konvergieren."
+    },
+    {
+     "id": "fa06-10",
+     "src": "Folie 19",
+     "q": "Wie viele Freiheitsgrade und Bewegungsrichtungen hat die Wirbelsäule?",
+     "a": "**3 Freiheitsgrade** mit **6 Bewegungsrichtungen**."
+    },
+    {
+     "id": "fa06-11",
+     "src": "Folie 22",
+     "q": "Nenne die Funktionen der Bandscheibe.",
+     "a": "**Beweglichkeit** bei ausreichender Steifigkeit, **Abstandshalter und Stoßdämpfer**, **Übertragung** von Druck- und Zugkräften von Wirbel zu Wirbel."
+    },
+    {
+     "id": "fa06-12",
+     "src": "Folie 22",
+     "q": "Wie dick sind Bandscheiben, und wie viel der Wirbelsäulenlänge machen sie aus?",
+     "a": "Dicke **5–9 mm**; zusammen ca. **¼ der Wirbelsäulenlänge**.\nZervikal und lumbal sind sie am dicksten und am flexibelsten."
+    },
+    {
+     "id": "fa06-13",
+     "src": "Folie 23",
+     "q": "Was passiert mit der Bandscheibe bei axialer Belastung und bei Biegebelastung?",
+     "a": "**Axial:** gleichmäßige Druckverteilung, eine gesunde Bandscheibe hält das aus.\n**Biegung/Knickung:** Bandscheibe wird **keilförmig** eingedrückt, der **Gallertkern (Nucleus pulposus)** verlagert sich."
+    },
+    {
+     "id": "fa06-14",
+     "src": "Folie 24",
+     "q": "Wie wird die Bandscheibe ernährt?",
+     "a": "Über einen **Pump- und Saugmechanismus** (Diffusion wie ein Schwamm) im **Wechsel von Belastung und Entlastung**.\nBei langer Belastung gibt sie Wasser ab, die Regeneration dauert länger."
+    },
+    {
+     "id": "fa06-15",
+     "src": "Folie 27",
+     "q": "Was gehört zum zentralen, was zum peripheren Nervensystem?",
+     "a": "**ZNS:** Gehirn und Rückenmark.\n**PNS:** Nervenzellen und Nervenbahnen außerhalb, die außen mit innen verbinden."
+    },
+    {
+     "id": "fa06-16",
+     "src": "Folie 31",
+     "q": "Welche Funktion haben die Bänder der Wirbelsäule, und was ist das Besondere an den Ligg. flava?",
+     "a": "Bänder: verhindern **zu starke Beugung oder Streckung**, Kräftetransfer.\n**Ligg. flava:** hoher **Elastinanteil** (gelblich), stabilisieren in der Sagittalebene, **hemmen übermäßige Flexion**, unterstützen die **Aufrichtung** aus der Vorbeuge."
+    },
+    {
+     "id": "fa06-17",
+     "src": "Folie 32",
+     "q": "Wie heißt die autochthone Rückenmuskulatur, und welches Modell beschreibt sie?",
+     "a": "**M. erector spinae**; das **Bootsmodell**: Die Wirbelsäule ist durch die Verspannung zugleich **starr und biegsam**."
+    },
+    {
+     "id": "fa06-18",
+     "src": "Folie 35",
+     "q": "Nenne Haltungsabweichungen in der Sagittalebene.",
+     "a": "**Hyperlordose** (Hohlkreuz), **Hyperkyphose** (Rundrücken), **Flachrücken**, **Handynacken**; dazu **Morbus Scheuermann**."
+    },
+    {
+     "id": "fa06-19",
+     "src": "Folie 38",
+     "q": "Welche Haltungsabweichung in der Frontalebene unterscheidet man, und in welchen zwei Formen?",
+     "a": "**Skoliose**: „**scheinbare**“ und „**echte**“ Skoliose."
+    },
+    {
+     "id": "fa06-20",
+     "src": "Folie 41",
+     "q": "Wie häufig ist Skoliose bei Athlet:innen, und in welchen Sportarten am häufigsten?",
+     "a": "Gesamtprävalenz **27 %**.\nAm höchsten in **Ballett/Tanz (35 %)** und **Basketball (34 %)**."
+    },
+    {
+     "id": "fa06-21",
+     "src": "Folie 30",
+     "q": "In welchen Sportarten drohen Rückenmarksverletzungen, und wodurch?",
+     "a": "In **Kollisionssportarten** mit massiver Krafteinwirkung (z. B. American Football, Eishockey, Formel 1, Ski, Snowboard), durch **Verschiebung der Facettengelenke** oder **(Trümmer-)Frakturen** der Wirbelkörper."
+    },
+    {
+     "id": "fa06-22",
+     "src": "Folie 3 · Wiederholung VL 05",
+     "q": "Analysiere die Schulter: Wie viele Freiheitsgrade, welche weiteren Verbindungen tragen zur Beweglichkeit bei, und welche Rolle spielt das Schulterblatt?",
+     "a": "**3 Freiheitsgrade** (Ante-/Retroversion, Ab-/Adduktion, Außen-/Innenrotation).\nWeitere Verbindungen: **Sternoklavikular-, Akromioklavikular-, Scapulothorakalgelenk**, subakromiale Fläche.\nDas **Gleiten des Schulterblatts** auf dem Thorax erweitert den Aktionsradius."
+    },
+    {
+     "id": "fa06-23",
+     "src": "MC · Folien 8–24",
+     "q": "Welche Aussagen zur Wirbelsäule treffen zu?\na) Die Brustwirbelsäule hat 12 Wirbel und ist kyphotisch gekrümmt.\nb) Der Atlas besitzt einen besonders großen Wirbelkörper.\nc) Facettengelenke tragen den Großteil der Druckbelastung.\nd) Die Bandscheibe wird über Belastung und Entlastung ernährt.",
+     "a": "Richtig: **a, d**.\nb) falsch: Der Atlas hat **keinen** Wirbelkörper.\nc) falsch: Facettengelenke tragen nur **wenig** Druck, Hauptaufgabe ist die Bewegungsführung."
+    }
+   ]
+  }
+ }
+}
