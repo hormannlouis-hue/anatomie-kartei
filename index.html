@@ -340,13 +340,6 @@ button.rn b::after{content:' ›';color:var(--muted);font-weight:400}
   <div class="status" id="status">Karten und Fortschritt werden geladen …</div>
 
   <main id="home" style="display:flex;flex-direction:column;gap:20px">
-    <div class="panel" id="resumeBox" hidden style="display:flex;flex-direction:column;gap:10px">
-      <b>Weitermachen, wo du warst</b>
-      <p class="fine">Auf diesem Gerät ist noch kein Lernstand gespeichert. Hast du eine Sicherung, etwa von einem anderen Gerät oder aus der alten Kartei, füg sie hier ein (sie beginnt mit „KARTEI1:“). Zum ersten Mal hier? Dann einfach ohne Sicherung starten.</p>
-      <textarea id="rsIn" class="precin" rows="3" aria-label="Sicherung einfügen"></textarea>
-      <div class="wrow"><button class="primary" id="rsGo" type="button" style="margin-left:0">Sicherung einspielen</button><button class="linkbtn" id="rsSkip" type="button">Ohne Sicherung starten</button></div>
-      <p class="qscan" id="rsMsg" aria-live="polite"></p>
-    </div>
     <button class="game" id="gameBtn" type="button" hidden>
       <span class="ringwrap" aria-hidden="true"><svg class="ring" viewBox="0 0 44 44"><circle class="bg" cx="22" cy="22" r="18"/><circle class="fg" id="ringFg" cx="22" cy="22" r="18" stroke-dasharray="113.1" stroke-dashoffset="113.1"/></svg><b id="ringN">0</b></span>
       <span class="game-txt"><b id="gLevel">Level 1 · Erstsemester</b><span id="gLine"></span></span>
@@ -468,19 +461,6 @@ button.rn b::after{content:' ›';color:var(--muted);font-weight:400}
       </div>
     </div>
 
-    <section id="backupSec" hidden>
-      <h2>Sicherung</h2>
-      <div class="panel" style="display:flex;flex-direction:column;gap:10px">
-        <p class="fine" id="bkInfo"></p>
-        <div class="wrow"><button class="primary" id="bkCopy" type="button" style="margin-left:0">Sicherung kopieren</button><button class="secondary" id="bkFile" type="button" hidden>Als Datei speichern</button></div>
-        <textarea id="bkOut" class="precin" rows="3" readonly hidden aria-label="Sicherungscode"></textarea>
-        <p class="qscan" id="bkMsg" aria-live="polite"></p>
-        <label for="bkIn" class="modehint">Sicherung einspielen: Code hier einfügen</label>
-        <textarea id="bkIn" class="precin" rows="3"></textarea>
-        <div class="wrow"><button class="secondary precbtn" id="bkLoad" type="button">Einspielen</button><span class="photo"><input type="file" id="bkPick" accept=".txt,text/plain" aria-label="Sicherungsdatei wählen"></span></div>
-      </div>
-    </section>
-
     <section id="planSec">
       <h2>Klausurplan</h2>
       <div class="plansum" id="planSum"></div>
@@ -531,11 +511,6 @@ button.rn b::after{content:' ›';color:var(--muted);font-weight:400}
       <div class="xpgain" id="dXp"></div>
       <div class="next" id="dNote"></div>
       <button class="secondary" id="histDone" type="button" hidden><span>Karten dieser Runde ansehen</span><span>›</span></button>
-      <div id="bkDoneBox" hidden style="display:flex;flex-direction:column;gap:6px">
-        <button class="secondary" id="bkDone" type="button"><span>Sicherung kopieren</span><span>für den Notfall</span></button>
-        <textarea id="bkOutDone" class="precin" rows="3" readonly hidden aria-label="Sicherungscode"></textarea>
-        <p class="qscan" id="bkDoneMsg" aria-live="polite"></p>
-      </div>
       <button class="linkbtn" id="undoDone" type="button" hidden style="align-self:flex-start">↶ Letzte Bewertung zurücknehmen</button>
       <button class="primary" id="back" type="button"><span>Zurück zur Kartei</span><span></span></button>
     </div>
@@ -566,7 +541,7 @@ button.rn b::after{content:' ›';color:var(--muted);font-weight:400}
   let decks = [], cards = [], prog = {}, modules = {}, deckOrder = {};
   let db = null, uid = null, progLoaded = false, decksLoaded = false;
   /* store: 'cloud' = Fortschritt im Claude-Konto, 'local' = im Browser dieses Geräts, null = gar nicht */
-  let store = null, lastBackup = null, lsBroken = false, dl = null, lsErr = '', lsFound = null, lsCreated = null, lsSaved = null;
+  let store = null, lsBroken = false, lsErr = '', lsFound = null, lsCreated = null, lsSaved = null;
   const LKEY = 'kk-local-v1';
   const filt = {modul:'alle', group:'alle', sitzung:'alle'};
   try { const m = localStorage.getItem('kk-modul'); if(m) filt.modul = m; } catch(e){}
@@ -832,7 +807,7 @@ button.rn b::after{content:' ›';color:var(--muted);font-weight:400}
       : (() => { const t0 = today(), n = cards.filter(inFilter).filter(c => isLeech(prog[c.id]) && prog[c.id].due && prog[c.id].due <= t0).length; return n ? (n === 1 ? '1 fälliges Sorgenkind (dreimal nicht gewusst) kommt zuerst. ' : n + ' fällige Sorgenkinder (dreimal nicht gewusst) kommen zuerst. ') : ''; })() + 'Antwort tippen' + (sample && !aiOff ? ' oder Handschrift als Foto oder PDF anhängen' : '') + (sample && !aiOff ? ', Claude gibt Rückmeldung' : ', dann mit der Lösung vergleichen') + '. Bis zu ' + WRITE_SESSION + ' Karten pro Runde, +' + XP_WRITE + ' XP je Antwort.';
   }
   function renderHome(){
-    renderMods(); renderFilters(); renderHeader(); renderGame(); renderMode(); renderStoreLine(); renderResume();
+    renderMods(); renderFilters(); renderHeader(); renderGame(); renderMode(); renderStoreLine();
     const list = cards.filter(inFilter);
     const counts = [0,0,0,0,0,0];
     list.forEach(c => { const p = prog[c.id]; counts[p ? Math.min(5, Math.max(1, p.box||1)) : 0]++; });
@@ -1017,10 +992,9 @@ button.rn b::after{content:' ›';color:var(--muted);font-weight:400}
     const xpNow = totalXp(), before = levelOf(xpNow - sessionXp).L, after = levelOf(xpNow).L;
     $('dXp').textContent = sessionXp ? '+' + sessionXp + ' XP' + (after > before ? ' · Level ' + after + ' erreicht: ' + rankOf(after) : '') : '';
     const still = miss.size;
-    $('dNote').textContent = (mode === 'klausur' && exam && exam.used ? 'Klausur-Simulation: ' + mmss(exam.used) + ' von ' + EXAM_MIN + ':00 Minuten gebraucht' + (exam.used > EXAM_MIN * 60000 ? ', also über der Zeit. ' : '. ') : '') + (still ? still + (still===1 ? ' Karte kam heute zurück in Fach 1 und steht' : ' Karten kamen heute zurück in Fach 1 und stehen') + ' unter „Wackelig“. ' : '') + (store === 'local' ? 'Dein Fortschritt ist auf diesem Gerät gespeichert.' + (lastBackup && -daysTo(lastBackup) < 7 ? '' : ' Zeit für eine Sicherung, falls das Handy mal verloren geht.') : store ? 'Dein Fortschritt ist gespeichert.' : 'Ohne Anmeldung gilt der Fortschritt nur, solange die Seite offen ist.');
+    $('dNote').textContent = (mode === 'klausur' && exam && exam.used ? 'Klausur-Simulation: ' + mmss(exam.used) + ' von ' + EXAM_MIN + ':00 Minuten gebraucht' + (exam.used > EXAM_MIN * 60000 ? ', also über der Zeit. ' : '. ') : '') + (still ? still + (still===1 ? ' Karte kam heute zurück in Fach 1 und steht' : ' Karten kamen heute zurück in Fach 1 und stehen') + ' unter „Wackelig“. ' : '') + (store === 'local' ? 'Dein Fortschritt ist auf diesem Gerät gespeichert.' : store ? 'Dein Fortschritt ist gespeichert.' : 'Ohne Anmeldung gilt der Fortschritt nur, solange die Seite offen ist.');
     if(exam && exam.timer){ clearInterval(exam.timer); exam.timer = null; }
     $('undoDone').hidden = !lastStep; $('histDone').hidden = !hist.length;
-    $('bkDoneBox').hidden = store !== 'local' || (!!lastBackup && -daysTo(lastBackup) < 7); $('bkDoneMsg').textContent = ''; $('bkOutDone').hidden = true;
     show('done'); renderHome();
     if(progLoaded) persistBadges(computeBadges(activity()));
   }
@@ -1452,7 +1426,6 @@ button.rn b::after{content:' ›';color:var(--muted);font-weight:400}
 
     /* Klausurplan */
     renderPlan();
-    renderBackup();
 
     /* Kalender */
     const exams = {};
@@ -2288,24 +2261,24 @@ button.rn b::after{content:' ›';color:var(--muted);font-weight:400}
   }
 
   /* Browserspeicher: wenn das Konto nicht speichern darf (z. B. Person außerhalb der Organisation des Eigentümers),
-     liegt der ganze Fortschritt als ein JSON im localStorage dieses Browsers; Sicherung als Code oder Datei. */
+     liegt der ganze Fortschritt als ein JSON im localStorage dieses Browsers. */
   function lsAvailable(){ try { const k = 'kk-probe'; localStorage.setItem(k, '1'); localStorage.removeItem(k); return true; } catch(e){ lsErr = (e && e.name) || 'Fehler'; return false; } }
   function localData(){ return {v: 1, prog, days, notes, earned, answers: answers.slice(-300)}; }
   function localSave(){
-    try { lsSaved = new Date().toISOString(); lsCreated = lsCreated || lsSaved; localStorage.setItem(LKEY, JSON.stringify(Object.assign(localData(), {saved: lsSaved, created: lsCreated, backup: lastBackup}))); lsBroken = false; renderStoreLine(); }
-    catch(e){ if(!lsBroken){ lsBroken = true; setStatus('Der Browser lässt die Kartei gerade nichts speichern (' + (e && e.name || 'Fehler') + '). Mach jetzt eine Sicherung unter „Fortschritt“, sonst ist diese Runde beim Schließen weg.'); } }
+    try { lsSaved = new Date().toISOString(); lsCreated = lsCreated || lsSaved; localStorage.setItem(LKEY, JSON.stringify(Object.assign(localData(), {saved: lsSaved, created: lsCreated}))); lsBroken = false; renderStoreLine(); }
+    catch(e){ if(!lsBroken){ lsBroken = true; setStatus('Der Browser lässt die Kartei gerade nichts speichern (' + (e && e.name || 'Fehler') + '). Was du jetzt lernst, ist beim Schließen womöglich weg.'); } }
   }
   function localLoad(){
     try {
       const x = JSON.parse(localStorage.getItem(LKEY) || 'null');
       lsFound = !!(x && typeof x === 'object');
-      if(lsFound){ prog = x.prog || {}; days = x.days || {}; notes = x.notes || {}; earned = x.earned || {}; answers = Array.isArray(x.answers) ? x.answers : []; lastBackup = x.backup || null; lsCreated = x.created || x.saved || null; lsSaved = x.saved || null; }
+      if(lsFound){ prog = x.prog || {}; days = x.days || {}; notes = x.notes || {}; earned = x.earned || {}; answers = Array.isArray(x.answers) ? x.answers : []; lsCreated = x.created || x.saved || null; lsSaved = x.saved || null; }
     } catch(e){ lsFound = false; lsErr = (e && e.name) || 'Fehler'; }
   }
   function switchToLocal(){
     if(store === 'local' || !lsAvailable()) return false;
     store = 'local'; aiOff = true; localSave();
-    setStatus('Dein Fortschritt liegt auf diesem Gerät; mach ab und zu eine Sicherung unter „Fortschritt“.');
+    setStatus('Dein Fortschritt wird auf diesem Gerät gespeichert.');
     return true;
   }
   /* Diagnosezeile: wo gespeichert wird und ob beim Öffnen ein früherer Stand gefunden wurde */
@@ -2321,48 +2294,6 @@ button.rn b::after{content:' ›';color:var(--muted);font-weight:400}
       return;
     }
     p.textContent = 'Speicherort: keiner' + where + '. Dieser Browser lässt die Kartei nichts speichern' + (lsErr ? ' (' + lsErr + ')' : '') + '.';
-  }
-  function reviewCount(){ let n = 0; Object.values(prog).forEach(p => { n += (p.right||0) + (p.half||0) + (p.wrong||0); }); return n; }
-  function localStatus(){
-    if(reviewCount() < 20) return '';
-    const age = lastBackup ? -daysTo(lastBackup) : null;
-    if(age !== null && age < 7) return '';
-    return 'Dein Fortschritt liegt nur auf diesem Gerät. ' + (age === null ? 'Noch keine Sicherung' : 'Letzte Sicherung vor ' + age + ' Tagen') + ': oben auf „Fortschritt“ tippen, dann „Sicherung kopieren“.';
-  }
-  function b64e(str){ const b = new TextEncoder().encode(str); let bin = ''; for(let i = 0; i < b.length; i += 0x8000) bin += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000)); return btoa(bin); }
-  function b64d(t){ const bin = atob(t), b = new Uint8Array(bin.length); for(let i = 0; i < bin.length; i++) b[i] = bin.charCodeAt(i); return new TextDecoder().decode(b); }
-  function backupCode(){ return 'KARTEI1:' + b64e(JSON.stringify(Object.assign(localData(), {at: new Date().toISOString()}))); }
-  function parseBackup(txt){
-    const m = String(txt || '').replace(/\s+/g, '').match(/KARTEI1:([A-Za-z0-9+/=]+)/);
-    if(!m) throw new Error('kein Code');
-    const x = JSON.parse(b64d(m[1]));
-    if(!x || typeof x !== 'object' || !x.prog) throw new Error('leer');
-    return x;
-  }
-  /* Zusammenführen statt Ersetzen: je Karte gilt der Stand mit dem späteren letzten Lerntag */
-  function mergeBackup(x){
-    let n = 0;
-    const rv = p => (p.right||0) + (p.half||0) + (p.wrong||0);
-    Object.entries(x.prog || {}).forEach(([id, p]) => { const q = prog[id]; if(p && (!q || (p.last||'') > (q.last||'') || ((p.last||'') === (q.last||'') && rv(p) > rv(q)))){ prog[id] = p; n++; } });
-    Object.entries(x.days || {}).forEach(([d, v]) => { if(v && (!days[d] || (v.n||0) > (days[d].n||0))) days[d] = v; });
-    Object.entries(x.notes || {}).forEach(([id, t]) => { if(t && (!notes[id] || (t !== notes[id] && t.includes(notes[id])))) notes[id] = t; });
-    Object.entries(x.earned || {}).forEach(([b, d]) => { if(d && (!earned[b] || d < earned[b])) earned[b] = d; });
-    const have = new Set(answers.map(a => a.id));
-    (Array.isArray(x.answers) ? x.answers : []).forEach(a => { if(a && a.id && !have.has(a.id)){ answers.push(a); have.add(a.id); } });
-    return n;
-  }
-  function renderBackup(){
-    const sec = $('backupSec'); sec.hidden = store !== 'local';
-    if(sec.hidden) return;
-    const age = lastBackup ? -daysTo(lastBackup) : null;
-    $('bkInfo').textContent = 'Dein Fortschritt liegt nur auf diesem Gerät. Öffne die Kartei immer über das Symbol auf dem Home-Bildschirm: Safari und das Symbol haben getrennte Speicher. Kopier etwa einmal pro Woche eine Sicherung in eine Notiz; auf einem neuen Gerät fügst du sie unten wieder ein. Letzte Sicherung: ' + (age === null ? 'noch keine.' : age === 0 ? 'heute.' : 'vor ' + age + (age === 1 ? ' Tag.' : ' Tagen.'));
-    $('bkFile').hidden = !dl;
-  }
-  function backupDone(msg){ lastBackup = today(); localSave(); $('bkMsg').textContent = msg; renderBackup(); if($('status').textContent) setStatus(localStatus()); }
-  let resumeDismissed = false;
-  function renderResume(){
-    const show = store === 'local' && progLoaded && decksLoaded && lsFound === false && !resumeDismissed && Object.keys(prog).length === 0;
-    $('resumeBox').hidden = !show;
   }
 
   /* Persistence: one document per card in the viewer's private subtree */
@@ -2658,37 +2589,6 @@ button.rn b::after{content:' ›';color:var(--muted);font-weight:400}
   $('gameBtn').addEventListener('click', openStats);
   $('planBtn').addEventListener('click', () => { openStats(); const sec = $('planSec'); if(sec && !sec.hidden) sec.scrollIntoView({block: 'start'}); });
   $('statsBack').addEventListener('click', () => { show('home'); renderHome(); });
-  function copyBackup(msgId, outId){
-    const msg = $(msgId), out = $(outId);
-    let code; try { code = backupCode(); } catch(e){ msg.textContent = 'Die Sicherung ließ sich in diesem Browser nicht erstellen (' + (e && e.name || 'Fehler') + ').'; return; }
-    const done = t => { lastBackup = today(); localSave(); msg.textContent = t; renderBackup(); if($('status').textContent) setStatus(localStatus()); };
-    const manual = () => { out.hidden = false; out.value = code; out.focus(); out.select(); done('Kopieren ging hier nicht automatisch. Der Code steht markiert im Feld: von Hand kopieren und in die Notiz legen.'); };
-    try { navigator.clipboard.writeText(code).then(() => { out.hidden = true; done('Kopiert. Füg den Code jetzt in deine Notiz ein (alte Fassung ersetzen) oder leg ihn in den Drive-Ordner.'); }, manual); }
-    catch(e){ manual(); }
-  }
-  $('bkCopy').addEventListener('click', () => copyBackup('bkMsg', 'bkOut'));
-  $('bkDone').addEventListener('click', () => copyBackup('bkDoneMsg', 'bkOutDone'));
-  $('bkFile').addEventListener('click', async () => {
-    if(!dl) return;
-    try { await dl.save({filename: 'Anatomie-Kartei Sicherung ' + today() + '.txt', data: backupCode()}); backupDone('Datei gespeichert. Leg sie am besten in den Drive-Ordner.'); }
-    catch(e){ const c = e && e.code; $('bkMsg').textContent = c === 'declined' ? 'Nicht gespeichert.' : 'Als Datei speichern geht hier nicht (' + (c || 'Fehler') + '). Nimm „Sicherung kopieren“.'; if(c && c !== 'declined' && c !== 'rate_limited'){ dl = null; renderBackup(); } }
-  });
-  function importBackup(txt, msgId){
-    const msg = $(msgId || 'bkMsg');
-    let x;
-    try { x = parseBackup(txt); } catch(e){ msg.textContent = 'Das ist kein vollständiger Sicherungscode. Er beginnt mit „KARTEI1:“; achte darauf, ihn ganz zu kopieren.'; return false; }
-    const n = mergeBackup(x);
-    if(store === 'local') localSave();
-    else if(store === 'cloud') Object.keys(x.prog || {}).forEach(id => { if(prog[id]) save(id, prog[id]); });
-    $('bkIn').value = '';
-    msg.textContent = 'Eingespielt: ' + n + (n === 1 ? ' Karte' : ' Karten') + ' mit neuerem Stand übernommen' + (x.at ? ' (Sicherung vom ' + dayLabel(String(x.at).slice(0, 10)) + ')' : '') + '.';
-    if(!$('stats').hidden) renderStats(); else renderHome();
-    return true;
-  }
-  $('rsGo').addEventListener('click', () => { if(importBackup($('rsIn').value, 'rsMsg')){ resumeDismissed = true; $('rsIn').value = ''; setStatus($('rsMsg').textContent); renderResume(); } });
-  $('rsSkip').addEventListener('click', () => { resumeDismissed = true; renderResume(); });
-  $('bkLoad').addEventListener('click', () => importBackup($('bkIn').value));
-  $('bkPick').addEventListener('change', e => { const f = e.target.files && e.target.files[0]; if(!f) return; f.text().then(importBackup, () => { $('bkMsg').textContent = 'Die Datei ließ sich nicht lesen.'; }); e.target.value = ''; });
   window.addEventListener('pagehide', () => { if(store === 'local') localSave(); });
   $('calPrev').addEventListener('click', () => { calMonth = shiftMonth(calMonth, -1); selDay = null; renderStats(); });
   $('calNext').addEventListener('click', () => { calMonth = shiftMonth(calMonth, 1); selDay = null; renderStats(); });
@@ -2713,7 +2613,7 @@ button.rn b::after{content:' ›';color:var(--muted);font-weight:400}
     if(!decksLoaded) return;
     if(!cards.length) setStatus('Noch keine Karten in der Kartei.');
     else if(!store) setStatus(progLoaded ? 'Dein Fortschritt kann hier nicht gespeichert werden: weder im Konto noch im Browser.' : 'Fortschritt wird geladen …');
-    else if(progLoaded && !lsBroken) setStatus(store === 'local' ? localStatus() : '');
+    else if(progLoaded && !lsBroken) setStatus('');
     if($('study').hidden) renderHome();
     if(!$('stats').hidden) renderStats();
     if(progLoaded && !deepLinked){ deepLinked = true; if(location.hash === '#fortschritt' && $('study').hidden) openStats(); }
@@ -2728,7 +2628,6 @@ button.rn b::after{content:' ›';color:var(--muted);font-weight:400}
     db = dbNs;
     if(!db){ setStatus('Die Kartei lädt Karten und Fortschritt aus deinem Claude-Konto. Öffne sie angemeldet in Claude.'); return; }
     uid = userNs ? await userNs.id() : null;
-    window.claude.use('downloads').then(d => { dl = d || null; if(!$('stats').hidden) renderBackup(); }).catch(() => {});
     window.claude.use('sample').then(async sm => {
       sample = sm || null;
       if(sample){ try { const lim = await sample.limits(); imgOk = !!(lim && lim.images); } catch(e){ imgOk = false; if(['not_granted','sampling_disabled','not_declared','capability_disabled','capability_removed','unavailable'].includes(e && e.code)) aiOff = true; } imgChecked = true; }
